@@ -7,25 +7,25 @@ This table describes all fields, parameters, and data types used in the `Unified
 | Category | Field / Parameter | Data Type | Description | Valid Range / Values | Notes |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Core** | `Protocol` | `enum` | List of all supported protocols. | `DCC`, `MM_I`, `MM_II`, `MFX`, `SELECTRIX`, `SX2`, `LOCONET`, `BIDIB`, `XPRESSNET`, `CAN_GENERIC` | Determines the driver to be used. |
-| **Core** | `mobAddress` | `uint16_t` | The digital address of the decoder. | `1` - `10239` (DCC)<br>`1` - `255` (MM)<br>`1` - `127` (SX) | Is ignored if `mfxUid` is set. |
-| **Core** | `mobMfxUid` | `uint32_t` | Unique hardware ID (UID) for mfx/BiDiB. | `0` = Inactive<br>`>0` = Valid UID | Takes precedence over the address (routing priority). |
-| **Core** | `direction` | `enum` | Logical driving direction. | `REVERSE` (0)<br>`FORWARD` (1)<br>`UNKNOWN` (2) | Used for commands and feedback. |
-| **Traffic** | `mobSpeedPercent` | `float` | Target speed of the locomotive. | `0.0` (Stop) to `100.0` (Vmax) | Must be converted by the driver into speed steps (14/28/128). |
-| **Traffic** | `mobSpeedSteps` | `int` | Resolution of the speed steps for the command. | `14`, `28`, `128` | Important for correct DCC packet generation. |
-| **Traffic** | `mobFuncX` | `int` | Index of the function key. | `0` (Light)<br>`1` - `32767` (Aux) | RCN-227 defines up to F68, `int` is future-proof. |
-| **Traffic** | `mobFuncActive` | `bool` | Status of a binary function (switch). | `true` = ON<br>`false` = OFF | Standard for F-keys. |
-| **Traffic** | `mobFuncAnalog0to1` | `float` | Value of an analog function (pressure/intensity). | `0.0` to `1.0` | For `onLocoFunctionAnalogValue` (e.g., WiThrottle). |
-| **Traffic** | `mobIsAcquired` | `bool` | Status of slot management (dispatching). | `true` = Taken over by controller<br>`false` = Released | Relevant for LocoNet/XpressNet arbitration. |
-| **Traffic** | `mobOwnerId` | `string` | ID of the device controlling the locomotive. | e.g., "Throttle #54", "JMRI" | Debug info. |
-| **Traffic** | `mobConsist` | `enum` | Method of multiple traction. | `ADVANCED_DCC` (CV19)<br>`UNIVERSAL_HOST` (Software)<br>`MU_LOCONET` | Determines the type of linking/addressing. |
-| **Traffic** | `mobInverted` | `bool` | Orientation in the consist. | `true` = Slave runs in opposite direction<br>`false` = Same direction | For `onConsistLink`. |
-| **Accessory** | `statAddress` | `uint16_t` | Address of the accessory decoder. | Protocol-dependent (usually `1`-`2048`) | For turnouts and signals. |
-| **Accessory** | `statIsThrown` | `bool` | State of a standard turnout. | `true` = Diverging/Red<br>`false` = Straight/Green | Basic function. |
-| **Accessory** | `statIsFeedback` | `bool` | Source of the event. | `true` = Real feedback (RailCom)<br>`false` = Command echo | Important for automation validation (safety). |
-| **Accessory** | `statAspect` | `uint8_t` | Signal aspect. | `0` to `255` | For complex signals (Hp0, Hp1, Sh1...). |
-| **Accessory** | `statAnalog0to1` | `float` | Analog accessory value (servo/dimmer). | `0.0` to `1.0` | Normalized float. |
-| **Accessory** | `statError` | `uint8_t` | Diagnostic error code. | `1`=OpenLoad<br>`2`=Overload/Short<br>`3`=Stall | Hardware diagnostics (BiDiB/RailCom Port Status). |
-| **Accessory** | `statErrorDesc` | `string` | Readable error description. | Text | For UI display. |
+| **Core** | `LocoHandle.address` | `uint16_t` | The digital address of the decoder. | `1` - `10239` (DCC)<br>`1` - `255` (MM)<br>`1` - `127` (SX) | Is ignored if `mfxUid` is set. |
+| **Core** | `LocoHandle.mfxUid` | `uint32_t` | Unique hardware ID (UID) for mfx/BiDiB. | `0` = Inactive<br>`>0` = Valid UID | Takes precedence over the address (routing priority). |
+| **Core** | `Direction` | `enum` | Logical driving direction. | `REVERSE` (0)<br>`FORWARD` (1)<br>`UNKNOWN` (2) | Used for commands and feedback. |
+| **Traffic** | `speedPercent` | `float` | Target speed of the locomotive. | `0.0` (Stop) to `100.0` (Vmax) | Must be converted by the driver into speed steps (14/28/128). |
+| **Traffic** | `speedSteps` | `int` | Resolution of the speed steps for the command. | `14`, `28`, `128` | Important for correct DCC packet generation. |
+| **Traffic** | `fIndex` | `int` | Index of the function key. | `0` (Light)<br>`1` - `32767` (Aux) | RCN-227 defines up to F68, `int` is future-proof. |
+| **Traffic** | `isActive` | `bool` | Status of a binary function (switch). | `true` = ON<br>`false` = OFF | Standard for F-keys. |
+| **Traffic** | `value` (Analog) | `uint8_t` | Value of an analog function (pressure/intensity). | `0` to `255` | For `onLocoFunctionAnalogValue` (e.g., WiThrottle). |
+| **Traffic** | `isAcquired` | `bool` | Status of slot management (dispatching). | `true` = Taken over by controller<br>`false` = Released | Relevant for LocoNet/XpressNet arbitration. |
+| **Traffic** | `ownerId` | `string` | ID of the device controlling the locomotive. | e.g., "Throttle #54", "JMRI" | Debug info. |
+| **Traffic** | `ConsistType` | `enum` | Method of multiple traction. | `ADVANCED_DCC` (CV19)<br>`UNIVERSAL_HOST` (Software)<br>`MU_LOCONET` | Determines the type of linking/addressing. |
+| **Traffic** | `inverted` | `bool` | Orientation in the consist. | `true` = Slave runs in opposite direction<br>`false` = Same direction | For `onConsistLink`. |
+| **Accessory** | `address` | `uint16_t` | Address of the accessory decoder. | Protocol-dependent (usually `1`-`2048`) | For turnouts and signals. |
+| **Accessory** | `isThrown` | `bool` | State of a standard turnout. | `true` = Diverging/Red<br>`false` = Straight/Green | Basic function. |
+| **Accessory** | `isFeedback` | `bool` | Source of the event. | `true` = Real feedback (RailCom)<br>`false` = Command echo | Important for automation validation (safety). |
+| **Accessory** | `aspectId` | `uint8_t` | Signal aspect. | `0` to `255` | For complex signals (Hp0, Hp1, Sh1...). |
+| **Accessory** | `value0to1` | `float` | Analog accessory value (servo/dimmer). | `0.0` to `1.0` | Normalized float. |
+| **Accessory** | `errorId` | `uint8_t` | Diagnostic error code. | `1`=OpenLoad<br>`2`=Overload/Short<br>`3`=Stall | Hardware diagnostics (BiDiB/RailCom Port Status). |
+| **Accessory** | `errorMsg` | `string` | Readable error description. | Text | For UI display. |
 | **System** | `PowerState` | `enum` | Global power status. | `OFF` (0)<br>`ON` (1)<br>`EMERGENCY_STOP` (2)<br>`SHORT_CIRCUIT` (3) | Differentiates logical emergency stop from physical short circuit. |
 | **System** | `modelTimeUnix` | `int64_t` | Current model time (RCN-211). | Unix Timestamp (seconds since 1970) | Contains year, month, day, time for DCC Time/Date packets. |
 | **System** | `factor` | `float` | Time acceleration factor. | e.g., `1.0` (Real-time), `4.0` (Fast) | Sync for throttle clocks (LocoNet/XpressNet). |
