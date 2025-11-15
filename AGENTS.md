@@ -1,0 +1,28 @@
+# Agent Instructions for xTrainAPI
+
+This document provides guidance for AI agents working on this repository.
+
+## Source of Truth
+
+The canonical definition of the xTrainAPI is the C++ abstract interface located at:
+
+`/xDuinoRails_xTrainAPI.h`
+
+This header file is the **single source of truth** for all API events, data structures, and enums.
+
+## Derivative Artifacts
+
+The following files are derivatives of the main `.h` file and **must** be kept in sync with it:
+
+1.  **XML Schema:** `/arduino_examples/xml_messages/xTrainEvents.xsd`
+2.  **OpenAPI Schema:** `/swagger/openapi.yaml`
+
+### Agent Responsibility
+
+When making changes to the API, you **must** follow this workflow:
+
+1.  **Modify the `.h` file first.** All new events, or changes to existing ones, should be implemented in `xDuinoRails_xTrainAPI.h`.
+2.  **Update the derivatives.** Propagate the changes to the `.xsd` and `openapi.yaml` files to reflect the modifications made to the header.
+3.  **Run validation.** Ensure that the XML and OpenAPI validation checks pass after your changes.
+
+Failure to keep these files consistent will result in build failures and a broken API contract. Always check for deviations from the main `.h` file and correct them.

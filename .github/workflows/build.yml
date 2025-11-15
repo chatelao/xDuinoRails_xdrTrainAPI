@@ -54,8 +54,22 @@ jobs:
       - name: Validate XML files
         run: xmllint --noout --schema arduino_examples/xml_messages/xTrainEvents.xsd arduino_examples/xml_messages/*.xml
 
+  validate-swagger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: pip install openapi-spec-validator
+      - name: Validate OpenAPI spec
+        run: openapi-spec-validator swagger/openapi.yaml
+
   release:
-    needs: build
+    needs: [build, validate-xml, validate-swagger]
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
     steps:
@@ -67,3 +81,51 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: artifacts/*/*.uf2
+
+  build-and-deploy-docs:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Doxygen
+        run: sudo apt-get update && sudo apt-get install -y doxygen
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Redocly CLI
+        run: npm install -g @redocly/cli
+
+      - name: Generate Doxygen documentation
+        run: doxygen Doxyfile
+
+      - name: Generate Redocly documentation
+        run: |
+          mkdir -p public/redoc
+          redocly build-docs swagger/openapi.yaml -o public/redoc/index.html
+
+      - name: Create index page
+        run: |
+          echo '<!DOCTYPE html>
+          <html>
+          <head>
+            <title>xTrain API Documentation</title>
+          </head>
+          <body>
+            <h1>xTrain API Documentation</h1>
+            <ul>
+              <li><a href="doxygen/index.html">Doxygen (C++ API)</a></li>
+              <li><a href="redoc/index.html">Redocly (REST API)</a></li>
+            </ul>
+          </body>
+          </html>' > public/index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

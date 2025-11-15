@@ -1,0 +1,176 @@
+openapi: 3.0.0
+info:
+  title: xTrain Event API
+  version: "1.0.0"
+  description: |
+    A RESTful API to trigger events for the Unified Model Train Control System (xTrain).
+    This API is based on the abstract interface defined in `xDuinoRails_xTrainAPI.h`.
+servers:
+  - url: "/api/v1"
+    description: "Main API endpoint"
+
+paths:
+  /event:
+    post:
+      summary: "Submit a single train control event"
+      description: "Receives and processes a single event object."
+      operationId: "postEvent"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '202':
+          description: "Event accepted for processing."
+        '400':
+          description: "Bad Request - Invalid event structure or payload."
+
+components:
+  schemas:
+    # This is the schema that should be used in requests/responses.
+    # It uses a discriminator to determine the actual event type.
+    Event:
+      oneOf:
+        - $ref: '#/components/schemas/LocoSpeedChanged'
+        - $ref: '#/components/schemas/LocoFunctionChanged'
+        - $ref: '#/components/schemas/TurnoutChanged'
+        - $ref: '#/components/schemas/TrackPowerChanged'
+        - $ref: '#/components/schemas/SensorStateChanged'
+      discriminator:
+        propertyName: eventType
+        mapping:
+          LocoSpeedChanged: '#/components/schemas/LocoSpeedChanged'
+          LocoFunctionChanged: '#/components/schemas/LocoFunctionChanged'
+          TurnoutChanged: '#/components/schemas/TurnoutChanged'
+          TrackPowerChanged: '#/components/schemas/TrackPowerChanged'
+          SensorStateChanged: '#/components/schemas/SensorStateChanged'
+
+    # This is the base schema with common properties, used for inheritance.
+    BaseEvent:
+      type: object
+      required:
+        - eventType
+        - timestamp
+      properties:
+        eventType:
+          type: string
+          description: "The unique identifier for the event type."
+        timestamp:
+          type: string
+          format: date-time
+          description: "ISO 8601 timestamp of when the event was generated."
+
+    # --------- Core Data Types ---------
+
+    LocoHandle:
+      type: object
+      description: "Unique identifier for a locomotive."
+      required: [address, protocol]
+      properties:
+        address:
+          type: integer
+          format: uint16
+          description: "Primary address of the locomotive."
+        protocol:
+          $ref: '#/components/schemas/Protocol'
+        mfxUid:
+          type: integer
+          format: uint32
+          description: "Unique mfx ID, if applicable."
+
+    # --------- Enums (from .h file) ---------
+
+    Protocol:
+      type: string
+      enum: [DCC, MM_I, MM_II, MFX, SELECTRIX, SX2, LOCONET, BIDIB, XPRESSNET, CAN_GENERIC]
+    Direction:
+      type: string
+      enum: [REVERSE, FORWARD, UNKNOWN]
+    PowerState:
+      type: string
+      enum: [OFF, ON, EMERGENCY_STOP, SHORT_CIRCUIT]
+
+    # --------- Event-Specific Schemas ---------
+
+    LocoSpeedChanged:
+      type: object
+      description: "Event for changing a locomotive's speed and direction."
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          required: [loco, speedPercent, direction, speedSteps]
+          properties:
+            loco:
+              $ref: '#/components/schemas/LocoHandle'
+            speedPercent:
+              type: number
+              format: float
+              minimum: 0.0
+              maximum: 100.0
+            direction:
+              $ref: '#/components/schemas/Direction'
+            speedSteps:
+              type: integer
+              description: "The speed step mode (e.g., 14, 28, 128)."
+
+    LocoFunctionChanged:
+      type: object
+      description: "Event for activating or deactivating a locomotive function."
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          required: [loco, fIndex, isActive]
+          properties:
+            loco:
+              $ref: '#/components/schemas/LocoHandle'
+            fIndex:
+              type: integer
+              description: "Function index (0 for light, 1 for F1, etc.)."
+            isActive:
+              type: boolean
+
+    TurnoutChanged:
+      type: object
+      description: "Event for changing a turnout's state."
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          required: [address, isThrown, isFeedback]
+          properties:
+            address:
+              type: integer
+              format: uint16
+            isThrown:
+              type: boolean
+              description: "True for diverging/thrown, False for straight."
+            isFeedback:
+              type: boolean
+              description: "True if this is a confirmation from hardware."
+
+    TrackPowerChanged:
+      type: object
+      description: "Event for changing the global track power state."
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          required: [state]
+          properties:
+            state:
+              $ref: '#/components/schemas/PowerState'
+
+    SensorStateChanged:
+      type: object
+      description: "Event for an occupancy or feedback sensor changing state."
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          required: [sensorId, isActive]
+          properties:
+            sensorId:
+              type: integer
+              format: uint32
+            isActive:
+              type: boolean
+              description: "True for occupied/active, False for free."
