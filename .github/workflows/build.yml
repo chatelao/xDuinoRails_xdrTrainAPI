@@ -2,8 +2,6 @@ name: Build Arduino Examples
 
 on:
   push:
-    branches:
-      - main
   release:
     types: [created]
 
