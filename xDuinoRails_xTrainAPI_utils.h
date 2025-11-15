@@ -1,6 +1,7 @@
 #pragma once
 
 #include "xDuinoRails_xTrainAPI.h"
+#include "yxml.h"
 #include <Arduino.h>
 
 #ifndef USE_EXTENDED_CLI_SYNTAX
@@ -125,6 +126,102 @@ public:
 
 private:
     Stream* _stream;
+};
+
+class XmlPrinter : public IUnifiedModelTrainListener {
+public:
+    XmlPrinter(Stream& stream) : _stream(&stream) {}
+
+    void onLocoSpeedChanged(const LocoHandle& loco, float speedPercent, Direction direction, int speedSteps) override {
+        _stream->println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        _stream->println("<xTrainEvents>");
+        _stream->println("    <event type=\"onLocoSpeedChanged\">");
+        _stream->print("        <loco address=\"");
+        _stream->print(loco.address);
+        _stream->print("\" protocol=\"DCC\" mfxUid=\"");
+        _stream->print(loco.mfxUid);
+        _stream->println("\" />");
+        _stream->print("        <speed speedPercent=\"");
+        _stream->print(speedPercent);
+        _stream->print("\" direction=\"");
+        _stream->print(direction == Direction::FORWARD ? "FORWARD" : "REVERSE");
+        _stream->print("\" speedSteps=\"");
+        _stream->print(speedSteps);
+        _stream->println("\" />");
+        _stream->println("    </event>");
+        _stream->println("</xTrainEvents>");
+    }
+
+    // Implement other pure virtual functions from the interface
+    void onLocoFunctionChanged(const LocoHandle& loco, int fIndex, bool isActive) override {}
+    void onLocoFunctionAnalogValue(const LocoHandle& loco, int fIndex, uint8_t value) override {}
+    void onLocoDispatchStateChanged(const LocoHandle& loco, bool isAcquired, std::string ownerId) override {}
+    void onConsistLink(const LocoHandle& master, const LocoHandle& slave, ConsistType type, bool inverted) override {}
+    void onConsistUnlink(const LocoHandle& slave) override {}
+    void onTurnoutChanged(uint16_t address, bool isThrown, bool isFeedback) override {}
+    void onSignalAspectChanged(uint16_t address, uint8_t aspectId, bool isFeedback) override {}
+    void onAccessoryAnalogValue(uint16_t address, float value0to1) override {}
+    void onAccessoryError(uint16_t address, uint8_t errorId, std::string errorMsg) override {}
+    void onSensorStateChanged(uint32_t sensorId, bool isActive) override {}
+    void onTrackPowerChanged(PowerState state) override {}
+    void onFastClockUpdated(int64_t modelTimeUnix, float factor) override {}
+    void onHardwareNodeAttached(std::string nodeUid, std::string productName, bool booster) override {}
+    void onHardwareNodeLost(std::string nodeUid) override {}
+    void onSystemMessage(std::string source, std::string message) override {}
+    void onLocoDetectedOnBlock(uint32_t sensorId, const LocoHandle& loco, DecoderOrientation orientation) override {}
+    void onLocoTelemetryData(const LocoHandle& loco, TelemetryType type, float value) override {}
+    void onLocoExternalStateChanged(const LocoHandle& loco, ExternalState state) override {}
+    void onLocoRailComRawData(const LocoHandle& loco, uint8_t appId, const std::vector<uint8_t>& data) override {}
+    void onNewLocoDiscovered(const LocoHandle& loco, const std::string& name, const std::string& icon) override {}
+    void onCvReadResult(const LocoHandle& loco, int cvNumber, uint8_t value, bool success) override {}
+    void onSusiConfigRead(const LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value) override {}
+    void onConfigBlockLoaded(const LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data) override {}
+    void onProgressUpdate(std::string operation, float percent) override {}
+    void onMechanicalSyncEvent(const LocoHandle& loco, SyncType type, uint8_t value) override {}
+
+private:
+    Stream* _stream;
+};
+
+class XmlParser {
+public:
+    XmlParser(IUnifiedModelTrainListener& listener) : _listener(&listener) {
+        yxml_init(&_xml, _stack, sizeof(_stack));
+    }
+
+    void parse(const String& xml) {
+        LocoHandle loco;
+        float speedPercent;
+        Direction direction;
+        int speedSteps;
+
+        for (size_t i = 0; i < xml.length(); i++) {
+            yxml_ret_t r = yxml_parse(&_xml, xml[i]);
+            if (r == YXML_ELEMSTART && strcmp(_xml.elem, "loco") == 0) {
+                // do nothing
+            } else if (r == YXML_ATTRSTART && strcmp(_xml.attr, "address") == 0) {
+                // do nothing
+            } else if (r == YXML_ATTRVAL) {
+                if (strcmp(_xml.elem, "loco") == 0 && strcmp(_xml.attr, "address") == 0) {
+                    loco.address = atoi(_xml.data);
+                } else if (strcmp(_xml.elem, "speed") == 0 && strcmp(_xml.attr, "speedPercent") == 0) {
+                    speedPercent = atof(_xml.data);
+                } else if (strcmp(_xml.elem, "speed") == 0 && strcmp(_xml.attr, "direction") == 0) {
+                    direction = strcmp(_xml.data, "FORWARD") == 0 ? Direction::FORWARD : Direction::REVERSE;
+                } else if (strcmp(_xml.elem, "speed") == 0 && strcmp(_xml.attr, "speedSteps") == 0) {
+                    speedSteps = atoi(_xml.data);
+                }
+            } else if (r == YXML_ELEMEND && strcmp(_xml.elem, "event") == 0) {
+                _listener->onLocoSpeedChanged(loco, speedPercent, direction, speedSteps);
+            }
+        }
+        yxml_eof(&_xml);
+    }
+
+private:
+    IUnifiedModelTrainListener* _listener;
+    yxml_t _xml;
+    uint8_t _stack[4096];
 };
 
 class CmdLineParser {

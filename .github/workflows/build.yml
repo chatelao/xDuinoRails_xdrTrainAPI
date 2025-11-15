@@ -59,7 +59,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libxml2-utils
       - name: Validate XML files
-        run: xmllint --noout --schema arduino_examples/xml_messages/xTrainEvents.xsd arduino_examples/xml_messages/*.xml
+        run: xmllint --noout --schema xml/xTrainEvents.xsd xml/*.xml
 
   release:
     needs: build
