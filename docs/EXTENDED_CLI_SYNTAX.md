@@ -4,6 +4,8 @@ This document defines the extended command-line interface (CLI) syntax for the x
 
 The extended syntax follows a consistent format: `<COMMAND param1="value1" param2="value2" ...>`.
 
+**Note on Command Formats:** The `CmdLineParser` class is designed to accept both the legacy single-character commands and the extended commands at all times. The `CmdLinePrinter` class, however, can be configured to output either the legacy or extended format. This is controlled by the `USE_EXTENDED_CLI_SYNTAX` compile-time flag. By default, the extended syntax is used for output. To use the legacy syntax for output, set this flag to `0` during compilation.
+
 ## A. Track Power & Status
 
 | Command | Legacy | Parameters | Description | Example |

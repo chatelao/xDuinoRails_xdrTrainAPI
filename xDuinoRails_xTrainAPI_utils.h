@@ -3,6 +3,10 @@
 #include "xDuinoRails_xTrainAPI.h"
 #include <Arduino.h>
 
+#ifndef USE_EXTENDED_CLI_SYNTAX
+#define USE_EXTENDED_CLI_SYNTAX 1
+#endif
+
 namespace ModelRail {
 
 class CmdLinePrinter : public IUnifiedModelTrainListener {
@@ -10,6 +14,17 @@ public:
     CmdLinePrinter(Stream& stream) : _stream(&stream) {}
 
     void onLocoSpeedChanged(const LocoHandle& loco, float speedPercent, Direction direction, int speedSteps) override {
+#if USE_EXTENDED_CLI_SYNTAX
+        _stream->print("<THROTTLE cab=\"");
+        _stream->print(loco.address);
+        _stream->print("\" speed=\"");
+        _stream->print((int)speedPercent);
+        _stream->print("\" direction=\"");
+        _stream->print(direction == Direction::FORWARD ? 1 : 0);
+        _stream->print("\" steps=\"");
+        _stream->print(speedSteps);
+        _stream->println("\">");
+#else
         _stream->print("<t ");
         _stream->print(loco.address);
         _stream->print(" ");
@@ -17,9 +32,19 @@ public:
         _stream->print(" ");
         _stream->print(direction == Direction::FORWARD ? 1 : 0);
         _stream->println(">");
+#endif
     }
 
     void onLocoFunctionChanged(const LocoHandle& loco, int fIndex, bool isActive) override {
+#if USE_EXTENDED_CLI_SYNTAX
+        _stream->print("<FUNCTION cab=\"");
+        _stream->print(loco.address);
+        _stream->print("\" function=\"");
+        _stream->print(fIndex);
+        _stream->print("\" state=\"");
+        _stream->print(isActive ? 1 : 0);
+        _stream->println("\">");
+#else
         _stream->print("<f ");
         _stream->print(loco.address);
         _stream->print(" ");
@@ -27,28 +52,51 @@ public:
         _stream->print(" ");
         _stream->print(isActive ? 1 : 0);
         _stream->println(">");
+#endif
     }
 
     void onTurnoutChanged(uint16_t address, bool isThrown, bool isFeedback) override {
+#if USE_EXTENDED_CLI_SYNTAX
+        _stream->print("<TURNOUT id=\"");
+        _stream->print(address);
+        _stream->print("\" state=\"");
+        _stream->print(isThrown ? 1 : 0);
+        _stream->println("\">");
+#else
         _stream->print("<T ");
         _stream->print(address);
         _stream->print(" ");
         _stream->print(isThrown ? 1 : 0);
         _stream->println(">");
+#endif
     }
 
     void onSignalAspectChanged(uint16_t address, uint8_t aspectId, bool isFeedback) override {
+#if USE_EXTENDED_CLI_SYNTAX
+        _stream->print("<SIGNAL id=\"");
+        _stream->print(address);
+        _stream->print("\" aspect=\"");
+        _stream->print(aspectId);
+        _stream->println("\">");
+#else
         _stream->print("<S ");
         _stream->print(address);
         _stream->print(" ");
         _stream->print(aspectId);
         _stream->println(">");
+#endif
     }
 
     void onTrackPowerChanged(PowerState state) override {
+#if USE_EXTENDED_CLI_SYNTAX
+        _stream->print("<POWER state=\"");
+        _stream->print(state == PowerState::ON ? "ON" : "OFF");
+        _stream->println("\">");
+#else
         _stream->print("<");
         _stream->print(state == PowerState::ON ? 1 : 0);
         _stream->println(">");
+#endif
     }
 
     // Implement other pure virtual functions from the interface
@@ -83,9 +131,77 @@ class CmdLineParser {
 public:
     CmdLineParser(IUnifiedModelTrainListener& listener) : _listener(&listener) {}
 
+    String getParamValue(const String& params, const char* key) {
+        String searchKey = String(key) + "=\"";
+        int keyIndex = params.indexOf(searchKey);
+        if (keyIndex == -1) {
+            return "";
+        }
+        int valueStartIndex = keyIndex + searchKey.length();
+        int valueEndIndex = params.indexOf('"', valueStartIndex);
+        if (valueEndIndex == -1) {
+            return "";
+        }
+        return params.substring(valueStartIndex, valueEndIndex);
+    }
+
     void parse(const String& command) {
+        if (command.length() == 0) {
+            return;
+        }
+
+        // Try parsing extended format first
+        int firstSpace = command.indexOf(' ');
+        String cmd;
+        String params;
+        if (firstSpace != -1) {
+            cmd = command.substring(0, firstSpace);
+            params = command.substring(firstSpace + 1);
+        } else {
+            cmd = command;
+        }
+
+        if (cmd == "POWER") {
+            String state = getParamValue(params, "state");
+            if (state == "ON") {
+                _listener->onTrackPowerChanged(PowerState::ON);
+            } else if (state == "OFF") {
+                _listener->onTrackPowerChanged(PowerState::OFF);
+            }
+            return;
+        } else if (cmd == "THROTTLE") {
+            uint16_t cab = getParamValue(params, "cab").toInt();
+            int speed = getParamValue(params, "speed").toInt();
+            int dir = getParamValue(params, "direction").toInt();
+            int steps = getParamValue(params, "steps").toInt();
+            if (steps == 0) steps = 128; // default
+
+            LocoHandle loco = {cab, Protocol::DCC, 0};
+            _listener->onLocoSpeedChanged(loco, speed, (Direction)dir, steps);
+            return;
+        } else if (cmd == "FUNCTION") {
+            uint16_t cab = getParamValue(params, "cab").toInt();
+            int func = getParamValue(params, "function").toInt();
+            int state = getParamValue(params, "state").toInt();
+
+            LocoHandle loco = {cab, Protocol::DCC, 0};
+            _listener->onLocoFunctionChanged(loco, func, state);
+            return;
+        } else if (cmd == "TURNOUT") {
+            uint16_t addr = getParamValue(params, "id").toInt();
+            int state = getParamValue(params, "state").toInt();
+            _listener->onTurnoutChanged(addr, state, false);
+            return;
+        } else if (cmd == "SIGNAL") {
+            uint16_t addr = getParamValue(params, "id").toInt();
+            int aspect = getParamValue(params, "aspect").toInt();
+            _listener->onSignalAspectChanged(addr, aspect, false);
+            return;
+        }
+
+        // If not an extended command, try parsing legacy format
         char cmdChar = command.charAt(0);
-        String params = command.substring(1);
+        params = command.substring(1);
         params.trim();
 
         switch (cmdChar) {

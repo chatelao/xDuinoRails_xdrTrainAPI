@@ -24,6 +24,7 @@ jobs:
       matrix:
         example: ${{ fromJson(needs.discover.outputs.examples) }}
         fqbn: [arduino:avr:uno, arduino:mbed_rp2040:pico]
+        cli_syntax: [short, long]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -35,12 +36,18 @@ jobs:
           arduino-cli core install arduino:mbed_rp2040
       - name: Compile sketch
         run: |
-          arduino-cli compile --fqbn ${{ matrix.fqbn }} arduino_examples/${{ matrix.example }} --output-dir build/${{ matrix.example }}-${{ matrix.fqbn }}
+          BUILD_PROPERTIES=""
+          if [ "${{ matrix.cli_syntax }}" == "long" ]; then
+            BUILD_PROPERTIES="--build-property build.extra_flags=-DUSE_EXTENDED_CLI_SYNTAX=1"
+          else
+            BUILD_PROPERTIES="--build-property build.extra_flags=-DUSE_EXTENDED_CLI_SYNTAX=0"
+          fi
+          arduino-cli compile --fqbn ${{ matrix.fqbn }} $BUILD_PROPERTIES arduino_examples/${{ matrix.example }} --output-dir build/${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.example }}-${{ matrix.fqbn }}
-          path: build/${{ matrix.example }}-${{ matrix.fqbn }}
+          name: ${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
+          path: build/${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
 
   release:
     needs: build
