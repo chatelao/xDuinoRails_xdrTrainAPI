@@ -1,27 +1,27 @@
-# xTrainAPI - Einheitliche Modellbahnsteuerung
+# xTrainAPI - Unified Model Train Control
 
-Willkommen beim xTrainAPI-Projekt! Dieses Repository enthält eine C++-basierte API zur Steuerung von digitalen Modelleisenbahnen und deren Zubehör.
+Welcome to the xTrainAPI project! This repository contains a C++-based API for controlling digital model trains and their accessories.
 
-## Dokumentation
+## Documentation
 
-Unsere API-Dokumentation wird automatisch generiert und auf GitHub Pages gehostet.
+Our API documentation is automatically generated and hosted on GitHub Pages.
 
-*   **Doxygen (C++ API):** Eine detaillierte Dokumentation des C++-Interfaces, der Klassen und Methoden finden Sie hier:
-    [Doxygen-Dokumentation](https://xtrainapi.github.io/xTrainAPI/doxygen/)
+*   **Doxygen (C++ API):** Detailed documentation of the C++ interface, classes, and methods can be found here:
+    [Doxygen Documentation](https://xtrainapi.github.io/xTrainAPI/doxygen/)
 
-*   **Swagger (REST API):** Die Spezifikation unserer REST-Schnittstelle, inklusive interaktiver Endpunkte, ist hier verfügbar:
+*   **Swagger (REST API):** The specification for our REST interface, including interactive endpoints, is available here:
     [Swagger UI](https://xtrainapi.github.io/xTrainAPI/swagger/)
 
-## Was ist xTrainAPI?
+## What is xTrainAPI?
 
-xTrainAPI ist eine vereinheitlichte Schnittstelle, die es ermöglicht, verschiedene digitale Modellbahnsysteme über ein einziges, konsistentes API zu steuern. Dies vereinfacht die Entwicklung von Steuerungssoftware, da die Komplexität der einzelnen Protokolle (wie DCC, Märklin Motorola, etc.) abstrahiert wird.
+xTrainAPI is a unified interface that allows various digital model train systems to be controlled through a single, consistent API. This simplifies the development of control software by abstracting the complexity of individual protocols (such as DCC, Märklin Motorola, etc.).
 
-## Kernkonzepte
+## Core Concepts
 
-Die API ist in C++ als abstrakte Schnittstelle (`IUnifiedModelTrainListener`) definiert und dient als "Single Source of Truth". Alle anderen Artefakte, wie die XML-Schemata und die OpenAPI-Spezifikation, werden von dieser C++-Header-Datei abgeleitet.
+The API is defined in C++ as an abstract interface (`IUnifiedModelTrainListener`) and serves as the "Single Source of Truth". All other artifacts, such as the XML schemas and the OpenAPI specification, are derived from this C++ header file.
 
-Für ein tieferes Verständnis der in der API verwendeten Begriffe und Datenfelder, werfen Sie bitte einen Blick in unser [Glossar](XTTRAIN_GLOSSARY.md) und das [Data Dictionary](DATA_DICTIONARY.md).
+For a deeper understanding of the terms and data fields used in the API, please take a look at our [Glossary](XTTRAIN_GLOSSARY.md) and the [Data Dictionary](DATA_DICTIONARY.md).
 
-## Mitwirken
+## Contributing
 
-Wir freuen uns über Beiträge! Bitte lesen Sie unsere `AGENTS.md`, bevor Sie Änderungen am Code vornehmen.
+We welcome contributions! Please read our `AGENTS.md` before making any changes to the code.
