@@ -1,18 +1,6 @@
-/*
- * xDuinoRails_xTrainAPI_debug_cli
- *
- * This sketch provides a simple serial command line interface (CLI) to interact
- * with the xDuinoRails_xTrainAPI. It is designed to be used for end-to-end
- * testing with the print_monitor example.
- *
- * This sketch will read commands from the serial port and log the API calls
- * that it would make to the serial port.
- *
- */
-
 #include "xDuinoRails_xTrainAPI.h"
+#include "xDuinoRails_xTrainAPI_utils.h"
 
-// Dummy implementation of the xTrainAPI for demonstration purposes
 class MyTrainAPI : public ModelRail::IUnifiedModelTrainListener {
 public:
     void onLocoSpeedChanged(const ModelRail::LocoHandle& loco, float speedPercent, ModelRail::Direction direction, int speedSteps) override {
@@ -78,9 +66,11 @@ public:
     void onSusiConfigRead(const ModelRail::LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value) override {}
     void onConfigBlockLoaded(const ModelRail::LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data) override {}
     void onProgressUpdate(std::string operation, float percent) override {}
+    void onMechanicalSyncEvent(const ModelRail::LocoHandle& loco, ModelRail::SyncType type, uint8_t value) override {}
 };
 
 MyTrainAPI trainAPI;
+ModelRail::CmdLineParser parser(trainAPI);
 
 void setup() {
   Serial.begin(115200);
@@ -96,80 +86,7 @@ void loop() {
     String command = Serial.readStringUntil('>');
     if (command.startsWith("<")) {
       command = command.substring(1);
-      parseCommand(command);
+      parser.parse(command);
     }
-  }
-}
-
-void parseCommand(String command) {
-  char cmdChar = command.charAt(0);
-  String params = command.substring(1);
-  params.trim();
-
-  switch (cmdChar) {
-    case '1':
-      trainAPI.onTrackPowerChanged(ModelRail::PowerState::ON);
-      break;
-    case '0':
-      trainAPI.onTrackPowerChanged(ModelRail::PowerState::OFF);
-      break;
-    case 't':
-      {
-        int firstSpace = params.indexOf(' ');
-        int secondSpace = params.indexOf(' ', firstSpace + 1);
-        if (firstSpace != -1 && secondSpace != -1) {
-          uint16_t cab = params.substring(0, firstSpace).toInt();
-          int speed = params.substring(firstSpace + 1, secondSpace).toInt();
-          int dir = params.substring(secondSpace + 1).toInt();
-
-          ModelRail::LocoHandle loco = {cab, ModelRail::Protocol::DCC, 0};
-          trainAPI.onLocoSpeedChanged(loco, speed, (ModelRail::Direction)dir, 128);
-        } else {
-          Serial.println("Invalid t command format. Use: <t CAB SPEED DIR>");
-        }
-      }
-      break;
-    case 'f':
-      {
-        int firstSpace = params.indexOf(' ');
-        int secondSpace = params.indexOf(' ', firstSpace + 1);
-        if (firstSpace != -1 && secondSpace != -1) {
-          uint16_t cab = params.substring(0, firstSpace).toInt();
-          int func = params.substring(firstSpace + 1, secondSpace).toInt();
-          int state = params.substring(secondSpace + 1).toInt();
-
-          ModelRail::LocoHandle loco = {cab, ModelRail::Protocol::DCC, 0};
-          trainAPI.onLocoFunctionChanged(loco, func, state);
-        } else {
-          Serial.println("Invalid f command format. Use: <f CAB FUNC STATE>");
-        }
-      }
-      break;
-    case 'T':
-      {
-        int firstSpace = params.indexOf(' ');
-        if (firstSpace != -1) {
-          uint16_t addr = params.substring(0, firstSpace).toInt();
-          int state = params.substring(firstSpace + 1).toInt();
-          trainAPI.onTurnoutChanged(addr, state, false);
-        } else {
-          Serial.println("Invalid T command format. Use: <T ADDR STATE>");
-        }
-      }
-      break;
-    case 'S':
-      {
-        int firstSpace = params.indexOf(' ');
-        if (firstSpace != -1) {
-          uint16_t addr = params.substring(0, firstSpace).toInt();
-          int aspect = params.substring(firstSpace + 1).toInt();
-          trainAPI.onSignalAspectChanged(addr, aspect, false);
-        } else {
-          Serial.println("Invalid S command format. Use: <S ADDR ASPECT>");
-        }
-      }
-      break;
-    default:
-      Serial.println("Unknown command");
   }
 }

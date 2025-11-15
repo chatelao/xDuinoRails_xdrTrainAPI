@@ -7,6 +7,19 @@ This directory contains example Arduino sketches that demonstrate how to use the
 * **debug_cli**: A simple command-line interface that allows you to send DCC-EX like commands to control a model train layout. This sketch acts as the test target.
 * **print_monitor**: A sketch that demonstrates how to implement the `IUnifiedModelTrainListener` to receive events from the `xDuinoRails_xTrainAPI` and print them to the serial port in a DCC-EX like command format. This sketch acts as the test driver.
 
+## Command Syntax
+
+The debug CLI uses a command syntax similar to DCC-EX. Each command is enclosed in `<` and `>` brackets.
+
+| Command | Description | Example |
+| --- | --- | --- |
+| `<1>` | Turn track power on | `<1>` |
+| `<0>` | Turn track power off | `<0>` |
+| `<t CAB SPEED DIR>` | Set locomotive speed | `<t 123 100 1>` |
+| `<f CAB FUNC STATE>` | Set locomotive function | `<f 123 1 1>` |
+| `<T ADDR STATE>` | Set turnout state | `<T 456 1>` |
+| `<S ADDR ASPECT>` | Set signal aspect | `<S 789 3>` |
+
 ## End-to-End Testing
 
 These examples are designed to be used together for end-to-end testing. The `print_monitor` sketch can be used to generate a command stream that can be piped to the `debug_cli` sketch. The output of the `debug_cli` sketch can then be compared to the original test data to verify that the commands are being parsed and handled correctly.
