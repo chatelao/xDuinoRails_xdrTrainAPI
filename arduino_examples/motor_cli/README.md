@@ -1,11 +1,13 @@
 # Motor CLI Example
 
-This example demonstrates how to control a motor using the `XDuinoRails_MotorDriver` library with a simple command-line interface.
+This example demonstrates how to control a motor using the `XDuinoRails_MotorDriver` library with a simple command-line interface. It uses the `CmdLineParser` from the xTrainAPI.
 
-## Commands
+## Command
 
-- `s <speed>`: Set the target speed in pulses per second (PPS).
-- `d <0|1>`: Set the direction (0 for reverse, 1 for forward).
-- `a <rate>`: Set the acceleration in PPS/s.
-- `c <rate>`: Set the deceleration in PPS/s.
-- `k <pwm> <ms>`: Set the startup kick PWM and duration.
+The CLI accepts `THROTTLE` commands in the following format:
+
+`THROTTLE cab="<address>" speed="<speed>" direction="<0|1>"`
+
+- `<address>`: The address of the motor (e.g., 1).
+- `<speed>`: The target speed (0-100).
+- `<direction>`: 0 for reverse, 1 for forward.
