@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onProgressUpdate" timestamp="2024-07-29T10:09:05Z">
+        <progress operation="Reading Decoder CVs" percent="25.0" />
+    </event>
+</xTrainEvents>

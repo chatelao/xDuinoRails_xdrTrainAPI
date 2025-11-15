@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onLocoDetectedOnBlock" timestamp="2024-07-29T10:06:15Z">
+        <sensor sensorId="501" />
+        <loco address="3" protocol="DCC" />
+        <detection orientation="NORMAL" />
+    </event>
+</xTrainEvents>

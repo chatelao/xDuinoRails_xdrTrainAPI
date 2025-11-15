@@ -42,6 +42,18 @@ jobs:
           name: ${{ matrix.example }}-${{ matrix.fqbn }}
           path: build/${{ matrix.example }}-${{ matrix.fqbn }}
 
+  validate-xml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install libxml2-utils
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxml2-utils
+      - name: Validate XML files
+        run: xmllint --noout --schema arduino_examples/xml_messages/xTrainEvents.xsd arduino_examples/xml_messages/*.xml
+
   release:
     needs: build
     if: github.event_name == 'release'

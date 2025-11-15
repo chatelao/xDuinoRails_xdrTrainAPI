@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onAccessoryError" timestamp="2024-07-29T10:03:20Z">
+        <accessory address="18" errorId="2" errorMsg="Overload on port 3" />
+    </event>
+</xTrainEvents>

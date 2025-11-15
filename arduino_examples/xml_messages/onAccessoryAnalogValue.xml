@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onAccessoryAnalogValue" timestamp="2024-07-29T10:03:15Z">
+        <accessory address="22" value0to1="0.75" />
+    </event>
+</xTrainEvents>

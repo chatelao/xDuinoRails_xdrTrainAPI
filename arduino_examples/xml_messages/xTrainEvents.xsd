@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Root Element Definition -->
+    <xs:element name="xTrainEvents">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="event" type="EventType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Main Event Type Definition -->
+    <xs:complexType name="EventType">
+        <xs:sequence>
+            <!-- All child elements are optional, as an event contains only the relevant ones. -->
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="loco" type="LocoHandleType"/>
+                <xs:element name="master" type="LocoHandleType"/>
+                <xs:element name="slave" type="LocoHandleType"/>
+                <xs:element name="speed" type="SpeedType"/>
+                <xs:element name="function" type="FunctionType"/>
+                <xs:element name="dispatch" type="DispatchType"/>
+                <xs:element name="consist" type="ConsistType"/>
+                <xs:element name="turnout" type="TurnoutType"/>
+                <xs:element name="signal" type="SignalType"/>
+                <xs:element name="accessory" type="AccessoryType"/>
+                <xs:element name="sensor" type="SensorType"/>
+                <xs:element name="power" type="PowerType"/>
+                <xs:element name="clock" type="ClockType"/>
+                <xs:element name="node" type="NodeType"/>
+                <xs:element name="detection" type="DetectionType"/>
+                <xs:element name="telemetry" type="TelemetryType"/>
+                <xs:element name="externalState" type="ExternalStateType"/>
+                <xs:element name="cv" type="CvType"/>
+                <xs:element name="progress" type="ProgressType"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+        <xs:attribute name="timestamp" type="xs:dateTime" use="required"/>
+    </xs:complexType>
+
+    <!-- Complex Type Definitions for Event Payloads -->
+    <xs:complexType name="LocoHandleType">
+        <xs:attribute name="address" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="protocol" type="ProtocolEnum" use="required"/>
+        <xs:attribute name="mfxUid" type="xs:unsignedInt" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="SpeedType">
+        <xs:attribute name="speedPercent" type="xs:float" use="required"/>
+        <xs:attribute name="direction" type="DirectionEnum" use="required"/>
+        <xs:attribute name="speedSteps" type="xs:positiveInteger" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="FunctionType">
+        <xs:attribute name="fIndex" type="xs:nonNegativeInteger" use="required"/>
+        <xs:attribute name="isActive" type="xs:boolean" use="optional"/>
+        <xs:attribute name="value" type="xs:unsignedByte" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="DispatchType">
+        <xs:attribute name="isAcquired" type="xs:boolean" use="required"/>
+        <xs:attribute name="ownerId" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="ConsistType">
+        <xs:attribute name="type" type="ConsistEnum" use="required"/>
+        <xs:attribute name="inverted" type="xs:boolean" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="TurnoutType">
+        <xs:attribute name="address" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="isThrown" type="xs:boolean" use="required"/>
+        <xs:attribute name="isFeedback" type="xs:boolean" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="SignalType">
+        <xs:attribute name="address" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="aspectId" type="xs:unsignedByte" use="required"/>
+        <xs:attribute name="isFeedback" type="xs:boolean" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="AccessoryType">
+        <xs:attribute name="address" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="value0to1" type="xs:float" use="optional"/>
+        <xs:attribute name="errorId" type="xs:unsignedByte" use="optional"/>
+        <xs:attribute name="errorMsg" type="xs:string" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="SensorType">
+        <xs:attribute name="sensorId" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="isActive" type="xs:boolean" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="PowerType">
+        <xs:attribute name="state" type="PowerStateEnum" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="ClockType">
+        <xs:attribute name="modelTimeUnix" type="xs:long" use="required"/>
+        <xs:attribute name="factor" type="xs:float" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="NodeType">
+        <xs:attribute name="nodeUid" type="xs:string" use="required"/>
+        <xs:attribute name="productName" type="xs:string" use="required"/>
+        <xs:attribute name="booster" type="xs:boolean" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="DetectionType">
+        <xs:attribute name="orientation" type="DecoderOrientationEnum" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="TelemetryType">
+        <xs:attribute name="type" type="TelemetryEnum" use="required"/>
+        <xs:attribute name="value" type="xs:float" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="ExternalStateType">
+        <xs:attribute name="state" type="ExternalStateEnum" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="CvType">
+        <xs:attribute name="cvNumber" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="value" type="xs:unsignedByte" use="required"/>
+        <xs:attribute name="success" type="xs:boolean" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="ProgressType">
+        <xs:attribute name="operation" type="xs:string" use="required"/>
+        <xs:attribute name="percent" type="xs:float" use="required"/>
+    </xs:complexType>
+
+    <!-- Enumeration Definitions -->
+    <xs:simpleType name="ProtocolEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DCC"/>
+            <xs:enumeration value="MM_I"/>
+            <xs:enumeration value="MM_II"/>
+            <xs:enumeration value="MFX"/>
+            <xs:enumeration value="SELECTRIX"/>
+            <xs:enumeration value="SX2"/>
+            <xs:enumeration value="LOCONET"/>
+            <xs:enumeration value="BIDIB"/>
+            <xs:enumeration value="XPRESSNET"/>
+            <xs:enumeration value="CAN_GENERIC"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DirectionEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="REVERSE"/>
+            <xs:enumeration value="FORWARD"/>
+            <xs:enumeration value="UNKNOWN"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PowerStateEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="OFF"/>
+            <xs:enumeration value="ON"/>
+            <xs:enumeration value="EMERGENCY_STOP"/>
+            <xs:enumeration value="SHORT_CIRCUIT"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ConsistEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ADVANCED_DCC"/>
+            <xs:enumeration value="UNIVERSAL_HOST"/>
+            <xs:enumeration value="MU_LOCONET"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DecoderOrientationEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NORMAL"/>
+            <xs:enumeration value="INVERTED"/>
+            <xs:enumeration value="UNKNOWN"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ExternalStateEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FREE_RUN"/>
+            <xs:enumeration value="STOPPED_BY_ABC_SIGNAL"/>
+            <xs:enumeration value="STOPPED_BY_DC_BRAKE"/>
+            <xs:enumeration value="STOPPED_BY_HLU"/>
+            <xs:enumeration value="RESTRICTED_SPEED_HLU"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TelemetryEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SPEED_KMH"/>
+            <xs:enumeration value="LOAD_PERCENT"/>
+            <xs:enumeration value="VOLTAGE_TRACK"/>
+            <xs:enumeration value="CURRENT_AMP"/>
+            <xs:enumeration value="FUEL_LEVEL"/>
+            <xs:enumeration value="TEMP_CELSIUS"/>
+            <xs:enumeration value="QOS_ERROR_RATE"/>
+            <xs:enumeration value="ODOMETER_VALUE"/>
+            <xs:enumeration value="POSITION_CONFIDENCE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

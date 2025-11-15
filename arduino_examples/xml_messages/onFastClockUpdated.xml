@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onFastClockUpdated" timestamp="2024-07-29T10:05:00Z">
+        <clock modelTimeUnix="1722247500" factor="4.0" /> <!-- July 29, 2024 10:05:00 AM UTC -->
+    </event>
+</xTrainEvents>
