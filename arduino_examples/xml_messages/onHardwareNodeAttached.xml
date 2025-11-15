@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onHardwareNodeAttached" timestamp="2024-07-29T10:00:30Z">
+        <node nodeUid="BIDIB-0A3B5" productName="LightControl" booster="false" />
+    </event>
+</xTrainEvents>

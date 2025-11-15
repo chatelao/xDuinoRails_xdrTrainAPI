@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <!-- ===================================================================== -->
+    <!-- GROUP A: TRAFFIC & DISPATCHING                                        -->
+    <!-- ===================================================================== -->
+
+    <!-- Event: Speed of a locomotive has changed. -->
+    <event type="onLocoSpeedChanged" timestamp="2024-07-29T10:00:01Z">
+        <loco address="3" protocol="DCC" mfxUid="0" />
+        <speed speedPercent="50.5" direction="FORWARD" speedSteps="128" />
+    </event>
+
+    <!-- Event: A binary function (e.g., lights, smoke) has been toggled. -->
+    <event type="onLocoFunctionChanged" timestamp="2024-07-29T10:00:05Z">
+        <loco address="3" protocol="DCC" />
+        <function fIndex="0" isActive="true" />
+    </event>
+
+    <!-- Event: An analog function's value has changed (e.g., steam whistle pressure). -->
+    <event type="onLocoFunctionAnalogValue" timestamp="2024-07-29T10:00:08Z">
+        <loco address="102" protocol="MFX" mfxUid="12345678" />
+        <function fIndex="5" value="180" />
+    </event>
+
+    <!-- Event: A locomotive has been acquired or released by a throttle. -->
+    <event type="onLocoDispatchStateChanged" timestamp="2024-07-29T10:01:00Z">
+        <loco address="44" protocol="LOCONET" />
+        <dispatch isAcquired="true" ownerId="Throttle #3" />
+    </event>
+
+    <!-- Event: Two locomotives have been linked in a consist (multi-traction). -->
+    <event type="onConsistLink" timestamp="2024-07-29T10:02:00Z">
+        <master address="2001" protocol="DCC" />
+        <slave address="2002" protocol="DCC" />
+        <consist type="ADVANCED_DCC" inverted="false" />
+    </event>
+
+    <!-- ===================================================================== -->
+    <!-- GROUP B: INFRASTRUCTURE (ACCESSORIES)                                 -->
+    <!-- ===================================================================== -->
+
+    <!-- Event: A turnout has changed its state. -->
+    <event type="onTurnoutChanged" timestamp="2024-07-29T10:03:10Z">
+        <turnout address="15" isThrown="true" isFeedback="true" />
+    </event>
+
+    <!-- Event: A signal is showing a new aspect. -->
+    <event type="onSignalAspectChanged" timestamp="2024-07-29T10:03:12Z">
+        <signal address="7" aspectId="2" isFeedback="true" /> <!-- Hp2: Langsamfahrt -->
+    </event>
+
+    <!-- Event: An accessory's analog value changed (e.g., servo position). -->
+    <event type="onAccessoryAnalogValue" timestamp="2024-07-29T10:03:15Z">
+        <accessory address="22" value0to1="0.75" />
+    </event>
+
+    <!-- Event: An accessory decoder reported a hardware error. -->
+    <event type="onAccessoryError" timestamp="2024-07-29T10:03:20Z">
+        <accessory address="18" errorId="2" errorMsg="Overload on port 3" />
+    </event>
+
+    <!-- Event: An occupancy sensor has changed its state. -->
+    <event type="onSensorStateChanged" timestamp="2024-07-29T10:04:00Z">
+        <sensor sensorId="501" isActive="true" />
+    </event>
+
+    <!-- ===================================================================== -->
+    <!-- GROUP C: SYSTEM, TIME & TOPOLOGY                                      -->
+    <!-- ===================================================================== -->
+
+    <!-- Event: The global track power state has changed. -->
+    <event type="onTrackPowerChanged" timestamp="2024-07-29T09:59:59Z">
+        <power state="ON" />
+    </event>
+
+    <!-- Event: The fast clock time has been updated. -->
+    <event type="onFastClockUpdated" timestamp="2024-07-29T10:05:00Z">
+        <clock modelTimeUnix="1722247500" factor="4.0" /> <!-- July 29, 2024 10:05:00 AM UTC -->
+    </event>
+
+    <!-- Event: A new hardware node was detected on the bus. -->
+    <event type="onHardwareNodeAttached" timestamp="2024-07-29T10:00:30Z">
+        <node nodeUid="BIDIB-0A3B5" productName="LightControl" booster="false" />
+    </event>
+
+    <!-- ===================================================================== -->
+    <!-- GROUP D: TELEMETRY & IDENTIFICATION                                   -->
+    <!-- ===================================================================== -->
+
+    <!-- Event: A locomotive has been detected on a specific track block. -->
+    <event type="onLocoDetectedOnBlock" timestamp="2024-07-29T10:06:15Z">
+        <sensor sensorId="501" />
+        <loco address="3" protocol="DCC" />
+        <detection orientation="NORMAL" />
+    </event>
+
+    <!-- Event: Telemetry data has been received from a locomotive. -->
+    <event type="onLocoTelemetryData" timestamp="2024-07-29T10:06:18Z">
+        <loco address="3" protocol="DCC" />
+        <telemetry type="SPEED_KMH" value="88.5" />
+    </event>
+
+    <!-- Event: The external state of a loco changed (e.g., stopped by ABC). -->
+    <event type="onLocoExternalStateChanged" timestamp="2024-07-29T10:07:00Z">
+        <loco address="99" protocol="DCC" />
+        <externalState state="STOPPED_BY_ABC_SIGNAL" />
+    </event>
+
+    <!-- ===================================================================== -->
+    <!-- GROUP E: CONFIGURATION & MASS DATA                                    -->
+    <!-- ===================================================================== -->
+
+    <!-- Event: A CV read operation has completed. -->
+    <event type="onCvReadResult" timestamp="2024-07-29T10:08:30Z">
+        <loco address="5" protocol="DCC" />
+        <cv cvNumber="5" value="200" success="true" />
+    </event>
+
+    <!-- Event: A progress update for a long-running operation. -->
+    <event type="onProgressUpdate" timestamp="2024-07-29T10:09:05Z">
+        <progress operation="Reading Decoder CVs" percent="25.0" />
+    </event>
+</xTrainEvents>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onTrackPowerChanged" timestamp="2024-07-29T09:59:59Z">
+        <power state="ON" />
+    </event>
+</xTrainEvents>

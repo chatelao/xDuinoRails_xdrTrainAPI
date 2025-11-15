@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onSensorStateChanged" timestamp="2024-07-29T10:04:00Z">
+        <sensor sensorId="501" isActive="true" />
+    </event>
+</xTrainEvents>

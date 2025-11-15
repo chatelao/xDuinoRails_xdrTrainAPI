@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onLocoFunctionAnalogValue" timestamp="2024-07-29T10:00:08Z">
+        <loco address="102" protocol="MFX" mfxUid="12345678" />
+        <function fIndex="5" value="180" />
+    </event>
+</xTrainEvents>

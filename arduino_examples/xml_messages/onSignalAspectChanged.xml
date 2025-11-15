@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onSignalAspectChanged" timestamp="2024-07-29T10:03:12Z">
+        <signal address="7" aspectId="2" isFeedback="true" /> <!-- Hp2: Langsamfahrt -->
+    </event>
+</xTrainEvents>

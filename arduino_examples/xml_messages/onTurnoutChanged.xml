@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onTurnoutChanged" timestamp="2024-07-29T10:03:10Z">
+        <turnout address="15" isThrown="true" isFeedback="true" />
+    </event>
+</xTrainEvents>
