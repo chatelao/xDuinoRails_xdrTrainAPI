@@ -27,6 +27,10 @@ When making changes to the API, you **must** follow this workflow:
 
 Failure to keep these files consistent will result in build failures and a broken API contract. Always check for deviations from the main `.h` file and correct them.
 
+## Language
+
+All communication, documentation, and code comments must be in English. This ensures that the project is accessible to a global audience.
+
 ## File Naming Conventions
 
 Documentation files should be in `UPPER_SNAKE_CASE` (e.g., `DATA_DICTIONARY.md`). Standard files like `README.md`, `AGENTS.md`, and `LICENSE` are exceptions to this rule.
