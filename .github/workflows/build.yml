@@ -19,9 +19,9 @@ jobs:
     - name: Compile Arduino sketch
       uses: arduino/compile-sketches@v1
       with:
-        fqbn: Seeed:rp2040:seeed_xiao_rp2040
+        fqbn: Seeed-mbed:rp2040:seeed_xiao_rp2040
         platforms: |
-          - name: Seeed:rp2040
+          - name: Seeed-mbed:rp2040
             source-url: https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json
         libraries: |
           - name: NmraDcc
