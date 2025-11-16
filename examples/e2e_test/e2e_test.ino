@@ -117,9 +117,9 @@ public:
     void onLocoExternalStateChanged(const ModelRail::LocoHandle& loco, ModelRail::ExternalState state) override {}
     void onLocoRailComRawData(const ModelRail::LocoHandle& loco, uint8_t appId, const std::vector<uint8_t>& data) override {}
     void onNewLocoDiscovered(const ModelRail::LocoHandle& loco, const std::string& name, const std::string& icon) override {}
-    void onCvReadRequest(const ModelRail::LocoHandle& loco, int cvNumber) override {}
-    void onCvWriteRequest(const ModelRail::LocoHandle& loco, int cvNumber, uint8_t value) override {}
-    void onCvReadResult(const ModelRail::LocoHandle& loco, int cvNumber, uint8_t value, bool success) override {}
+    void onCvRead(const ModelRail::LocoHandle& loco, int cvNumber) override {}
+    void onCvWrite(const ModelRail::LocoHandle& loco, int cvNumber, uint8_t value) override {}
+    void onCvReadDone(const ModelRail::LocoHandle& loco, int cvNumber, uint8_t value, bool success) override {}
     void onSusiConfigRead(const ModelRail::LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value) override {}
     void onConfigBlockLoad(const ModelRail::LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data) override {}
     void onProgressUpdate(std::string operation, float percent) override {}

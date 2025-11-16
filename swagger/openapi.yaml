@@ -151,11 +151,11 @@ paths:
       responses:
         '202':
           description: "Event accepted."
-  /onCvWriteRequest:
+  /onCvWrite:
     post:
       summary: "CV Write Request"
       description: "Request to write a value to a configuration variable (CV)."
-      operationId: "onCvWriteRequest"
+      operationId: "onCvWrite"
       requestBody:
         required: true
         content:
@@ -182,11 +182,11 @@ paths:
       responses:
         '202':
           description: "Event accepted."
-  /onCvReadRequest:
+  /onCvRead:
     post:
       summary: "CV Read Request"
       description: "Request to read a value from a configuration variable (CV)."
-      operationId: "onCvReadRequest"
+      operationId: "onCvRead"
       requestBody:
         required: true
         content:
@@ -456,17 +456,17 @@ paths:
       responses:
         '202':
           description: "Event accepted."
-  /onCvReadResult:
+  /onCvReadDone:
     post:
-      summary: "CV Read Result"
+      summary: "CV Read Done"
       description: "Event for the result of a CV read operation."
-      operationId: "onCvReadResult"
+      operationId: "onCvReadDone"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CvReadResult'
+              $ref: '#/components/schemas/CvReadDone'
       responses:
         '202':
           description: "Event accepted."
@@ -633,7 +633,7 @@ components:
           type: string
           example: "System startup complete."
 
-    CvReadResult:
+    CvReadDone:
       type: object
       required: [loco, cvNumber, value, success]
       properties:

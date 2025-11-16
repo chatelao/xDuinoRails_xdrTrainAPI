@@ -164,22 +164,22 @@ public:
     void onNewLocoDiscovered(const LocoHandle& loco, const std::string& name, const std::string& icon) override {
         _stream->println("onNewLocoDiscovered");
     }
-    void onCvReadRequest(const LocoHandle& loco, int cvNumber) override {
-        _stream->print("onCvReadRequest cab=");
+    void onCvRead(const LocoHandle& loco, int cvNumber) override {
+        _stream->print("onCvRead cab=");
         _stream->print(loco.address);
         _stream->print(" cv=");
         _stream->println(cvNumber);
     }
-    void onCvWriteRequest(const LocoHandle& loco, int cvNumber, uint8_t value) override {
-        _stream->print("onCvWriteRequest cab=");
+    void onCvWrite(const LocoHandle& loco, int cvNumber, uint8_t value) override {
+        _stream->print("onCvWrite cab=");
         _stream->print(loco.address);
         _stream->print(" cv=");
         _stream->print(cvNumber);
         _stream->print(" value=");
         _stream->println(value);
     }
-    void onCvReadResult(const LocoHandle& loco, int cvNumber, uint8_t value, bool success) override {
-        _stream->println("onCvReadResult");
+    void onCvReadDone(const LocoHandle& loco, int cvNumber, uint8_t value, bool success) override {
+        _stream->println("onCvReadDone");
     }
     void onSusiConfigRead(const LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value) override {
         _stream->println("onSusiConfigRead");
@@ -333,14 +333,14 @@ public:
     void onNewLocoDiscovered(const LocoHandle& loco, const std::string& name, const std::string& icon) override {
         _stream->println("    <event type=\"onNewLocoDiscovered\"></event>");
     }
-    void onCvReadRequest(const LocoHandle& loco, int cvNumber) override {
-        _stream->println("    <event type=\"onCvReadRequest\"></event>");
+    void onCvRead(const LocoHandle& loco, int cvNumber) override {
+        _stream->println("    <event type=\"onCvRead\"></event>");
     }
-    void onCvWriteRequest(const LocoHandle& loco, int cvNumber, uint8_t value) override {
-        _stream->println("    <event type=\"onCvWriteRequest\"></event>");
+    void onCvWrite(const LocoHandle& loco, int cvNumber, uint8_t value) override {
+        _stream->println("    <event type=\"onCvWrite\"></event>");
     }
-    void onCvReadResult(const LocoHandle& loco, int cvNumber, uint8_t value, bool success) override {
-        _stream->println("    <event type=\"onCvReadResult\"></event>");
+    void onCvReadDone(const LocoHandle& loco, int cvNumber, uint8_t value, bool success) override {
+        _stream->println("    <event type=\"onCvReadDone\"></event>");
     }
     void onSusiConfigRead(const LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value) override {
         _stream->println("    <event type=\"onSusiConfigRead\"></event>");
