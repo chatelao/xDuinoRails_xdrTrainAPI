@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onConfigBlockLoaded" timestamp="2024-07-29T10:11:00Z">
+        <loco address="5" protocol="DCC" />
+        <config domain="ICON" data="89504e47" />
+    </event>
+</xTrainEvents>

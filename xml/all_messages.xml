@@ -35,6 +35,11 @@
         <consist type="ADVANCED_DCC" inverted="false" />
     </event>
 
+    <!-- Event: A locomotive has been removed from a consist. -->
+    <event type="onConsistUnlink" timestamp="2024-07-29T10:03:00Z">
+        <slave address="2002" protocol="DCC" />
+    </event>
+
     <!-- ===================================================================== -->
     <!-- GROUP B: INFRASTRUCTURE (ACCESSORIES)                                 -->
     <!-- ===================================================================== -->
@@ -83,6 +88,16 @@
         <node nodeUid="BIDIB-0A3B5" productName="LightControl" booster="false" />
     </event>
 
+    <!-- Event: A hardware node has disconnected from the bus. -->
+    <event type="onHardwareNodeLost" timestamp="2024-07-29T10:04:00Z">
+        <node nodeUid="booster-2" productName="Unknown" booster="true" />
+    </event>
+
+    <!-- Event: A generic system message or log entry. -->
+    <event type="onSystemMessage" timestamp="2024-07-29T10:05:00Z">
+        <message source="PowerManager" text="Emergency stop triggered by user." />
+    </event>
+
     <!-- ===================================================================== -->
     <!-- GROUP D: TELEMETRY & IDENTIFICATION                                   -->
     <!-- ===================================================================== -->
@@ -106,6 +121,18 @@
         <externalState state="STOPPED_BY_ABC_SIGNAL" />
     </event>
 
+    <!-- Event: Raw/Proprietary RailCom Data. -->
+    <event type="onLocoRailComRawData" timestamp="2024-07-29T10:06:00Z">
+        <loco address="1024" protocol="DCC" />
+        <railcom app="1" data="01A4B7" />
+    </event>
+
+    <!-- Event: A new locomotive was discovered (mfx / RailComPlus). -->
+    <event type="onNewLocoDiscovered" timestamp="2024-07-29T10:07:00Z">
+        <loco mfxUid="12345678" protocol="MFX" address="1" />
+        <discovery name="BR 18.5" icon="br18.png" />
+    </event>
+
     <!-- ===================================================================== -->
     <!-- GROUP E: CONFIGURATION & MASS DATA                                    -->
     <!-- ===================================================================== -->
@@ -116,8 +143,43 @@
         <cv cvNumber="5" value="200" success="true" />
     </event>
 
+    <!-- Event: A request to read a CV from a decoder has been issued. -->
+    <event type="onCvReadRequest" timestamp="2024-07-29T10:08:00Z">
+        <loco address="3" protocol="DCC" />
+        <cv cvNumber="5" />
+    </event>
+
+    <!-- Event: A request to write a CV to a decoder has been issued. -->
+    <event type="onCvWriteRequest" timestamp="2024-07-29T10:09:00Z">
+        <loco address="3" protocol="DCC" />
+        <cv cvNumber="5" value="128" />
+    </event>
+
+    <!-- Event: Result of reading a SUSI configuration register. -->
+    <event type="onSusiConfigRead" timestamp="2024-07-29T10:10:00Z">
+        <loco address="4" protocol="DCC" />
+        <susi bank="1" index="2" value="3" />
+    </event>
+
+    <!-- Event: Mass Data Transfer (e.g., icon or sound profile). -->
+    <event type="onConfigBlockLoaded" timestamp="2024-07-29T10:11:00Z">
+        <loco address="5" protocol="DCC" />
+        <config domain="ICON" data="89504e47" />
+    </event>
+
     <!-- Event: A progress update for a long-running operation. -->
     <event type="onProgressUpdate" timestamp="2024-07-29T10:09:05Z">
         <progress operation="Reading Decoder CVs" percent="25.0" />
     </event>
+
+    <!-- ===================================================================== -->
+    <!-- GROUP F: REAL-TIME SYNCHRONIZATION (v2.3+)                            -->
+    <!-- ===================================================================== -->
+
+    <!-- Event: A mechanical synchronization event occurred. -->
+    <event type="onLocoSyncEvent" timestamp="2024-07-29T10:12:00Z">
+        <loco address="6" protocol="DCC" />
+        <sync type="CAM_PULSE" value="1" />
+    </event>
+
 </xTrainEvents>

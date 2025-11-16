@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onNewLocoDiscovered" timestamp="2024-07-29T10:07:00Z">
+        <loco mfxUid="12345678" protocol="MFX" address="1" />
+        <discovery name="BR 18.5" icon="br18.png" />
+    </event>
+</xTrainEvents>

@@ -34,6 +34,12 @@
                 <xs:element name="externalState" type="ExternalStateType"/>
                 <xs:element name="cv" type="CvType"/>
                 <xs:element name="progress" type="ProgressType"/>
+                <xs:element name="message" type="MessageType"/>
+                <xs:element name="railcom" type="RailComType"/>
+                <xs:element name="discovery" type="DiscoveryType"/>
+                <xs:element name="susi" type="SusiType"/>
+                <xs:element name="config" type="ConfigType"/>
+                <xs:element name="sync" type="SyncType"/>
             </xs:choice>
         </xs:sequence>
         <xs:attribute name="type" type="xs:string" use="required"/>
@@ -42,7 +48,7 @@
 
     <!-- Complex Type Definitions for Event Payloads -->
     <xs:complexType name="LocoHandleType">
-        <xs:attribute name="address" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="address" type="xs:positiveInteger" use="optional"/>
         <xs:attribute name="protocol" type="ProtocolEnum" use="required"/>
         <xs:attribute name="mfxUid" type="xs:unsignedInt" use="optional"/>
     </xs:complexType>
@@ -132,6 +138,37 @@
         <xs:attribute name="percent" type="xs:float" use="required"/>
     </xs:complexType>
 
+    <xs:complexType name="MessageType">
+        <xs:attribute name="source" type="xs:string" use="required"/>
+        <xs:attribute name="text" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="RailComType">
+        <xs:attribute name="app" type="xs:unsignedByte" use="required"/>
+        <xs:attribute name="data" type="xs:hexBinary" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="DiscoveryType">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="icon" type="xs:string" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="SusiType">
+        <xs:attribute name="bank" type="xs:unsignedByte" use="required"/>
+        <xs:attribute name="index" type="xs:unsignedByte" use="required"/>
+        <xs:attribute name="value" type="xs:unsignedByte" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="ConfigType">
+        <xs:attribute name="domain" type="xs:string" use="required"/>
+        <xs:attribute name="data" type="xs:hexBinary" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="SyncType">
+        <xs:attribute name="type" type="SyncTypeEnum" use="required"/>
+        <xs:attribute name="value" type="xs:unsignedInt" use="optional"/>
+    </xs:complexType>
+
     <!-- Enumeration Definitions -->
     <xs:simpleType name="ProtocolEnum">
         <xs:restriction base="xs:string">
@@ -202,6 +239,17 @@
             <xs:enumeration value="QOS_ERROR_RATE"/>
             <xs:enumeration value="ODOMETER_VALUE"/>
             <xs:enumeration value="POSITION_CONFIDENCE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="SyncTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CAM_PULSE"/>
+            <xs:enumeration value="CYLINDER_CYCLE"/>
+            <xs:enumeration value="GEAR_CHANGE_UP"/>
+            <xs:enumeration value="GEAR_CHANGE_DOWN"/>
+            <xs:enumeration value="BRAKE_SQUEAL_START"/>
+            <xs:enumeration value="DOOR_MOVEMENT"/>
         </xs:restriction>
     </xs:simpleType>
 
