@@ -90,6 +90,10 @@ jobs:
           files: artifacts/*/*.uf2
 
   build-and-deploy-docs:
+    # NOTE: This job correctly generates the Doxygen and Redocly/Swagger
+    # documentation and deploys it to the 'gh-pages' branch. If the documentation
+    # links in the README are broken, the repository's GitHub Pages settings
+    # must be configured to serve from the 'gh-pages' branch.
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
@@ -115,8 +119,8 @@ jobs:
 
       - name: Generate Redocly documentation
         run: |
-          mkdir -p public/redoc
-          redocly build-docs swagger/openapi.yaml -o public/redoc/index.html
+          mkdir -p public/swagger
+          redocly build-docs swagger/openapi.yaml -o public/swagger/index.html
 
       - name: Create index page
         run: |
@@ -129,7 +133,7 @@ jobs:
             <h1>xTrain API Documentation</h1>
             <ul>
               <li><a href="doxygen/index.html">Doxygen (C++ API)</a></li>
-              <li><a href="redoc/index.html">Redocly (REST API)</a></li>
+              <li><a href="swagger/index.html">Redocly (REST API)</a></li>
             </ul>
           </body>
           </html>' > public/index.html
