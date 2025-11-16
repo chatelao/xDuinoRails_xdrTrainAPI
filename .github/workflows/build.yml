@@ -84,10 +84,24 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           path: artifacts
+      - name: Prepare release assets
+        run: |
+          mkdir release-assets
+          for artifact_dir in artifacts/*; do
+            if [ -d "$artifact_dir" ]; then
+              artifact_name=$(basename "$artifact_dir")
+              find "$artifact_dir" -type f \( -name "*.hex" -o -name "*.elf" -o -name "*.uf2" \) | while read -r file_path; do
+                extension="${file_path##*.}"
+                sanitized_artifact_name=$(echo "$artifact_name" | tr ':' '_')
+                new_filename="release-assets/${sanitized_artifact_name}.${extension}"
+                mv "$file_path" "$new_filename"
+              done
+            fi
+          done
       - name: Upload to release
         uses: softprops/action-gh-release@v1
         with:
-          files: artifacts/*/*.uf2
+          files: release-assets/*
 
   build-and-deploy-docs:
     # NOTE: This job correctly generates the Doxygen and Redocly/Swagger
