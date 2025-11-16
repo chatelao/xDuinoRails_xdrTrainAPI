@@ -49,13 +49,13 @@ public:
         ModelRail::PowerState state;
     };
 
-    struct ExpectedLocoSpeedChanged {
+    struct ExpectedLocoSpeedChange {
         uint16_t address;
         float speedPercent;
         ModelRail::Direction direction;
     };
 
-    struct ExpectedMechanicalSyncEvent {
+    struct ExpectedLocoEventSync {
         uint16_t address;
         ModelRail::SyncType type;
         uint8_t value;
@@ -64,14 +64,14 @@ public:
     using ExpectedCall = std::variant<
         std::monostate,
         ExpectedTrackPowerChanged,
-        ExpectedLocoSpeedChanged,
-        ExpectedMechanicalSyncEvent
+        ExpectedLocoSpeedChange,
+        ExpectedLocoEventSync
     >;
 
     VerifyingListener() : _testPassed(false) {}
 
-    void onLocoSpeedChanged(const ModelRail::LocoHandle& loco, float speedPercent, ModelRail::Direction direction, int speedSteps) override {
-        if (auto* expected = std::get_if<ExpectedLocoSpeedChanged>(&_expected)) {
+    void onLocoSpeedChange(const ModelRail::LocoHandle& loco, float speedPercent, ModelRail::Direction direction, int speedSteps) override {
+        if (auto* expected = std::get_if<ExpectedLocoSpeedChange>(&_expected)) {
             if (expected->address == loco.address &&
                 expected->speedPercent == speedPercent &&
                 expected->direction == direction) {
@@ -80,7 +80,7 @@ public:
         }
     }
 
-    void onTrackPowerChanged(ModelRail::PowerState state) override {
+    void onTrackPowerChange(ModelRail::PowerState state) override {
         if (auto* expected = std::get_if<ExpectedTrackPowerChanged>(&_expected)) {
             if (expected->state == state) {
                 _testPassed = true;
@@ -98,16 +98,16 @@ public:
     }
 
     // Implement other pure virtual functions from the interface
-    void onLocoFunctionChanged(const ModelRail::LocoHandle& loco, int fIndex, bool isActive) override {}
-    void onTurnoutChanged(uint16_t address, bool isThrown, bool isFeedback) override {}
-    void onSignalAspectChanged(uint16_t address, uint8_t aspectId, bool isFeedback) override {}
-    void onLocoFunctionAnalogValue(const ModelRail::LocoHandle& loco, int fIndex, uint8_t value) override {}
-    void onLocoDispatchStateChanged(const ModelRail::LocoHandle& loco, bool isAcquired, std::string ownerId) override {}
+    void onLocoFunctionChange(const ModelRail::LocoHandle& loco, int fIndex, bool isActive) override {}
+    void onTurnoutChange(uint16_t address, bool isThrown, bool isFeedback) override {}
+    void onSignalAspectChange(uint16_t address, uint8_t aspectId, bool isFeedback) override {}
+    void onLocoFunctionAnalogChange(const ModelRail::LocoHandle& loco, int fIndex, uint8_t value) override {}
+    void onLocoDispatchStateChange(const ModelRail::LocoHandle& loco, bool isAcquired, std::string ownerId) override {}
     void onConsistLink(const ModelRail::LocoHandle& master, const ModelRail::LocoHandle& slave, ModelRail::ConsistType type, bool inverted) override {}
     void onConsistUnlink(const ModelRail::LocoHandle& slave) override {}
     void onAccessoryAnalogValue(uint16_t address, float value0to1) override {}
     void onAccessoryError(uint16_t address, uint8_t errorId, std::string errorMsg) override {}
-    void onSensorStateChanged(uint32_t sensorId, bool isActive) override {}
+    void onSensorStateChange(uint32_t sensorId, bool isActive) override {}
     void onFastClockUpdated(int64_t modelTimeUnix, float factor) override {}
     void onHardwareNodeAttached(std::string nodeUid, std::string productName, bool booster) override {}
     void onHardwareNodeLost(std::string nodeUid) override {}
@@ -119,10 +119,10 @@ public:
     void onNewLocoDiscovered(const ModelRail::LocoHandle& loco, const std::string& name, const std::string& icon) override {}
     void onCvReadResult(const ModelRail::LocoHandle& loco, int cvNumber, uint8_t value, bool success) override {}
     void onSusiConfigRead(const ModelRail::LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value) override {}
-    void onConfigBlockLoaded(const ModelRail::LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data) override {}
+    void onConfigBlockLoad(const ModelRail::LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data) override {}
     void onProgressUpdate(std::string operation, float percent) override {}
-    void onMechanicalSyncEvent(const ModelRail::LocoHandle& loco, ModelRail::SyncType type, uint8_t value) override {
-        if (auto* expected = std::get_if<ExpectedMechanicalSyncEvent>(&_expected)) {
+    void onLocoEventSync(const ModelRail::LocoHandle& loco, ModelRail::SyncType type, uint32_t value) override {
+        if (auto* expected = std::get_if<ExpectedLocoEventSync>(&_expected)) {
             if (expected->address == loco.address &&
                 expected->type == type &&
                 expected->value == value) {
@@ -147,34 +147,34 @@ void setup() {
     VerifyingListener listener;
     ModelRail::CmdLineParser parser(listener);
 
-    // Test 1: onTrackPowerChanged
+    // Test 1: onTrackPowerChange
     listener.setExpected(VerifyingListener::ExpectedTrackPowerChanged{ModelRail::PowerState::ON});
-    printer.onTrackPowerChanged(ModelRail::PowerState::ON);
+    printer.onTrackPowerChange(ModelRail::PowerState::ON);
     String command = stream.readStringUntil('>');
     command = command.substring(1);
     parser.parse(command);
-    Serial.print("Test onTrackPowerChanged: ");
+    Serial.print("Test onTrackPowerChange: ");
     Serial.println(listener.hasPassed() ? "PASSED" : "FAILED");
 
-    // Test 2: onLocoSpeedChanged
+    // Test 2: onLocoSpeedChange
     stream.clear();
-    listener.setExpected(VerifyingListener::ExpectedLocoSpeedChanged{123, 100, ModelRail::Direction::FORWARD});
+    listener.setExpected(VerifyingListener::ExpectedLocoSpeedChange{123, 100, ModelRail::Direction::FORWARD});
     ModelRail::LocoHandle loco = {123, ModelRail::Protocol::DCC, 0};
-    printer.onLocoSpeedChanged(loco, 100, ModelRail::Direction::FORWARD, 128);
+    printer.onLocoSpeedChange(loco, 100, ModelRail::Direction::FORWARD, 128);
     command = stream.readStringUntil('>');
     command = command.substring(1);
     parser.parse(command);
-    Serial.print("Test onLocoSpeedChanged: ");
+    Serial.print("Test onLocoSpeedChange: ");
     Serial.println(listener.hasPassed() ? "PASSED" : "FAILED");
 
-    // Test 3: onMechanicalSyncEvent
+    // Test 3: onLocoEventSync
     stream.clear();
-    listener.setExpected(VerifyingListener::ExpectedMechanicalSyncEvent{123, ModelRail::SyncType::CAM_PULSE, 1});
-    printer.onMechanicalSyncEvent(loco, ModelRail::SyncType::CAM_PULSE, 1);
+    listener.setExpected(VerifyingListener::ExpectedLocoEventSync{123, ModelRail::SyncType::CAM_PULSE, 1});
+    printer.onLocoEventSync(loco, ModelRail::SyncType::CAM_PULSE, 1);
     command = stream.readStringUntil('>');
     command = command.substring(1);
     parser.parse(command);
-    Serial.print("Test onMechanicalSyncEvent: ");
+    Serial.print("Test onLocoEventSync: ");
     Serial.println(listener.hasPassed() ? "PASSED" : "FAILED");
 }
 

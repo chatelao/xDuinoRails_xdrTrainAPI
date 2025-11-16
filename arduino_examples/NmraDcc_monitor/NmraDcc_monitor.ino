@@ -11,7 +11,7 @@ ModelRail::CmdLinePrinter printer(Serial);
 void notifyDccSpeed(uint16_t Addr, DCC_ADDR_TYPE AddrType, uint8_t Speed, DCC_DIRECTION Dir, DCC_SPEED_STEPS SpeedSteps) {
     ModelRail::LocoHandle loco = {Addr, ModelRail::Protocol::DCC, 0};
     ModelRail::Direction direction = (Dir == DCC_DIR_FWD) ? ModelRail::Direction::FORWARD : ModelRail::Direction::REVERSE;
-    printer.onLocoSpeedChanged(loco, Speed, direction, 128);
+    printer.onLocoSpeedChange(loco, Speed, direction, 128);
 }
 
 void notifyDccFunc(uint16_t Addr, DCC_ADDR_TYPE AddrType, FN_GROUP FuncGrp, uint8_t FuncState) {

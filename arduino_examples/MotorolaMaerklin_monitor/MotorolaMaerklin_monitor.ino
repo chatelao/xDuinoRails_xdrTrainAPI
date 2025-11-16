@@ -24,7 +24,7 @@ void notifyMmEvent(uint8_t address, uint8_t command, uint8_t data) {
             {
                 ModelRail::Direction direction = (data & 0x80) ? ModelRail::Direction::FORWARD : ModelRail::Direction::REVERSE;
                 uint8_t speed = data & 0x7F;
-                printer.onLocoSpeedChanged(loco, speed, direction, 14);
+                printer.onLocoSpeedChange(loco, speed, direction, 14);
             }
             break;
         case 0x01: // Function on/off

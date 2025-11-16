@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xTrainEvents>
-    <event type="onLocoSyncEvent" timestamp="2024-07-29T10:12:00Z">
+    <event type="onLocoEventSync" timestamp="2024-07-29T10:12:00Z">
         <loco address="6" protocol="DCC" />
         <sync type="CAM_PULSE" value="1" />
     </event>

@@ -11,17 +11,17 @@ servers:
     description: "Main API endpoint"
 
 paths:
-  /onLocoSpeedChanged:
+  /onLocoSpeedChange:
     post:
-      summary: "Loco Speed Changed"
+      summary: "Loco Speed Change"
       description: "Event for changing a locomotive's speed and direction."
-      operationId: "onLocoSpeedChanged"
+      operationId: "onLocoSpeedChange"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LocoSpeedChanged'
+              $ref: '#/components/schemas/LocoSpeedChange'
             examples:
               DCC_Loco_Full_Speed:
                 summary: "Set a DCC locomotive to full speed forward."
@@ -45,17 +45,17 @@ paths:
       responses:
         '202':
           description: "Event accepted."
-  /onLocoFunctionChanged:
+  /onLocoFunctionChange:
     post:
-      summary: "Loco Function Changed"
+      summary: "Loco Function Change"
       description: "Event for activating or deactivating a locomotive function."
-      operationId: "onLocoFunctionChanged"
+      operationId: "onLocoFunctionChange"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LocoFunctionChanged'
+              $ref: '#/components/schemas/LocoFunctionChange'
             examples:
               TurnOnLight:
                 summary: "Turn on the headlight (F0)."
@@ -76,17 +76,17 @@ paths:
       responses:
         '202':
           description: "Event accepted."
-  /onTurnoutChanged:
+  /onTurnoutChange:
     post:
-      summary: "Turnout Changed"
+      summary: "Turnout Change"
       description: "Event for changing a turnout's state."
-      operationId: "onTurnoutChanged"
+      operationId: "onTurnoutChange"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TurnoutChanged'
+              $ref: '#/components/schemas/TurnoutChange'
             examples:
               ThrowTurnout:
                 summary: "Throw a turnout to the diverging route."
@@ -103,17 +103,17 @@ paths:
       responses:
         '202':
           description: "Event accepted."
-  /onTrackPowerChanged:
+  /onTrackPowerChange:
     post:
-      summary: "Track Power Changed"
+      summary: "Track Power Change"
       description: "Event for changing the global track power state."
-      operationId: "onTrackPowerChanged"
+      operationId: "onTrackPowerChange"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TrackPowerChanged'
+              $ref: '#/components/schemas/TrackPowerChange'
             examples:
               PowerOn:
                 summary: "Turn the track power on."
@@ -126,17 +126,17 @@ paths:
       responses:
         '202':
           description: "Event accepted."
-  /onSensorStateChanged:
+  /onSensorStateChange:
     post:
-      summary: "Sensor State Changed"
+      summary: "Sensor State Change"
       description: "Event for an occupancy or feedback sensor changing state."
-      operationId: "onSensorStateChanged"
+      operationId: "onSensorStateChange"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SensorStateChanged'
+              $ref: '#/components/schemas/SensorStateChange'
             examples:
               BlockOccupied:
                 summary: "A track block sensor is now occupied."
@@ -232,17 +232,17 @@ paths:
       responses:
         '202':
           description: "Event accepted."
-  /onSignalAspectChanged:
+  /onSignalAspectChange:
     post:
-      summary: "Signal Aspect Changed"
+      summary: "Signal Aspect Change"
       description: "Event for changing a signal's aspect."
-      operationId: "onSignalAspectChanged"
+      operationId: "onSignalAspectChange"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SignalAspectChanged'
+              $ref: '#/components/schemas/SignalAspectChange'
       responses:
         '202':
           description: "Event accepted."
@@ -274,31 +274,31 @@ paths:
       responses:
         '202':
           description: "Event accepted."
-  /onLocoFunctionAnalogValue:
+  /onLocoFunctionAnalogChange:
     post:
-      summary: "Loco Function Analog Value"
+      summary: "Loco Function Analog Change"
       description: "Event for an analog function value."
-      operationId: "onLocoFunctionAnalogValue"
+      operationId: "onLocoFunctionAnalogChange"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LocoFunctionAnalogValue'
+              $ref: '#/components/schemas/LocoFunctionAnalogChange'
       responses:
         '202':
           description: "Event accepted."
-  /onLocoDispatchStateChanged:
+  /onLocoDispatchStateChange:
     post:
-      summary: "Loco Dispatch State Changed"
+      summary: "Loco Dispatch State Change"
       description: "Event for slot management."
-      operationId: "onLocoDispatchStateChanged"
+      operationId: "onLocoDispatchStateChange"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LocoDispatchStateChanged'
+              $ref: '#/components/schemas/LocoDispatchStateChange'
       responses:
         '202':
           description: "Event accepted."
@@ -316,17 +316,17 @@ paths:
       responses:
         '202':
           description: "Event accepted."
-  /onLocoExternalStateChanged:
+  /onLocoExternalStateChange:
     post:
-      summary: "Loco External State Changed"
+      summary: "Loco External State Change"
       description: "Event for an external state change."
-      operationId: "onLocoExternalStateChanged"
+      operationId: "onLocoExternalStateChange"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LocoExternalStateChanged'
+              $ref: '#/components/schemas/LocoExternalStateChange'
       responses:
         '202':
           description: "Event accepted."
@@ -358,17 +358,17 @@ paths:
       responses:
         '202':
           description: "Event accepted."
-  /onLocoSyncEvent:
+  /onLocoEventSync:
     post:
-      summary: "Loco Sync Event"
+      summary: "Loco Event Sync"
       description: "Event for a mechanical synchronization event."
-      operationId: "onLocoSyncEvent"
+      operationId: "onLocoEventSync"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LocoSyncEvent'
+              $ref: '#/components/schemas/LocoEventSync'
       responses:
         '202':
           description: "Event accepted."
@@ -484,17 +484,17 @@ paths:
       responses:
         '202':
           description: "Event accepted."
-  /onConfigBlockLoaded:
+  /onConfigBlockLoad:
     post:
-      summary: "Config Block Loaded"
+      summary: "Config Block Load"
       description: "Event for a mass data transfer."
-      operationId: "onConfigBlockLoaded"
+      operationId: "onConfigBlockLoad"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ConfigBlockLoaded'
+              $ref: '#/components/schemas/ConfigBlockLoad'
       responses:
         '202':
           description: "Event accepted."
@@ -640,7 +640,7 @@ components:
           type: integer
           format: uint8
 
-    ConfigBlockLoaded:
+    ConfigBlockLoad:
       type: object
       required: [loco, domain, data]
       properties:
@@ -654,7 +654,7 @@ components:
             type: integer
             format: uint8
 
-    LocoFunctionAnalogValue:
+    LocoFunctionAnalogChange:
       type: object
       required: [loco, fIndex, value]
       properties:
@@ -666,7 +666,7 @@ components:
           type: integer
           format: uint8
 
-    LocoDispatchStateChanged:
+    LocoDispatchStateChange:
       type: object
       required: [loco, isAcquired, ownerId]
       properties:
@@ -689,7 +689,7 @@ components:
           type: number
           format: float
 
-    LocoExternalStateChanged:
+    LocoExternalStateChange:
       type: object
       required: [loco, state]
       properties:
@@ -724,7 +724,7 @@ components:
         icon:
           type: string
 
-    LocoSyncEvent:
+    LocoEventSync:
       type: object
       required: [loco, type, value]
       properties:
@@ -758,7 +758,7 @@ components:
         orientation:
           $ref: '#/components/schemas/DecoderOrientation'
 
-    LocoSpeedChanged:
+    LocoSpeedChange:
       type: object
       required: [loco, speedPercent, direction, speedSteps]
       properties:
@@ -775,7 +775,7 @@ components:
           type: integer
           description: "The speed step mode (e.g., 14, 28, 128)."
 
-    LocoFunctionChanged:
+    LocoFunctionChange:
       type: object
       required: [loco, fIndex, isActive]
       properties:
@@ -787,7 +787,7 @@ components:
         isActive:
           type: boolean
 
-    TurnoutChanged:
+    TurnoutChange:
       type: object
       required: [address, isThrown, isFeedback]
       properties:
@@ -801,14 +801,14 @@ components:
           type: boolean
           description: "True if this is a confirmation from hardware."
 
-    TrackPowerChanged:
+    TrackPowerChange:
       type: object
       required: [state]
       properties:
         state:
           $ref: '#/components/schemas/PowerState'
 
-    SensorStateChanged:
+    SensorStateChange:
       type: object
       required: [sensorId, isActive]
       properties:
@@ -863,7 +863,7 @@ components:
         slave:
           $ref: '#/components/schemas/LocoHandle'
 
-    SignalAspectChanged:
+    SignalAspectChange:
       type: object
       required: [address, aspectId, isFeedback]
       properties:

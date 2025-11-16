@@ -3,8 +3,8 @@
 
 class MyTrainAPI : public ModelRail::IUnifiedModelTrainListener {
 public:
-    void onLocoSpeedChanged(const ModelRail::LocoHandle& loco, float speedPercent, ModelRail::Direction direction, int speedSteps) override {
-        Serial.print("onLocoSpeedChanged(loco.address=");
+    void onLocoSpeedChange(const ModelRail::LocoHandle& loco, float speedPercent, ModelRail::Direction direction, int speedSteps) override {
+        Serial.print("onLocoSpeedChange(loco.address=");
         Serial.print(loco.address);
         Serial.print(", speedPercent=");
         Serial.print(speedPercent);
@@ -13,8 +13,8 @@ public:
         Serial.println(")");
     }
 
-    void onLocoFunctionChanged(const ModelRail::LocoHandle& loco, int fIndex, bool isActive) override {
-        Serial.print("onLocoFunctionChanged(loco.address=");
+    void onLocoFunctionChange(const ModelRail::LocoHandle& loco, int fIndex, bool isActive) override {
+        Serial.print("onLocoFunctionChange(loco.address=");
         Serial.print(loco.address);
         Serial.print(", fIndex=");
         Serial.print(fIndex);
@@ -23,50 +23,50 @@ public:
         Serial.println(")");
     }
 
-    void onTurnoutChanged(uint16_t address, bool isThrown, bool isFeedback) override {
-        Serial.print("onTurnoutChanged(address=");
+    void onTurnoutChange(uint16_t address, bool isThrown, bool isFeedback) override {
+        Serial.print("onTurnoutChange(address=");
         Serial.print(address);
         Serial.print(", isThrown=");
         Serial.print(isThrown ? "true" : "false");
         Serial.println(")");
     }
 
-    void onSignalAspectChanged(uint16_t address, uint8_t aspectId, bool isFeedback) override {
-        Serial.print("onSignalAspectChanged(address=");
+    void onSignalAspectChange(uint16_t address, uint8_t aspectId, bool isFeedback) override {
+        Serial.print("onSignalAspectChange(address=");
         Serial.print(address);
         Serial.print(", aspectId=");
         Serial.print(aspectId);
         Serial.println(")");
     }
 
-    void onTrackPowerChanged(ModelRail::PowerState state) override {
-        Serial.print("onTrackPowerChanged(state=");
+    void onTrackPowerChange(ModelRail::PowerState state) override {
+        Serial.print("onTrackPowerChange(state=");
         Serial.print(state == ModelRail::PowerState::ON ? "ON" : "OFF");
         Serial.println(")");
     }
 
     // Implement other pure virtual functions from the interface
-    void onLocoFunctionAnalogValue(const ModelRail::LocoHandle& loco, int fIndex, uint8_t value) override {}
-    void onLocoDispatchStateChanged(const ModelRail::LocoHandle& loco, bool isAcquired, std::string ownerId) override {}
+    void onLocoFunctionAnalogChange(const ModelRail::LocoHandle& loco, int fIndex, uint8_t value) override {}
+    void onLocoDispatchStateChange(const ModelRail::LocoHandle& loco, bool isAcquired, std::string ownerId) override {}
     void onConsistLink(const ModelRail::LocoHandle& master, const ModelRail::LocoHandle& slave, ModelRail::ConsistType type, bool inverted) override {}
     void onConsistUnlink(const ModelRail::LocoHandle& slave) override {}
     void onAccessoryAnalogValue(uint16_t address, float value0to1) override {}
     void onAccessoryError(uint16_t address, uint8_t errorId, std::string errorMsg) override {}
-    void onSensorStateChanged(uint32_t sensorId, bool isActive) override {}
+    void onSensorStateChange(uint32_t sensorId, bool isActive) override {}
     void onFastClockUpdated(int64_t modelTimeUnix, float factor) override {}
     void onHardwareNodeAttached(std::string nodeUid, std::string productName, bool booster) override {}
     void onHardwareNodeLost(std::string nodeUid) override {}
     void onSystemMessage(std::string source, std::string message) override {}
     void onLocoDetectedOnBlock(uint32_t sensorId, const ModelRail::LocoHandle& loco, ModelRail::DecoderOrientation orientation) override {}
     void onLocoTelemetryData(const ModelRail::LocoHandle& loco, ModelRail::TelemetryType type, float value) override {}
-    void onLocoExternalStateChanged(const ModelRail::LocoHandle& loco, ModelRail::ExternalState state) override {}
+    void onLocoExternalStateChange(const ModelRail::LocoHandle& loco, ModelRail::ExternalState state) override {}
     void onLocoRailComRawData(const ModelRail::LocoHandle& loco, uint8_t appId, const std::vector<uint8_t>& data) override {}
     void onNewLocoDiscovered(const ModelRail::LocoHandle& loco, const std::string& name, const std::string& icon) override {}
     void onCvReadResult(const ModelRail::LocoHandle& loco, int cvNumber, uint8_t value, bool success) override {}
     void onSusiConfigRead(const ModelRail::LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value) override {}
-    void onConfigBlockLoaded(const ModelRail::LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data) override {}
+    void onConfigBlockLoad(const ModelRail::LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data) override {}
     void onProgressUpdate(std::string operation, float percent) override {}
-    void onMechanicalSyncEvent(const ModelRail::LocoHandle& loco, ModelRail::SyncType type, uint8_t value) override {}
+    void onLocoEventSync(const ModelRail::LocoHandle& loco, ModelRail::SyncType type, uint32_t value) override {}
 };
 
 MyTrainAPI trainAPI;

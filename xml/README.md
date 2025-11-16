@@ -4,7 +4,7 @@ This document describes the XML format used for asynchronous communication and t
 
 ## 1. Basic Structure
 
-All messages are encapsulated within a root `<xTrainEvents>` element. Each individual message is represented by an `<event>` element with a `type` attribute that corresponds to a method in the C++ listener interface (e.g., `onLocoSpeedChanged`).
+All messages are encapsulated within a root `<xTrainEvents>` element. Each individual message is represented by an `<event>` element with a `type` attribute that corresponds to a method in the C++ listener interface (e.g., `onLocoSpeedChange`).
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -25,13 +25,13 @@ All messages are encapsulated within a root `<xTrainEvents>` element. Each indiv
 
 The payload of each event is represented by one or more child elements that group related parameters from the corresponding C++ function.
 
-### Example 1: `onLocoSpeedChanged`
+### Example 1: `onLocoSpeedChange`
 
-*   **C++ Signature:** `onLocoSpeedChanged(const LocoHandle& loco, float speedPercent, Direction direction, int speedSteps)`
+*   **C++ Signature:** `onLocoSpeedChange(const LocoHandle& loco, float speedPercent, Direction direction, int speedSteps)`
 *   **XML Representation:**
 
     ```xml
-    <event type="onLocoSpeedChanged" timestamp="2024-07-29T10:00:01Z">
+    <event type="onLocoSpeedChange" timestamp="2024-07-29T10:00:01Z">
         <loco address="3" protocol="DCC" mfxUid="0" />
         <speed speedPercent="50.5" direction="FORWARD" speedSteps="128" />
     </event>

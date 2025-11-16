@@ -132,27 +132,27 @@ namespace ModelRail {
          * @param direction Requested direction.
          * @param speedSteps Step mode (14, 28, 128).
          */
-        virtual void onLocoSpeedChanged(const LocoHandle& loco, float speedPercent, Direction direction, int speedSteps) = 0;
+        virtual void onLocoSpeedChange(const LocoHandle& loco, float speedPercent, Direction direction, int speedSteps) = 0;
 
         /**
          * @brief Binary function control (F0-F68+).
          * @param fIndex Function index (0=Light, 1=F1...).
          * @param isActive True=ON, False=OFF.
          */
-        virtual void onLocoFunctionChanged(const LocoHandle& loco, int fIndex, bool isActive)                            = 0;
+        virtual void onLocoFunctionChange(const LocoHandle& loco, int fIndex, bool isActive)                            = 0;
 
         /**
          * @brief Analog function value (Pressure-sensitive / Analog features).
          * @param value Analog value (0-255).
          */
-        virtual void onLocoFunctionAnalogValue(const LocoHandle& loco, int fIndex, uint8_t value)                        = 0;
+        virtual void onLocoFunctionAnalogChange(const LocoHandle& loco, int fIndex, uint8_t value)                        = 0;
 
         /**
          * @brief Slot Management (LocoNet/XpressNet).
          * @param isAcquired True=Controlled by throttle, False=Released.
          * @param ownerId ID of the controlling device.
          */
-        virtual void onLocoDispatchStateChanged(const LocoHandle& loco, bool isAcquired, std::string ownerId)            = 0;
+        virtual void onLocoDispatchStateChange(const LocoHandle& loco, bool isAcquired, std::string ownerId)            = 0;
 
         /**
          * @brief Consist Linking report.
@@ -176,13 +176,13 @@ namespace ModelRail {
          * @param isThrown True=Diverging, False=Straight.
          * @param isFeedback True=Real hardware confirmation.
          */
-        virtual void onTurnoutChanged(uint16_t address, bool isThrown, bool isFeedback)                 = 0;
+        virtual void onTurnoutChange(uint16_t address, bool isThrown, bool isFeedback)                 = 0;
 
         /**
          * @brief Extended Signal Aspects (0-255).
          * @param aspectId Aspect ID (Hp0, Hp1, etc.).
          */
-        virtual void onSignalAspectChanged(uint16_t address, uint8_t aspectId, bool isFeedback)         = 0;
+        virtual void onSignalAspectChange(uint16_t address, uint8_t aspectId, bool isFeedback)         = 0;
         
         /**
          * @brief Direct analog control (Servos, Dimmers).
@@ -201,7 +201,7 @@ namespace ModelRail {
          * @param sensorId Unique 32-bit ID.
          * @param isActive True=Occupied.
          */
-        virtual void onSensorStateChanged(uint32_t sensorId, bool isActive)                             = 0;
+        virtual void onSensorStateChange(uint32_t sensorId, bool isActive)                             = 0;
 
         // -------------------------------------------------------------
         // GROUP C: SYSTEM, TIME & TOPOLOGY
@@ -211,7 +211,7 @@ namespace ModelRail {
          * @brief Report global track power status change.
          * @param state The new power state (ON, OFF, EMERGENCY_STOP).
          */
-        virtual void onTrackPowerChanged(PowerState state)                                                              = 0;
+        virtual void onTrackPowerChange(PowerState state)                                                              = 0;
 
         /**
          * @brief Model Time / Fast Clock (RCN-211).
@@ -254,7 +254,7 @@ namespace ModelRail {
          * @brief External State Change (ABC / HLU).
          * Loco stopped by track module despite throttle > 0.
          */
-        virtual void onLocoExternalStateChanged(const LocoHandle& loco, ExternalState state)                             = 0;
+        virtual void onLocoExternalStateChange(const LocoHandle& loco, ExternalState state)                             = 0;
 
         /**
          * @brief Raw/Proprietary RailCom Data.
@@ -309,7 +309,7 @@ namespace ModelRail {
          * @brief Mass Data Transfer.
          * @param domain Data type (e.g., "ICON", "MFX_CONFIG").
          */
-        virtual void onConfigBlockLoaded(const LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data)   = 0;
+        virtual void onConfigBlockLoad(const LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data)   = 0;
 
         /**
          * @brief Feedback on the progress of a long-running operation.
@@ -329,6 +329,6 @@ namespace ModelRail {
          * @param type The type of mechanical event (e.g., CAM_PULSE).
          * @param value An optional value (e.g., new gear number).
          */
-        virtual void onLocoSyncEvent(const LocoHandle& loco, SyncType type, uint32_t value) = 0;
+        virtual void onLocoEventSync(const LocoHandle& loco, SyncType type, uint32_t value) = 0;
     };
 }

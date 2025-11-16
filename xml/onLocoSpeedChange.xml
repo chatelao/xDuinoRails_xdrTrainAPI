@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xTrainEvents>
-    <event type="onLocoSpeedChanged" timestamp="2024-07-29T10:00:01Z">
+    <event type="onLocoSpeedChange" timestamp="2024-07-29T10:00:01Z">
         <loco address="3" protocol="DCC" mfxUid="0" />
         <speed speedPercent="50.5" direction="FORWARD" speedSteps="128" />
     </event>

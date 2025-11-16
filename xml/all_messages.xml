@@ -5,25 +5,25 @@
     <!-- ===================================================================== -->
 
     <!-- Event: Speed of a locomotive has changed. -->
-    <event type="onLocoSpeedChanged" timestamp="2024-07-29T10:00:01Z">
+    <event type="onLocoSpeedChange" timestamp="2024-07-29T10:00:01Z">
         <loco address="3" protocol="DCC" mfxUid="0" />
         <speed speedPercent="50.5" direction="FORWARD" speedSteps="128" />
     </event>
 
     <!-- Event: A binary function (e.g., lights, smoke) has been toggled. -->
-    <event type="onLocoFunctionChanged" timestamp="2024-07-29T10:00:05Z">
+    <event type="onLocoFunctionChange" timestamp="2024-07-29T10:00:05Z">
         <loco address="3" protocol="DCC" />
         <function fIndex="0" isActive="true" />
     </event>
 
     <!-- Event: An analog function's value has changed (e.g., steam whistle pressure). -->
-    <event type="onLocoFunctionAnalogValue" timestamp="2024-07-29T10:00:08Z">
+    <event type="onLocoFunctionAnalogChange" timestamp="2024-07-29T10:00:08Z">
         <loco address="102" protocol="MFX" mfxUid="12345678" />
         <function fIndex="5" value="180" />
     </event>
 
     <!-- Event: A locomotive has been acquired or released by a throttle. -->
-    <event type="onLocoDispatchStateChanged" timestamp="2024-07-29T10:01:00Z">
+    <event type="onLocoDispatchStateChange" timestamp="2024-07-29T10:01:00Z">
         <loco address="44" protocol="LOCONET" />
         <dispatch isAcquired="true" ownerId="Throttle #3" />
     </event>
@@ -45,12 +45,12 @@
     <!-- ===================================================================== -->
 
     <!-- Event: A turnout has changed its state. -->
-    <event type="onTurnoutChanged" timestamp="2024-07-29T10:03:10Z">
+    <event type="onTurnoutChange" timestamp="2024-07-29T10:03:10Z">
         <turnout address="15" isThrown="true" isFeedback="true" />
     </event>
 
     <!-- Event: A signal is showing a new aspect. -->
-    <event type="onSignalAspectChanged" timestamp="2024-07-29T10:03:12Z">
+    <event type="onSignalAspectChange" timestamp="2024-07-29T10:03:12Z">
         <signal address="7" aspectId="2" isFeedback="true" /> <!-- Hp2: Langsamfahrt -->
     </event>
 
@@ -65,7 +65,7 @@
     </event>
 
     <!-- Event: An occupancy sensor has changed its state. -->
-    <event type="onSensorStateChanged" timestamp="2024-07-29T10:04:00Z">
+    <event type="onSensorStateChange" timestamp="2024-07-29T10:04:00Z">
         <sensor sensorId="501" isActive="true" />
     </event>
 
@@ -74,7 +74,7 @@
     <!-- ===================================================================== -->
 
     <!-- Event: The global track power state has changed. -->
-    <event type="onTrackPowerChanged" timestamp="2024-07-29T09:59:59Z">
+    <event type="onTrackPowerChange" timestamp="2024-07-29T09:59:59Z">
         <power state="ON" />
     </event>
 
@@ -116,7 +116,7 @@
     </event>
 
     <!-- Event: The external state of a loco changed (e.g., stopped by ABC). -->
-    <event type="onLocoExternalStateChanged" timestamp="2024-07-29T10:07:00Z">
+    <event type="onLocoExternalStateChange" timestamp="2024-07-29T10:07:00Z">
         <loco address="99" protocol="DCC" />
         <externalState state="STOPPED_BY_ABC_SIGNAL" />
     </event>
@@ -162,7 +162,7 @@
     </event>
 
     <!-- Event: Mass Data Transfer (e.g., icon or sound profile). -->
-    <event type="onConfigBlockLoaded" timestamp="2024-07-29T10:11:00Z">
+    <event type="onConfigBlockLoad" timestamp="2024-07-29T10:11:00Z">
         <loco address="5" protocol="DCC" />
         <config domain="ICON" data="89504e47" />
     </event>
