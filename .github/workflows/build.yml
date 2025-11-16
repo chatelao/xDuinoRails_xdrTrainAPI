@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
       - id: discover
         run: |
-          EXAMPLES=$(find arduino_examples -mindepth 1 -maxdepth 1 -type d ! -name 'testdata' -exec basename {} \; | jq -R . | jq -s .)
+          EXAMPLES=$(find examples -mindepth 1 -maxdepth 1 -type d ! -name 'testdata' -exec basename {} \; | jq -R . | jq -s .)
           echo "::set-output name=examples::$EXAMPLES"
   build:
     needs: discover
@@ -42,7 +42,7 @@ jobs:
           else
             BUILD_PROPERTIES="--build-property build.extra_flags=-DUSE_EXTENDED_CLI_SYNTAX=0"
           fi
-          arduino-cli compile --fqbn ${{ matrix.fqbn }} --library lib $BUILD_PROPERTIES arduino_examples/${{ matrix.example }} --output-dir build/${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
+          arduino-cli compile --fqbn ${{ matrix.fqbn }} --library lib $BUILD_PROPERTIES examples/${{ matrix.example }} --output-dir build/${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
