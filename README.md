@@ -7,10 +7,10 @@ Welcome to the xTrainAPI project! This repository contains a C++-based API for c
 Our API documentation is automatically generated and hosted on GitHub Pages.
 
 *   **Doxygen (C++ API):** Detailed documentation of the C++ interface, classes, and methods can be found here:
-    [Doxygen Documentation](https://xtrainapi.github.io/xTrainAPI/doxygen/)
+    [Doxygen Documentation](https://chatelao.github.io/xDuinoRails_xTrainAPI/doxygen)
 
 *   **Swagger (REST API):** The specification for our REST interface, including interactive endpoints, is available here:
-    [Swagger UI](https://xtrainapi.github.io/xTrainAPI/swagger/)
+    [Swagger UI](https://chatelao.github.io/xDuinoRails_xTrainAPI/swagger)
 
 ## What is xTrainAPI?
 
