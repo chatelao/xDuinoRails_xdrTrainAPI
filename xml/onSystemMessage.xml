@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onSystemMessage" timestamp="2024-07-29T10:05:00Z">
+        <message source="PowerManager" text="Emergency stop triggered by user." />
+    </event>
+</xTrainEvents>

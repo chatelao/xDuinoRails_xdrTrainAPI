@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onHardwareNodeLost" timestamp="2024-07-29T10:04:00Z">
+        <node nodeUid="booster-2" productName="Unknown" booster="true" />
+    </event>
+</xTrainEvents>

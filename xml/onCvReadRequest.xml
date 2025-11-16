@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xTrainEvents>
+    <event type="onCvReadRequest" timestamp="2024-07-29T10:08:00Z">
+        <loco address="3" protocol="DCC" />
+        <cv cvNumber="5" />
+    </event>
+</xTrainEvents>
