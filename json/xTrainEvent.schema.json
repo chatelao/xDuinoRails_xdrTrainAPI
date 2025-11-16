@@ -1,0 +1,1373 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "xTrainEvent",
+  "description": "A single xTrain event message. This schema combines all possible event types.",
+  "$defs": {
+    "AccessoryAnalogValue": {
+      "type": "object",
+      "required": [
+        "address",
+        "value0to1"
+      ],
+      "properties": {
+        "address": {
+          "type": "integer",
+          "format": "uint16",
+          "example": 55
+        },
+        "value0to1": {
+          "type": "number",
+          "format": "float",
+          "example": 0.75
+        }
+      }
+    },
+    "AccessoryError": {
+      "type": "object",
+      "required": [
+        "address",
+        "errorId",
+        "errorMsg"
+      ],
+      "properties": {
+        "address": {
+          "type": "integer",
+          "format": "uint16",
+          "example": 201
+        },
+        "errorId": {
+          "type": "integer",
+          "format": "uint8",
+          "example": 1
+        },
+        "errorMsg": {
+          "type": "string",
+          "example": "Overload detected"
+        }
+      }
+    },
+    "ConfigBlockLoaded": {
+      "type": "object",
+      "required": [
+        "loco",
+        "domain",
+        "data"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "domain": {
+          "type": "string",
+          "example": "SoundProfile"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "uint8"
+          },
+          "example": [
+            255,
+            254,
+            253,
+            252
+          ]
+        }
+      }
+    },
+    "ConsistLink": {
+      "type": "object",
+      "required": [
+        "master",
+        "slave",
+        "type",
+        "inverted"
+      ],
+      "properties": {
+        "master": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "slave": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ADVANCED_DCC",
+            "UNIVERSAL_HOST",
+            "MU_LOCONET"
+          ],
+          "example": "ADVANCED_DCC"
+        },
+        "inverted": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "ConsistUnlink": {
+      "type": "object",
+      "required": [
+        "slave"
+      ],
+      "properties": {
+        "slave": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        }
+      }
+    },
+    "CvReadRequest": {
+      "type": "object",
+      "required": [
+        "loco",
+        "cvNumber"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "cvNumber": {
+          "type": "integer",
+          "description": "The CV number to read from.",
+          "example": 8
+        }
+      }
+    },
+    "CvReadResult": {
+      "type": "object",
+      "required": [
+        "loco",
+        "cvNumber",
+        "value",
+        "success"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "cvNumber": {
+          "type": "integer",
+          "example": 3
+        },
+        "value": {
+          "type": "integer",
+          "format": "uint8",
+          "example": 20
+        },
+        "success": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "CvWriteRequest": {
+      "type": "object",
+      "required": [
+        "loco",
+        "cvNumber",
+        "value"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "cvNumber": {
+          "type": "integer",
+          "description": "The CV number to write to.",
+          "example": 3
+        },
+        "value": {
+          "type": "integer",
+          "format": "uint8",
+          "description": "The 8-bit value to write.",
+          "example": 20
+        }
+      }
+    },
+    "FastClockUpdated": {
+      "type": "object",
+      "required": [
+        "modelTimeUnix",
+        "factor"
+      ],
+      "properties": {
+        "modelTimeUnix": {
+          "type": "integer",
+          "format": "int64",
+          "example": 1678886400
+        },
+        "factor": {
+          "type": "number",
+          "format": "float",
+          "example": 10.0
+        }
+      }
+    },
+    "HardwareNodeAttached": {
+      "type": "object",
+      "required": [
+        "nodeUid",
+        "productName",
+        "booster"
+      ],
+      "properties": {
+        "nodeUid": {
+          "type": "string",
+          "example": "uuid-1234-abcd"
+        },
+        "productName": {
+          "type": "string",
+          "example": "xTrain Central Station"
+        },
+        "booster": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "HardwareNodeLost": {
+      "type": "object",
+      "required": [
+        "nodeUid"
+      ],
+      "properties": {
+        "nodeUid": {
+          "type": "string",
+          "example": "uuid-1234-efgh"
+        }
+      }
+    },
+    "LocoDetectedOnBlock": {
+      "type": "object",
+      "required": [
+        "sensorId",
+        "loco",
+        "orientation"
+      ],
+      "properties": {
+        "sensorId": {
+          "type": "integer",
+          "format": "uint32",
+          "example": 1001
+        },
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "orientation": {
+          "type": "string",
+          "enum": [
+            "NORMAL",
+            "INVERTED",
+            "UNKNOWN"
+          ],
+          "example": "NORMAL"
+        }
+      }
+    },
+    "LocoDispatchStateChanged": {
+      "type": "object",
+      "required": [
+        "loco",
+        "isAcquired",
+        "ownerId"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "isAcquired": {
+          "type": "boolean",
+          "example": true
+        },
+        "ownerId": {
+          "type": "string",
+          "example": "throttle-5678"
+        }
+      }
+    },
+    "LocoExternalStateChanged": {
+      "type": "object",
+      "required": [
+        "loco",
+        "state"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "FREE_RUN",
+            "STOPPED_BY_ABC_SIGNAL",
+            "STOPPED_BY_DC_BRAKE",
+            "STOPPED_BY_HLU",
+            "RESTRICTED_SPEED_HLU"
+          ],
+          "example": "FREE_RUN"
+        }
+      }
+    },
+    "LocoFunctionAnalogValue": {
+      "type": "object",
+      "required": [
+        "loco",
+        "fIndex",
+        "value"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "fIndex": {
+          "type": "integer",
+          "example": 5
+        },
+        "value": {
+          "type": "integer",
+          "format": "uint8",
+          "example": 128
+        }
+      }
+    },
+    "LocoFunctionChanged": {
+      "type": "object",
+      "required": [
+        "loco",
+        "fIndex",
+        "isActive"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "fIndex": {
+          "type": "integer",
+          "description": "Function index (0 for light, 1 for F1, etc.).",
+          "example": 1
+        },
+        "isActive": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "LocoRailComRawData": {
+      "type": "object",
+      "required": [
+        "loco",
+        "appId",
+        "data"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "appId": {
+          "type": "integer",
+          "format": "uint8",
+          "example": 1
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "uint8"
+          },
+          "example": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    "LocoSpeedChanged": {
+      "type": "object",
+      "required": [
+        "loco",
+        "speedPercent",
+        "direction",
+        "speedSteps"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "speedPercent": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0.0,
+          "maximum": 100.0,
+          "example": 75.5
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "REVERSE",
+            "FORWARD",
+            "UNKNOWN"
+          ],
+          "example": "FORWARD"
+        },
+        "speedSteps": {
+          "type": "integer",
+          "description": "The speed step mode (e.g., 14, 28, 128).",
+          "example": 128
+        }
+      }
+    },
+    "LocoSyncEvent": {
+      "type": "object",
+      "required": [
+        "loco",
+        "type",
+        "value"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "CAM_PULSE",
+            "CYLINDER_CYCLE",
+            "GEAR_CHANGE_UP",
+            "GEAR_CHANGE_DOWN",
+            "BRAKE_SQUEAL_START",
+            "DOOR_MOVEMENT"
+          ],
+          "example": "CAM_PULSE"
+        },
+        "value": {
+          "type": "integer",
+          "format": "uint32",
+          "example": 1
+        }
+      }
+    },
+    "LocoTelemetryData": {
+      "type": "object",
+      "required": [
+        "loco",
+        "type",
+        "value"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "SPEED_KMH",
+            "LOAD_PERCENT",
+            "VOLTAGE_TRACK",
+            "CURRENT_AMP",
+            "FUEL_LEVEL",
+            "TEMP_CELSIUS",
+            "QOS_ERROR_RATE",
+            "ODOMETER_VALUE",
+            "POSITION_CONFIDENCE"
+          ],
+          "example": "SPEED_KMH"
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "example": 88.5
+        }
+      }
+    },
+    "NewLocoDiscovered": {
+      "type": "object",
+      "required": [
+        "loco",
+        "name",
+        "icon"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "name": {
+          "type": "string",
+          "example": "BR 18.5"
+        },
+        "icon": {
+          "type": "string",
+          "example": "br185.png"
+        }
+      }
+    },
+    "ProgressUpdate": {
+      "type": "object",
+      "required": [
+        "operation",
+        "percent"
+      ],
+      "properties": {
+        "operation": {
+          "type": "string",
+          "example": "FirmwareUpdate"
+        },
+        "percent": {
+          "type": "number",
+          "format": "float",
+          "example": 50.5
+        }
+      }
+    },
+    "SensorStateChanged": {
+      "type": "object",
+      "required": [
+        "sensorId",
+        "isActive"
+      ],
+      "properties": {
+        "sensorId": {
+          "type": "integer",
+          "format": "uint32",
+          "example": 1002
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "True for occupied/active, False for free.",
+          "example": true
+        }
+      }
+    },
+    "SignalAspectChanged": {
+      "type": "object",
+      "required": [
+        "address",
+        "aspectId",
+        "isFeedback"
+      ],
+      "properties": {
+        "address": {
+          "type": "integer",
+          "format": "uint16",
+          "example": 301
+        },
+        "aspectId": {
+          "type": "integer",
+          "format": "uint8",
+          "example": 2
+        },
+        "isFeedback": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "SusiConfigRead": {
+      "type": "object",
+      "required": [
+        "loco",
+        "bankIndex",
+        "susiIndex",
+        "value"
+      ],
+      "properties": {
+        "loco": {
+          "type": "object",
+          "description": "Unique identifier for a locomotive.",
+          "required": [
+            "address",
+            "protocol"
+          ],
+          "properties": {
+            "address": {
+              "type": "integer",
+              "format": "uint16",
+              "description": "Primary address of the locomotive.",
+              "example": 101
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "DCC",
+                "MM_I",
+                "MM_II",
+                "MFX",
+                "SELECTRIX",
+                "SX2",
+                "LOCONET",
+                "BIDIB",
+                "XPRESSNET",
+                "CAN_GENERIC"
+              ],
+              "example": "DCC"
+            },
+            "mfxUid": {
+              "type": "integer",
+              "format": "uint32",
+              "description": "Unique mfx ID, if applicable.",
+              "example": 16385
+            }
+          }
+        },
+        "bankIndex": {
+          "type": "integer",
+          "format": "uint8",
+          "example": 1
+        },
+        "susiIndex": {
+          "type": "integer",
+          "format": "uint8",
+          "example": 5
+        },
+        "value": {
+          "type": "integer",
+          "format": "uint8",
+          "example": 255
+        }
+      }
+    },
+    "SystemMessage": {
+      "type": "object",
+      "required": [
+        "source",
+        "message"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "example": "CommandStation"
+        },
+        "message": {
+          "type": "string",
+          "example": "System startup complete."
+        }
+      }
+    },
+    "TrackPowerChanged": {
+      "type": "object",
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "OFF",
+            "ON",
+            "EMERGENCY_STOP",
+            "SHORT_CIRCUIT"
+          ],
+          "example": "ON"
+        }
+      }
+    },
+    "TurnoutChanged": {
+      "type": "object",
+      "required": [
+        "address",
+        "isThrown",
+        "isFeedback"
+      ],
+      "properties": {
+        "address": {
+          "type": "integer",
+          "format": "uint16",
+          "example": 25
+        },
+        "isThrown": {
+          "type": "boolean",
+          "description": "True for diverging/thrown, False for straight.",
+          "example": true
+        },
+        "isFeedback": {
+          "type": "boolean",
+          "description": "True if this is a confirmation from hardware.",
+          "example": false
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/AccessoryAnalogValue"
+    },
+    {
+      "$ref": "#/$defs/AccessoryError"
+    },
+    {
+      "$ref": "#/$defs/ConfigBlockLoaded"
+    },
+    {
+      "$ref": "#/$defs/ConsistLink"
+    },
+    {
+      "$ref": "#/$defs/ConsistUnlink"
+    },
+    {
+      "$ref": "#/$defs/CvReadRequest"
+    },
+    {
+      "$ref": "#/$defs/CvReadResult"
+    },
+    {
+      "$ref": "#/$defs/CvWriteRequest"
+    },
+    {
+      "$ref": "#/$defs/FastClockUpdated"
+    },
+    {
+      "$ref": "#/$defs/HardwareNodeAttached"
+    },
+    {
+      "$ref": "#/$defs/HardwareNodeLost"
+    },
+    {
+      "$ref": "#/$defs/LocoDetectedOnBlock"
+    },
+    {
+      "$ref": "#/$defs/LocoDispatchStateChanged"
+    },
+    {
+      "$ref": "#/$defs/LocoExternalStateChanged"
+    },
+    {
+      "$ref": "#/$defs/LocoFunctionAnalogValue"
+    },
+    {
+      "$ref": "#/$defs/LocoFunctionChanged"
+    },
+    {
+      "$ref": "#/$defs/LocoRailComRawData"
+    },
+    {
+      "$ref": "#/$defs/LocoSpeedChanged"
+    },
+    {
+      "$ref": "#/$defs/LocoSyncEvent"
+    },
+    {
+      "$ref": "#/$defs/LocoTelemetryData"
+    },
+    {
+      "$ref": "#/$defs/NewLocoDiscovered"
+    },
+    {
+      "$ref": "#/$defs/ProgressUpdate"
+    },
+    {
+      "$ref": "#/$defs/SensorStateChanged"
+    },
+    {
+      "$ref": "#/$defs/SignalAspectChanged"
+    },
+    {
+      "$ref": "#/$defs/SusiConfigRead"
+    },
+    {
+      "$ref": "#/$defs/SystemMessage"
+    },
+    {
+      "$ref": "#/$defs/TrackPowerChanged"
+    },
+    {
+      "$ref": "#/$defs/TurnoutChanged"
+    }
+  ]
+}

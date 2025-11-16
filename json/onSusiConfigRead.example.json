@@ -1,0 +1,9 @@
+{
+  "loco": {
+    "address": 4,
+    "protocol": "DCC"
+  },
+  "bankIndex": 1,
+  "susiIndex": 2,
+  "value": 3
+}

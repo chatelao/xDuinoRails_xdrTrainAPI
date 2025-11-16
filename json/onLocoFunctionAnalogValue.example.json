@@ -1,0 +1,9 @@
+{
+  "loco": {
+    "address": 102,
+    "protocol": "MFX",
+    "mfxUid": 12345678
+  },
+  "fIndex": 5,
+  "value": 180
+}

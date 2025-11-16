@@ -1,0 +1,8 @@
+{
+  "loco": {
+    "address": 6,
+    "protocol": "DCC"
+  },
+  "type": "CAM_PULSE",
+  "value": 1
+}

@@ -1,0 +1,8 @@
+{
+  "loco": {
+    "address": 44,
+    "protocol": "LOCONET"
+  },
+  "isAcquired": true,
+  "ownerId": "Throttle #3"
+}

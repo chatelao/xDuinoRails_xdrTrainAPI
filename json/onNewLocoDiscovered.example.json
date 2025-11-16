@@ -1,0 +1,9 @@
+{
+  "loco": {
+    "mfxUid": 12345678,
+    "protocol": "MFX",
+    "address": 1
+  },
+  "name": "BR 18.5",
+  "icon": "br18.png"
+}

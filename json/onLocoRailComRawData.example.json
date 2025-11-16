@@ -1,0 +1,12 @@
+{
+  "loco": {
+    "address": 1024,
+    "protocol": "DCC"
+  },
+  "appId": 1,
+  "data": [
+    1,
+    164,
+    183
+  ]
+}

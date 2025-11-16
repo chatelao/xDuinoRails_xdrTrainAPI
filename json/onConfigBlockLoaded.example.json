@@ -1,0 +1,13 @@
+{
+  "loco": {
+    "address": 5,
+    "protocol": "DCC"
+  },
+  "domain": "ICON",
+  "data": [
+    137,
+    80,
+    78,
+    71
+  ]
+}

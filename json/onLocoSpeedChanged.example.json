@@ -1,0 +1,10 @@
+{
+  "loco": {
+    "address": 3,
+    "protocol": "DCC",
+    "mfxUid": 0
+  },
+  "speedPercent": 50.5,
+  "direction": "FORWARD",
+  "speedSteps": 128
+}

@@ -42,61 +42,157 @@
                 <xs:element name="sync" type="SyncType"/>
             </xs:choice>
         </xs:sequence>
-        <xs:attribute name="type" type="xs:string" use="required"/>
-        <xs:attribute name="timestamp" type="xs:dateTime" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>onLocoSpeedChanged</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="timestamp" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation>2023-03-15T12:00:00Z</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <!-- Complex Type Definitions for Event Payloads -->
     <xs:complexType name="LocoHandleType">
-        <xs:attribute name="address" type="xs:positiveInteger" use="optional"/>
+        <xs:attribute name="address" type="xs:positiveInteger" use="optional">
+            <xs:annotation>
+                <xs:documentation>101</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
         <xs:attribute name="protocol" type="ProtocolEnum" use="required"/>
-        <xs:attribute name="mfxUid" type="xs:unsignedInt" use="optional"/>
+        <xs:attribute name="mfxUid" type="xs:unsignedInt" use="optional">
+            <xs:annotation>
+                <xs:documentation>16385</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="SpeedType">
-        <xs:attribute name="speedPercent" type="xs:float" use="required"/>
+        <xs:attribute name="speedPercent" type="xs:float" use="required">
+            <xs:annotation>
+                <xs:documentation>75.5</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
         <xs:attribute name="direction" type="DirectionEnum" use="required"/>
-        <xs:attribute name="speedSteps" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="speedSteps" type="xs:positiveInteger" use="required">
+            <xs:annotation>
+                <xs:documentation>128</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="FunctionType">
-        <xs:attribute name="fIndex" type="xs:nonNegativeInteger" use="required"/>
-        <xs:attribute name="isActive" type="xs:boolean" use="optional"/>
-        <xs:attribute name="value" type="xs:unsignedByte" use="optional"/>
+        <xs:attribute name="fIndex" type="xs:nonNegativeInteger" use="required">
+            <xs:annotation>
+                <xs:documentation>1</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="isActive" type="xs:boolean" use="optional">
+            <xs:annotation>
+                <xs:documentation>true</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="value" type="xs:unsignedByte" use="optional">
+            <xs:annotation>
+                <xs:documentation>128</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="DispatchType">
-        <xs:attribute name="isAcquired" type="xs:boolean" use="required"/>
-        <xs:attribute name="ownerId" type="xs:string" use="required"/>
+        <xs:attribute name="isAcquired" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>true</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="ownerId" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>throttle-5678</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="ConsistType">
         <xs:attribute name="type" type="ConsistEnum" use="required"/>
-        <xs:attribute name="inverted" type="xs:boolean" use="required"/>
+        <xs:attribute name="inverted" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>false</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="TurnoutType">
-        <xs:attribute name="address" type="xs:positiveInteger" use="required"/>
-        <xs:attribute name="isThrown" type="xs:boolean" use="required"/>
-        <xs:attribute name="isFeedback" type="xs:boolean" use="required"/>
+        <xs:attribute name="address" type="xs:positiveInteger" use="required">
+            <xs:annotation>
+                <xs:documentation>25</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="isThrown" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>true</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="isFeedback" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>false</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="SignalType">
-        <xs:attribute name="address" type="xs:positiveInteger" use="required"/>
-        <xs:attribute name="aspectId" type="xs:unsignedByte" use="required"/>
-        <xs:attribute name="isFeedback" type="xs:boolean" use="required"/>
+        <xs:attribute name="address" type="xs:positiveInteger" use="required">
+            <xs:annotation>
+                <xs:documentation>301</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="aspectId" type="xs:unsignedByte" use="required">
+            <xs:annotation>
+                <xs:documentation>2</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="isFeedback" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>false</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="AccessoryType">
-        <xs:attribute name="address" type="xs:positiveInteger" use="required"/>
-        <xs:attribute name="value0to1" type="xs:float" use="optional"/>
-        <xs:attribute name="errorId" type="xs:unsignedByte" use="optional"/>
-        <xs:attribute name="errorMsg" type="xs:string" use="optional"/>
+        <xs:attribute name="address" type="xs:positiveInteger" use="required">
+            <xs:annotation>
+                <xs:documentation>55</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="value0to1" type="xs:float" use="optional">
+            <xs:annotation>
+                <xs:documentation>0.75</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="errorId" type="xs:unsignedByte" use="optional">
+            <xs:annotation>
+                <xs:documentation>1</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="errorMsg" type="xs:string" use="optional">
+            <xs:annotation>
+                <xs:documentation>Overload detected</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="SensorType">
-        <xs:attribute name="sensorId" type="xs:positiveInteger" use="required"/>
-        <xs:attribute name="isActive" type="xs:boolean" use="optional"/>
+        <xs:attribute name="sensorId" type="xs:positiveInteger" use="required">
+            <xs:annotation>
+                <xs:documentation>1002</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="isActive" type="xs:boolean" use="optional">
+            <xs:annotation>
+                <xs:documentation>true</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="PowerType">
@@ -104,14 +200,34 @@
     </xs:complexType>
 
     <xs:complexType name="ClockType">
-        <xs:attribute name="modelTimeUnix" type="xs:long" use="required"/>
-        <xs:attribute name="factor" type="xs:float" use="required"/>
+        <xs:attribute name="modelTimeUnix" type="xs:long" use="required">
+            <xs:annotation>
+                <xs:documentation>1678886400</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="factor" type="xs:float" use="required">
+            <xs:annotation>
+                <xs:documentation>10.0</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="NodeType">
-        <xs:attribute name="nodeUid" type="xs:string" use="required"/>
-        <xs:attribute name="productName" type="xs:string" use="required"/>
-        <xs:attribute name="booster" type="xs:boolean" use="required"/>
+        <xs:attribute name="nodeUid" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>uuid-1234-abcd</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="productName" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>xTrain Central Station</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="booster" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>true</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="DetectionType">
@@ -120,7 +236,11 @@
 
     <xs:complexType name="TelemetryType">
         <xs:attribute name="type" type="TelemetryEnum" use="required"/>
-        <xs:attribute name="value" type="xs:float" use="required"/>
+        <xs:attribute name="value" type="xs:float" use="required">
+            <xs:annotation>
+                <xs:documentation>88.5</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="ExternalStateType">
@@ -128,49 +248,120 @@
     </xs:complexType>
 
     <xs:complexType name="CvType">
-        <xs:attribute name="cvNumber" type="xs:positiveInteger" use="required"/>
-        <xs:attribute name="value" type="xs:unsignedByte" use="optional"/>
-        <xs:attribute name="success" type="xs:boolean" use="optional"/>
+        <xs:attribute name="cvNumber" type="xs:positiveInteger" use="required">
+            <xs:annotation>
+                <xs:documentation>3</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="value" type="xs:unsignedByte" use="optional">
+            <xs:annotation>
+                <xs:documentation>20</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="success" type="xs:boolean" use="optional">
+            <xs:annotation>
+                <xs:documentation>true</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="ProgressType">
-        <xs:attribute name="operation" type="xs:string" use="required"/>
-        <xs:attribute name="percent" type="xs:float" use="required"/>
+        <xs:attribute name="operation" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>FirmwareUpdate</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="percent" type="xs:float" use="required">
+            <xs:annotation>
+                <xs:documentation>50.5</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="MessageType">
-        <xs:attribute name="source" type="xs:string" use="required"/>
-        <xs:attribute name="text" type="xs:string" use="required"/>
+        <xs:attribute name="source" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>CommandStation</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="text" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>System startup complete.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="RailComType">
-        <xs:attribute name="app" type="xs:unsignedByte" use="required"/>
-        <xs:attribute name="data" type="xs:hexBinary" use="required"/>
+        <xs:attribute name="app" type="xs:unsignedByte" use="required">
+            <xs:annotation>
+                <xs:documentation>1</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="data" type="xs:hexBinary" use="required">
+            <xs:annotation>
+                <xs:documentation>01020304</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="DiscoveryType">
-        <xs:attribute name="name" type="xs:string" use="required"/>
-        <xs:attribute name="icon" type="xs:string" use="optional"/>
+        <xs:attribute name="name" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>BR 18.5</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="icon" type="xs:string" use="optional">
+            <xs:annotation>
+                <xs:documentation>br185.png</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="SusiType">
-        <xs:attribute name="bank" type="xs:unsignedByte" use="required"/>
-        <xs:attribute name="index" type="xs:unsignedByte" use="required"/>
-        <xs:attribute name="value" type="xs:unsignedByte" use="required"/>
+        <xs:attribute name="bank" type="xs:unsignedByte" use="required">
+            <xs:annotation>
+                <xs:documentation>1</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="index" type="xs:unsignedByte" use="required">
+            <xs:annotation>
+                <xs:documentation>5</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="value" type="xs:unsignedByte" use="required">
+            <xs:annotation>
+                <xs:documentation>255</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="ConfigType">
-        <xs:attribute name="domain" type="xs:string" use="required"/>
-        <xs:attribute name="data" type="xs:hexBinary" use="required"/>
+        <xs:attribute name="domain" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>SoundProfile</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="data" type="xs:hexBinary" use="required">
+            <xs:annotation>
+                <xs:documentation>FFFEFDFC</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="SyncType">
         <xs:attribute name="type" type="SyncTypeEnum" use="required"/>
-        <xs:attribute name="value" type="xs:unsignedInt" use="optional"/>
+        <xs:attribute name="value" type="xs:unsignedInt" use="optional">
+            <xs:annotation>
+                <xs:documentation>1</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <!-- Enumeration Definitions -->
     <xs:simpleType name="ProtocolEnum">
+        <xs:annotation>
+            <xs:documentation>DCC</xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:enumeration value="DCC"/>
             <xs:enumeration value="MM_I"/>
@@ -186,6 +377,9 @@
     </xs:simpleType>
 
     <xs:simpleType name="DirectionEnum">
+        <xs:annotation>
+            <xs:documentation>FORWARD</xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:enumeration value="REVERSE"/>
             <xs:enumeration value="FORWARD"/>
@@ -194,6 +388,9 @@
     </xs:simpleType>
 
     <xs:simpleType name="PowerStateEnum">
+        <xs:annotation>
+            <xs:documentation>ON</xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:enumeration value="OFF"/>
             <xs:enumeration value="ON"/>
@@ -203,6 +400,9 @@
     </xs:simpleType>
 
     <xs:simpleType name="ConsistEnum">
+        <xs:annotation>
+            <xs:documentation>ADVANCED_DCC</xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:enumeration value="ADVANCED_DCC"/>
             <xs:enumeration value="UNIVERSAL_HOST"/>
@@ -211,6 +411,9 @@
     </xs:simpleType>
 
     <xs:simpleType name="DecoderOrientationEnum">
+        <xs:annotation>
+            <xs:documentation>NORMAL</xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:enumeration value="NORMAL"/>
             <xs:enumeration value="INVERTED"/>
@@ -219,6 +422,9 @@
     </xs:simpleType>
 
     <xs:simpleType name="ExternalStateEnum">
+        <xs:annotation>
+            <xs:documentation>FREE_RUN</xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:enumeration value="FREE_RUN"/>
             <xs:enumeration value="STOPPED_BY_ABC_SIGNAL"/>
@@ -229,6 +435,9 @@
     </xs:simpleType>
 
     <xs:simpleType name="TelemetryEnum">
+        <xs:annotation>
+            <xs:documentation>SPEED_KMH</xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:enumeration value="SPEED_KMH"/>
             <xs:enumeration value="LOAD_PERCENT"/>
@@ -243,6 +452,9 @@
     </xs:simpleType>
 
     <xs:simpleType name="SyncTypeEnum">
+        <xs:annotation>
+            <xs:documentation>CAM_PULSE</xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:enumeration value="CAM_PULSE"/>
             <xs:enumeration value="CYLINDER_CYCLE"/>

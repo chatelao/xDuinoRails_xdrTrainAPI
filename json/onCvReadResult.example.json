@@ -1,0 +1,9 @@
+{
+  "loco": {
+    "address": 5,
+    "protocol": "DCC"
+  },
+  "cvNumber": 5,
+  "value": 200,
+  "success": true
+}

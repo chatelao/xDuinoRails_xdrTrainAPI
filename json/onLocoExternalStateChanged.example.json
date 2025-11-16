@@ -1,0 +1,7 @@
+{
+  "loco": {
+    "address": 99,
+    "protocol": "DCC"
+  },
+  "state": "STOPPED_BY_ABC_SIGNAL"
+}

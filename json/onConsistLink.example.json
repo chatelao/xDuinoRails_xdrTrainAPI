@@ -1,0 +1,12 @@
+{
+  "master": {
+    "address": 2001,
+    "protocol": "DCC"
+  },
+  "slave": {
+    "address": 2002,
+    "protocol": "DCC"
+  },
+  "type": "ADVANCED_DCC",
+  "inverted": false
+}

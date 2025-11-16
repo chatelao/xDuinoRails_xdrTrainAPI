@@ -512,39 +512,49 @@ components:
           type: integer
           format: uint16
           description: "Primary address of the locomotive."
+          example: 101
         protocol:
           $ref: '#/components/schemas/Protocol'
         mfxUid:
           type: integer
           format: uint32
           description: "Unique mfx ID, if applicable."
+          example: 16385
 
     # --------- Enums (from .h file) ---------
 
     Protocol:
       type: string
       enum: [DCC, MM_I, MM_II, MFX, SELECTRIX, SX2, LOCONET, BIDIB, XPRESSNET, CAN_GENERIC]
+      example: "DCC"
     Direction:
       type: string
       enum: [REVERSE, FORWARD, UNKNOWN]
+      example: "FORWARD"
     PowerState:
       type: string
       enum: [OFF, ON, EMERGENCY_STOP, SHORT_CIRCUIT]
+      example: "ON"
     ConsistType:
       type: string
       enum: [ADVANCED_DCC, UNIVERSAL_HOST, MU_LOCONET]
+      example: "ADVANCED_DCC"
     DecoderOrientation:
       type: string
       enum: [NORMAL, INVERTED, UNKNOWN]
+      example: "NORMAL"
     TelemetryType:
       type: string
       enum: [SPEED_KMH, LOAD_PERCENT, VOLTAGE_TRACK, CURRENT_AMP, FUEL_LEVEL, TEMP_CELSIUS, QOS_ERROR_RATE, ODOMETER_VALUE, POSITION_CONFIDENCE]
+      example: "SPEED_KMH"
     ExternalState:
       type: string
       enum: [FREE_RUN, STOPPED_BY_ABC_SIGNAL, STOPPED_BY_DC_BRAKE, STOPPED_BY_HLU, RESTRICTED_SPEED_HLU]
+      example: "FREE_RUN"
     SyncType:
       type: string
       enum: [CAM_PULSE, CYLINDER_CYCLE, GEAR_CHANGE_UP, GEAR_CHANGE_DOWN, BRAKE_SQUEAL_START, DOOR_MOVEMENT]
+      example: "CAM_PULSE"
 
     # --------- Event-Specific Schemas ---------
 
@@ -555,9 +565,11 @@ components:
         address:
           type: integer
           format: uint16
+          example: 55
         value0to1:
           type: number
           format: float
+          example: 0.75
 
     AccessoryError:
       type: object
@@ -566,11 +578,14 @@ components:
         address:
           type: integer
           format: uint16
+          example: 201
         errorId:
           type: integer
           format: uint8
+          example: 1
         errorMsg:
           type: string
+          example: "Overload detected"
 
     FastClockUpdated:
       type: object
@@ -579,9 +594,11 @@ components:
         modelTimeUnix:
           type: integer
           format: int64
+          example: 1678886400
         factor:
           type: number
           format: float
+          example: 10.0
 
     HardwareNodeAttached:
       type: object
@@ -589,10 +606,13 @@ components:
       properties:
         nodeUid:
           type: string
+          example: "uuid-1234-abcd"
         productName:
           type: string
+          example: "xTrain Central Station"
         booster:
           type: boolean
+          example: true
 
     HardwareNodeLost:
       type: object
@@ -600,6 +620,7 @@ components:
       properties:
         nodeUid:
           type: string
+          example: "uuid-1234-efgh"
 
     SystemMessage:
       type: object
@@ -607,8 +628,10 @@ components:
       properties:
         source:
           type: string
+          example: "CommandStation"
         message:
           type: string
+          example: "System startup complete."
 
     CvReadResult:
       type: object
@@ -618,11 +641,14 @@ components:
           $ref: '#/components/schemas/LocoHandle'
         cvNumber:
           type: integer
+          example: 3
         value:
           type: integer
           format: uint8
+          example: 20
         success:
           type: boolean
+          example: true
 
     SusiConfigRead:
       type: object
@@ -633,12 +659,15 @@ components:
         bankIndex:
           type: integer
           format: uint8
+          example: 1
         susiIndex:
           type: integer
           format: uint8
+          example: 5
         value:
           type: integer
           format: uint8
+          example: 255
 
     ConfigBlockLoaded:
       type: object
@@ -648,11 +677,13 @@ components:
           $ref: '#/components/schemas/LocoHandle'
         domain:
           type: string
+          example: "SoundProfile"
         data:
           type: array
           items:
             type: integer
             format: uint8
+          example: [255, 254, 253, 252]
 
     LocoFunctionAnalogValue:
       type: object
@@ -662,9 +693,11 @@ components:
           $ref: '#/components/schemas/LocoHandle'
         fIndex:
           type: integer
+          example: 5
         value:
           type: integer
           format: uint8
+          example: 128
 
     LocoDispatchStateChanged:
       type: object
@@ -674,8 +707,10 @@ components:
           $ref: '#/components/schemas/LocoHandle'
         isAcquired:
           type: boolean
+          example: true
         ownerId:
           type: string
+          example: "throttle-5678"
 
     LocoTelemetryData:
       type: object
@@ -688,6 +723,7 @@ components:
         value:
           type: number
           format: float
+          example: 88.5
 
     LocoExternalStateChanged:
       type: object
@@ -707,11 +743,13 @@ components:
         appId:
           type: integer
           format: uint8
+          example: 1
         data:
           type: array
           items:
             type: integer
             format: uint8
+          example: [1, 2, 3, 4]
 
     NewLocoDiscovered:
       type: object
@@ -721,8 +759,10 @@ components:
           $ref: '#/components/schemas/LocoHandle'
         name:
           type: string
+          example: "BR 18.5"
         icon:
           type: string
+          example: "br185.png"
 
     LocoSyncEvent:
       type: object
@@ -735,6 +775,7 @@ components:
         value:
           type: integer
           format: uint32
+          example: 1
 
     ProgressUpdate:
       type: object
@@ -742,9 +783,11 @@ components:
       properties:
         operation:
           type: string
+          example: "FirmwareUpdate"
         percent:
           type: number
           format: float
+          example: 50.5
 
     LocoDetectedOnBlock:
       type: object
@@ -753,6 +796,7 @@ components:
         sensorId:
           type: integer
           format: uint32
+          example: 1001
         loco:
           $ref: '#/components/schemas/LocoHandle'
         orientation:
@@ -769,11 +813,13 @@ components:
           format: float
           minimum: 0.0
           maximum: 100.0
+          example: 75.5
         direction:
           $ref: '#/components/schemas/Direction'
         speedSteps:
           type: integer
           description: "The speed step mode (e.g., 14, 28, 128)."
+          example: 128
 
     LocoFunctionChanged:
       type: object
@@ -784,8 +830,10 @@ components:
         fIndex:
           type: integer
           description: "Function index (0 for light, 1 for F1, etc.)."
+          example: 1
         isActive:
           type: boolean
+          example: true
 
     TurnoutChanged:
       type: object
@@ -794,12 +842,15 @@ components:
         address:
           type: integer
           format: uint16
+          example: 25
         isThrown:
           type: boolean
           description: "True for diverging/thrown, False for straight."
+          example: true
         isFeedback:
           type: boolean
           description: "True if this is a confirmation from hardware."
+          example: false
 
     TrackPowerChanged:
       type: object
@@ -815,9 +866,11 @@ components:
         sensorId:
           type: integer
           format: uint32
+          example: 1002
         isActive:
           type: boolean
           description: "True for occupied/active, False for free."
+          example: true
 
     CvWriteRequest:
       type: object
@@ -828,10 +881,12 @@ components:
         cvNumber:
           type: integer
           description: "The CV number to write to."
+          example: 3
         value:
           type: integer
           format: uint8
           description: "The 8-bit value to write."
+          example: 20
 
     CvReadRequest:
       type: object
@@ -842,6 +897,7 @@ components:
         cvNumber:
           type: integer
           description: "The CV number to read from."
+          example: 8
 
     ConsistLink:
       type: object
@@ -855,6 +911,7 @@ components:
           $ref: '#/components/schemas/ConsistType'
         inverted:
           type: boolean
+          example: false
 
     ConsistUnlink:
       type: object
@@ -870,8 +927,11 @@ components:
         address:
           type: integer
           format: uint16
+          example: 301
         aspectId:
           type: integer
           format: uint8
+          example: 2
         isFeedback:
           type: boolean
+          example: false

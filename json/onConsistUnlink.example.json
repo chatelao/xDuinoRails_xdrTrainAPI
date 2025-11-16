@@ -1,0 +1,6 @@
+{
+  "slave": {
+    "address": 2002,
+    "protocol": "DCC"
+  }
+}
