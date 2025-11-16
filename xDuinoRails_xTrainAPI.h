@@ -252,6 +252,8 @@ namespace ModelRail {
         // GROUP E: CONFIGURATION & MASS DATA
         // -------------------------------------------------------------
 
+        virtual void onCvReadRequest(const LocoHandle& loco, int cvNumber)                                               = 0;
+        virtual void onCvWriteRequest(const LocoHandle& loco, int cvNumber, uint8_t value)                                = 0;
         virtual void onCvReadResult(const LocoHandle& loco, int cvNumber, uint8_t value, bool success)                   = 0;
         virtual void onSusiConfigRead(const LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value)       = 0;
         

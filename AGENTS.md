@@ -14,7 +14,7 @@ This header file is the **single source of truth** for all API events, data stru
 
 The following files are derivatives of the main `.h` file and **must** be kept in sync with it:
 
-1.  **XML Schema:** `/arduino_examples/xml_messages/xTrainEvents.xsd`
+1.  **XML Schema:** `/xml/xTrainEvents.xsd`
 2.  **OpenAPI Schema:** `/swagger/openapi.yaml`
 
 ### Agent Responsibility

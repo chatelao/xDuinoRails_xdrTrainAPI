@@ -123,8 +123,8 @@
 
     <xs:complexType name="CvType">
         <xs:attribute name="cvNumber" type="xs:positiveInteger" use="required"/>
-        <xs:attribute name="value" type="xs:unsignedByte" use="required"/>
-        <xs:attribute name="success" type="xs:boolean" use="required"/>
+        <xs:attribute name="value" type="xs:unsignedByte" use="optional"/>
+        <xs:attribute name="success" type="xs:boolean" use="optional"/>
     </xs:complexType>
 
     <xs:complexType name="ProgressType">

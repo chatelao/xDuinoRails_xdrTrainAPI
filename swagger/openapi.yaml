@@ -38,6 +38,8 @@ components:
         - $ref: '#/components/schemas/TurnoutChanged'
         - $ref: '#/components/schemas/TrackPowerChanged'
         - $ref: '#/components/schemas/SensorStateChanged'
+        - $ref: '#/components/schemas/CvWriteRequest'
+        - $ref: '#/components/schemas/CvReadRequest'
       discriminator:
         propertyName: eventType
         mapping:
@@ -46,6 +48,8 @@ components:
           TurnoutChanged: '#/components/schemas/TurnoutChanged'
           TrackPowerChanged: '#/components/schemas/TrackPowerChanged'
           SensorStateChanged: '#/components/schemas/SensorStateChanged'
+          CvWriteRequest: '#/components/schemas/CvWriteRequest'
+          CvReadRequest: '#/components/schemas/CvReadRequest'
 
     # This is the base schema with common properties, used for inheritance.
     BaseEvent:
@@ -174,3 +178,35 @@ components:
             isActive:
               type: boolean
               description: "True for occupied/active, False for free."
+
+    CvWriteRequest:
+      type: object
+      description: "Request to write a value to a configuration variable (CV)."
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          required: [loco, cvNumber, value]
+          properties:
+            loco:
+              $ref: '#/components/schemas/LocoHandle'
+            cvNumber:
+              type: integer
+              description: "The CV number to write to."
+            value:
+              type: integer
+              format: uint8
+              description: "The 8-bit value to write."
+
+    CvReadRequest:
+      type: object
+      description: "Request to read a value from a configuration variable (CV)."
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          required: [loco, cvNumber]
+          properties:
+            loco:
+              $ref: '#/components/schemas/LocoHandle'
+            cvNumber:
+              type: integer
+              description: "The CV number to read from."
