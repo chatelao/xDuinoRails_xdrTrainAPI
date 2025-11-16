@@ -100,27 +100,96 @@ public:
 #endif
     }
 
-    // Implement other pure virtual functions from the interface
-    void onLocoFunctionAnalogChange(const LocoHandle& loco, int fIndex, uint8_t value) override {}
-    void onLocoDispatchStateChange(const LocoHandle& loco, bool isAcquired, std::string ownerId) override {}
-    void onConsistLink(const LocoHandle& master, const LocoHandle& slave, ConsistType type, bool inverted) override {}
-    void onConsistUnlink(const LocoHandle& slave) override {}
-    void onAccessoryAnalogValue(uint16_t address, float value0to1) override {}
-    void onAccessoryError(uint16_t address, uint8_t errorId, std::string errorMsg) override {}
-    void onSensorStateChange(uint32_t sensorId, bool isActive) override {}
-    void onFastClockUpdated(int64_t modelTimeUnix, float factor) override {}
-    void onHardwareNodeAttached(std::string nodeUid, std::string productName, bool booster) override {}
-    void onHardwareNodeLost(std::string nodeUid) override {}
-    void onSystemMessage(std::string source, std::string message) override {}
-    void onLocoDetectedOnBlock(uint32_t sensorId, const LocoHandle& loco, DecoderOrientation orientation) override {}
-    void onLocoTelemetryData(const LocoHandle& loco, TelemetryType type, float value) override {}
-    void onLocoExternalStateChange(const LocoHandle& loco, ExternalState state) override {}
-    void onLocoRailComRawData(const LocoHandle& loco, uint8_t appId, const std::vector<uint8_t>& data) override {}
-    void onNewLocoDiscovered(const LocoHandle& loco, const std::string& name, const std::string& icon) override {}
-    void onCvReadResult(const LocoHandle& loco, int cvNumber, uint8_t value, bool success) override {}
-    void onSusiConfigRead(const LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value) override {}
-    void onConfigBlockLoad(const LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data) override {}
-    void onProgressUpdate(std::string operation, float percent) override {}
+    void onLocoFunctionAnalogChange(const LocoHandle& loco, int fIndex, uint8_t value) override {
+        _stream->print("onLocoFunctionAnalogChange cab=");
+        _stream->print(loco.address);
+        _stream->print(" fIndex=");
+        _stream->print(fIndex);
+        _stream->print(" value=");
+        _stream->println(value);
+    }
+    void onLocoDispatchStateChange(const LocoHandle& loco, bool isAcquired, std::string ownerId) override {
+        _stream->print("onLocoDispatchStateChange cab=");
+        _stream->print(loco.address);
+        _stream->print(" isAcquired=");
+        _stream->println(isAcquired);
+    }
+    void onConsistLink(const LocoHandle& master, const LocoHandle& slave, ConsistType type, bool inverted) override {
+        _stream->println("onConsistLink");
+    }
+    void onConsistUnlink(const LocoHandle& slave) override {
+        _stream->println("onConsistUnlink");
+    }
+    void onAccessoryAnalogValue(uint16_t address, float value0to1) override {
+        _stream->print("onAccessoryAnalogValue addr=");
+        _stream->print(address);
+        _stream->print(" value=");
+        _stream->println(value0to1);
+    }
+    void onAccessoryError(uint16_t address, uint8_t errorId, std::string errorMsg) override {
+        _stream->print("onAccessoryError addr=");
+        _stream->println(address);
+    }
+    void onSensorStateChange(uint32_t sensorId, bool isActive) override {
+        _stream->print("onSensorStateChange id=");
+        _stream->print(sensorId);
+        _stream->print(" isActive=");
+        _stream->println(isActive);
+    }
+    void onFastClockUpdated(int64_t modelTimeUnix, float factor) override {
+        _stream->println("onFastClockUpdated");
+    }
+    void onHardwareNodeAttached(std::string nodeUid, std::string productName, bool booster) override {
+        _stream->println("onHardwareNodeAttached");
+    }
+    void onHardwareNodeLost(std::string nodeUid) override {
+        _stream->println("onHardwareNodeLost");
+    }
+    void onSystemMessage(std::string source, std::string message) override {
+        _stream->println("onSystemMessage");
+    }
+    void onLocoDetectedOnBlock(uint32_t sensorId, const LocoHandle& loco, DecoderOrientation orientation) override {
+        _stream->print("onLocoDetectedOnBlock id=");
+        _stream->println(sensorId);
+    }
+    void onLocoTelemetryData(const LocoHandle& loco, TelemetryType type, float value) override {
+        _stream->println("onLocoTelemetryData");
+    }
+    void onLocoExternalStateChange(const LocoHandle& loco, ExternalState state) override {
+        _stream->println("onLocoExternalStateChange");
+    }
+    void onLocoRailComRawData(const LocoHandle& loco, uint8_t appId, const std::vector<uint8_t>& data) override {
+        _stream->println("onLocoRailComRawData");
+    }
+    void onNewLocoDiscovered(const LocoHandle& loco, const std::string& name, const std::string& icon) override {
+        _stream->println("onNewLocoDiscovered");
+    }
+    void onCvReadRequest(const LocoHandle& loco, int cvNumber) override {
+        _stream->print("onCvReadRequest cab=");
+        _stream->print(loco.address);
+        _stream->print(" cv=");
+        _stream->println(cvNumber);
+    }
+    void onCvWriteRequest(const LocoHandle& loco, int cvNumber, uint8_t value) override {
+        _stream->print("onCvWriteRequest cab=");
+        _stream->print(loco.address);
+        _stream->print(" cv=");
+        _stream->print(cvNumber);
+        _stream->print(" value=");
+        _stream->println(value);
+    }
+    void onCvReadResult(const LocoHandle& loco, int cvNumber, uint8_t value, bool success) override {
+        _stream->println("onCvReadResult");
+    }
+    void onSusiConfigRead(const LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value) override {
+        _stream->println("onSusiConfigRead");
+    }
+    void onConfigBlockLoad(const LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data) override {
+        _stream->println("onConfigBlockLoad");
+    }
+    void onProgressUpdate(std::string operation, float percent) override {
+        _stream->println("onProgressUpdate");
+    }
 
     // GROUP F: REAL-TIME SYNCHRONIZATION (Added in v2.3)
     void onLocoEventSync(const LocoHandle& loco, SyncType type, uint32_t value) override {
@@ -158,9 +227,18 @@ class XmlPrinter : public IUnifiedModelTrainListener {
 public:
     XmlPrinter(Stream& stream) : _stream(&stream) {}
 
-    void onLocoSpeedChange(const LocoHandle& loco, float speedPercent, Direction direction, int speedSteps) override {
+    // Helper to start the XML document
+    void begin() {
         _stream->println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         _stream->println("<xTrainEvents>");
+    }
+
+    // Helper to end the XML document
+    void end() {
+        _stream->println("</xTrainEvents>");
+    }
+
+    void onLocoSpeedChange(const LocoHandle& loco, float speedPercent, Direction direction, int speedSteps) override {
         _stream->println("    <event type=\"onLocoSpeedChange\">");
         _stream->print("        <loco address=\"");
         _stream->print(loco.address);
@@ -175,37 +253,105 @@ public:
         _stream->print(speedSteps);
         _stream->println("\" />");
         _stream->println("    </event>");
-        _stream->println("</xTrainEvents>");
     }
 
-    // Implement other pure virtual functions from the interface
-    void onLocoFunctionChange(const LocoHandle& loco, int fIndex, bool isActive) override {}
-    void onLocoFunctionAnalogChange(const LocoHandle& loco, int fIndex, uint8_t value) override {}
-    void onLocoDispatchStateChange(const LocoHandle& loco, bool isAcquired, std::string ownerId) override {}
-    void onConsistLink(const LocoHandle& master, const LocoHandle& slave, ConsistType type, bool inverted) override {}
-    void onConsistUnlink(const LocoHandle& slave) override {}
-    void onTurnoutChange(uint16_t address, bool isThrown, bool isFeedback) override {}
-    void onSignalAspectChange(uint16_t address, uint8_t aspectId, bool isFeedback) override {}
-    void onAccessoryAnalogValue(uint16_t address, float value0to1) override {}
-    void onAccessoryError(uint16_t address, uint8_t errorId, std::string errorMsg) override {}
-    void onSensorStateChange(uint32_t sensorId, bool isActive) override {}
-    void onTrackPowerChange(PowerState state) override {}
-    void onFastClockUpdated(int64_t modelTimeUnix, float factor) override {}
-    void onHardwareNodeAttached(std::string nodeUid, std::string productName, bool booster) override {}
-    void onHardwareNodeLost(std::string nodeUid) override {}
-    void onSystemMessage(std::string source, std::string message) override {}
-    void onLocoDetectedOnBlock(uint32_t sensorId, const LocoHandle& loco, DecoderOrientation orientation) override {}
-    void onLocoTelemetryData(const LocoHandle& loco, TelemetryType type, float value) override {}
-    void onLocoExternalStateChange(const LocoHandle& loco, ExternalState state) override {}
-    void onLocoRailComRawData(const LocoHandle& loco, uint8_t appId, const std::vector<uint8_t>& data) override {}
-    void onNewLocoDiscovered(const LocoHandle& loco, const std::string& name, const std::string& icon) override {}
-    void onCvReadResult(const LocoHandle& loco, int cvNumber, uint8_t value, bool success) override {}
-    void onSusiConfigRead(const LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value) override {}
-    void onConfigBlockLoad(const LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data) override {}
-    void onProgressUpdate(std::string operation, float percent) override {}
+    void onLocoFunctionChange(const LocoHandle& loco, int fIndex, bool isActive) override {
+        _stream->println("    <event type=\"onLocoFunctionChange\">");
+        _stream->print("        <loco address=\"");
+        _stream->print(loco.address);
+        _stream->println("\" protocol=\"DCC\" />");
+        _stream->print("        <function fIndex=\"");
+        _stream->print(fIndex);
+        _stream->print("\" isActive=\"");
+        _stream->print(isActive ? "true" : "false");
+        _stream->println("\" />");
+        _stream->println("    </event>");
+    }
+    void onLocoFunctionAnalogChange(const LocoHandle& loco, int fIndex, uint8_t value) override {
+        _stream->println("    <event type=\"onLocoFunctionAnalogChange\">");
+        _stream->print("        <loco address=\"");
+        _stream->print(loco.address);
+        _stream->println("\" protocol=\"DCC\" />");
+        _stream->print("        <function fIndex=\"");
+        _stream->print(fIndex);
+        _stream->print("\" value=\"");
+        _stream->print(value);
+        _stream->println("\" />");
+        _stream->println("    </event>");
+    }
+    void onLocoDispatchStateChange(const LocoHandle& loco, bool isAcquired, std::string ownerId) override {
+        _stream->println("    <event type=\"onLocoDispatchStateChange\"></event>");
+    }
+    void onConsistLink(const LocoHandle& master, const LocoHandle& slave, ConsistType type, bool inverted) override {
+        _stream->println("    <event type=\"onConsistLink\"></event>");
+    }
+    void onConsistUnlink(const LocoHandle& slave) override {
+        _stream->println("    <event type=\"onConsistUnlink\"></event>");
+    }
+    void onTurnoutChange(uint16_t address, bool isThrown, bool isFeedback) override {
+        _stream->println("    <event type=\"onTurnoutChange\"></event>");
+    }
+    void onSignalAspectChange(uint16_t address, uint8_t aspectId, bool isFeedback) override {
+        _stream->println("    <event type=\"onSignalAspectChange\"></event>");
+    }
+    void onAccessoryAnalogValue(uint16_t address, float value0to1) override {
+        _stream->println("    <event type=\"onAccessoryAnalogValue\"></event>");
+    }
+    void onAccessoryError(uint16_t address, uint8_t errorId, std::string errorMsg) override {
+        _stream->println("    <event type=\"onAccessoryError\"></event>");
+    }
+    void onSensorStateChange(uint32_t sensorId, bool isActive) override {
+        _stream->println("    <event type=\"onSensorStateChange\"></event>");
+    }
+    void onTrackPowerChange(PowerState state) override {
+        _stream->println("    <event type=\"onTrackPowerChange\"></event>");
+    }
+    void onFastClockUpdated(int64_t modelTimeUnix, float factor) override {
+        _stream->println("    <event type=\"onFastClockUpdated\"></event>");
+    }
+    void onHardwareNodeAttached(std::string nodeUid, std::string productName, bool booster) override {
+        _stream->println("    <event type=\"onHardwareNodeAttached\"></event>");
+    }
+    void onHardwareNodeLost(std::string nodeUid) override {
+        _stream->println("    <event type=\"onHardwareNodeLost\"></event>");
+    }
+    void onSystemMessage(std::string source, std::string message) override {
+        _stream->println("    <event type=\"onSystemMessage\"></event>");
+    }
+    void onLocoDetectedOnBlock(uint32_t sensorId, const LocoHandle& loco, DecoderOrientation orientation) override {
+        _stream->println("    <event type=\"onLocoDetectedOnBlock\"></event>");
+    }
+    void onLocoTelemetryData(const LocoHandle& loco, TelemetryType type, float value) override {
+        _stream->println("    <event type=\"onLocoTelemetryData\"></event>");
+    }
+    void onLocoExternalStateChange(const LocoHandle& loco, ExternalState state) override {
+        _stream->println("    <event type=\"onLocoExternalStateChange\"></event>");
+    }
+    void onLocoRailComRawData(const LocoHandle& loco, uint8_t appId, const std::vector<uint8_t>& data) override {
+        _stream->println("    <event type=\"onLocoRailComRawData\"></event>");
+    }
+    void onNewLocoDiscovered(const LocoHandle& loco, const std::string& name, const std::string& icon) override {
+        _stream->println("    <event type=\"onNewLocoDiscovered\"></event>");
+    }
+    void onCvReadRequest(const LocoHandle& loco, int cvNumber) override {
+        _stream->println("    <event type=\"onCvReadRequest\"></event>");
+    }
+    void onCvWriteRequest(const LocoHandle& loco, int cvNumber, uint8_t value) override {
+        _stream->println("    <event type=\"onCvWriteRequest\"></event>");
+    }
+    void onCvReadResult(const LocoHandle& loco, int cvNumber, uint8_t value, bool success) override {
+        _stream->println("    <event type=\"onCvReadResult\"></event>");
+    }
+    void onSusiConfigRead(const LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value) override {
+        _stream->println("    <event type=\"onSusiConfigRead\"></event>");
+    }
+    void onConfigBlockLoad(const LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data) override {
+        _stream->println("    <event type=\"onConfigBlockLoad\"></event>");
+    }
+    void onProgressUpdate(std::string operation, float percent) override {
+        _stream->println("    <event type=\"onProgressUpdate\"></event>");
+    }
     void onLocoEventSync(const LocoHandle& loco, SyncType type, uint32_t value) override {
-        _stream->println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-        _stream->println("<xTrainEvents>");
         _stream->println("    <event type=\"onLocoEventSync\">");
         _stream->print("        <loco address=\"");
         _stream->print(loco.address);
@@ -225,7 +371,6 @@ public:
         _stream->print(value);
         _stream->println("\" />");
         _stream->println("    </event>");
-        _stream->println("</xTrainEvents>");
     }
 
 private:
