@@ -112,6 +112,10 @@ Inheritance diagram for ModelRail::XmlPrinter:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad040838fe44d9a628f4a58b67f70b815" id="r_ad040838fe44d9a628f4a58b67f70b815"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelRail_1_1XmlPrinter.html#ad040838fe44d9a628f4a58b67f70b815">XmlPrinter</a> (Stream &amp;stream)</td></tr>
 <tr class="separator:ad040838fe44d9a628f4a58b67f70b815"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad9d7481bccf1fb38181aef78ed126dd" id="r_aad9d7481bccf1fb38181aef78ed126dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelRail_1_1XmlPrinter.html#aad9d7481bccf1fb38181aef78ed126dd">begin</a> ()</td></tr>
+<tr class="separator:aad9d7481bccf1fb38181aef78ed126dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a50b29f71427c1941f8f3316b58d3d7" id="r_a2a50b29f71427c1941f8f3316b58d3d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelRail_1_1XmlPrinter.html#a2a50b29f71427c1941f8f3316b58d3d7">end</a> ()</td></tr>
+<tr class="separator:a2a50b29f71427c1941f8f3316b58d3d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1561e347cde1179895604f91ec142f6" id="r_ac1561e347cde1179895604f91ec142f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelRail_1_1XmlPrinter.html#ac1561e347cde1179895604f91ec142f6">onLocoSpeedChange</a> (const <a class="el" href="structModelRail_1_1LocoHandle.html">LocoHandle</a> &amp;loco, float speedPercent, <a class="el" href="namespaceModelRail.html#afe98c6614d10e85614d309d919327cf6">Direction</a> direction, int speedSteps) override</td></tr>
 <tr class="memdesc:ac1561e347cde1179895604f91ec142f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard speed control (RCN-212).  <br /></td></tr>
 <tr class="separator:ac1561e347cde1179895604f91ec142f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -174,6 +178,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:add162c932211dd549c86f20f93a7cc5e" id="r_add162c932211dd549c86f20f93a7cc5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelRail_1_1XmlPrinter.html#add162c932211dd549c86f20f93a7cc5e">onNewLocoDiscovered</a> (const <a class="el" href="structModelRail_1_1LocoHandle.html">LocoHandle</a> &amp;loco, const std::string &amp;name, const std::string &amp;icon) override</td></tr>
 <tr class="memdesc:add162c932211dd549c86f20f93a7cc5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discovery (mfx / RailComPlus).  <br /></td></tr>
 <tr class="separator:add162c932211dd549c86f20f93a7cc5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf22d51ca756ad6a2c655ddc2a923536" id="r_abf22d51ca756ad6a2c655ddc2a923536"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelRail_1_1XmlPrinter.html#abf22d51ca756ad6a2c655ddc2a923536">onCvReadRequest</a> (const <a class="el" href="structModelRail_1_1LocoHandle.html">LocoHandle</a> &amp;loco, int cvNumber) override</td></tr>
+<tr class="memdesc:abf22d51ca756ad6a2c655ddc2a923536"><td class="mdescLeft">&#160;</td><td class="mdescRight">A request to read a CV from a decoder has been issued.  <br /></td></tr>
+<tr class="separator:abf22d51ca756ad6a2c655ddc2a923536"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2d2ba3551984358ee2fbed70e5c1d07" id="r_ab2d2ba3551984358ee2fbed70e5c1d07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelRail_1_1XmlPrinter.html#ab2d2ba3551984358ee2fbed70e5c1d07">onCvWriteRequest</a> (const <a class="el" href="structModelRail_1_1LocoHandle.html">LocoHandle</a> &amp;loco, int cvNumber, uint8_t value) override</td></tr>
+<tr class="memdesc:ab2d2ba3551984358ee2fbed70e5c1d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">A request to write a CV to a decoder has been issued.  <br /></td></tr>
+<tr class="separator:ab2d2ba3551984358ee2fbed70e5c1d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc21c4b8baa67787f773ed45676be7aa" id="r_afc21c4b8baa67787f773ed45676be7aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelRail_1_1XmlPrinter.html#afc21c4b8baa67787f773ed45676be7aa">onCvReadResult</a> (const <a class="el" href="structModelRail_1_1LocoHandle.html">LocoHandle</a> &amp;loco, int cvNumber, uint8_t value, bool success) override</td></tr>
 <tr class="memdesc:afc21c4b8baa67787f773ed45676be7aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Result of a CV read operation.  <br /></td></tr>
 <tr class="separator:afc21c4b8baa67787f773ed45676be7aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,16 +202,10 @@ Public Member Functions</h2></td></tr>
 <tr class="inherit_header pub_methods_classModelRail_1_1IUnifiedModelTrainListener"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classModelRail_1_1IUnifiedModelTrainListener')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html">ModelRail::IUnifiedModelTrainListener</a></td></tr>
 <tr class="memitem:a4ffc7d8ec7c90fe1867540917d256ea7 inherit pub_methods_classModelRail_1_1IUnifiedModelTrainListener" id="r_a4ffc7d8ec7c90fe1867540917d256ea7"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a4ffc7d8ec7c90fe1867540917d256ea7">~IUnifiedModelTrainListener</a> ()=default</td></tr>
 <tr class="separator:a4ffc7d8ec7c90fe1867540917d256ea7 inherit pub_methods_classModelRail_1_1IUnifiedModelTrainListener"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88af9adfeb222cda84b0dfc70071e86a inherit pub_methods_classModelRail_1_1IUnifiedModelTrainListener" id="r_a88af9adfeb222cda84b0dfc70071e86a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a88af9adfeb222cda84b0dfc70071e86a">onCvReadRequest</a> (const <a class="el" href="structModelRail_1_1LocoHandle.html">LocoHandle</a> &amp;loco, int cvNumber)=0</td></tr>
-<tr class="memdesc:a88af9adfeb222cda84b0dfc70071e86a inherit pub_methods_classModelRail_1_1IUnifiedModelTrainListener"><td class="mdescLeft">&#160;</td><td class="mdescRight">A request to read a CV from a decoder has been issued.  <br /></td></tr>
-<tr class="separator:a88af9adfeb222cda84b0dfc70071e86a inherit pub_methods_classModelRail_1_1IUnifiedModelTrainListener"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf256f59cb4c04729027f1a2a65f08e2 inherit pub_methods_classModelRail_1_1IUnifiedModelTrainListener" id="r_adf256f59cb4c04729027f1a2a65f08e2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#adf256f59cb4c04729027f1a2a65f08e2">onCvWriteRequest</a> (const <a class="el" href="structModelRail_1_1LocoHandle.html">LocoHandle</a> &amp;loco, int cvNumber, uint8_t value)=0</td></tr>
-<tr class="memdesc:adf256f59cb4c04729027f1a2a65f08e2 inherit pub_methods_classModelRail_1_1IUnifiedModelTrainListener"><td class="mdescLeft">&#160;</td><td class="mdescRight">A request to write a CV to a decoder has been issued.  <br /></td></tr>
-<tr class="separator:adf256f59cb4c04729027f1a2a65f08e2 inherit pub_methods_classModelRail_1_1IUnifiedModelTrainListener"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00157">157</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00226">226</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad040838fe44d9a628f4a58b67f70b815" name="ad040838fe44d9a628f4a58b67f70b815"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad040838fe44d9a628f4a58b67f70b815">&#9670;&#160;</a></span>XmlPrinter()</h2>
@@ -227,11 +231,65 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00159">159</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00228">228</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aad9d7481bccf1fb38181aef78ed126dd" name="aad9d7481bccf1fb38181aef78ed126dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad9d7481bccf1fb38181aef78ed126dd">&#9670;&#160;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ModelRail::XmlPrinter::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00231">231</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+
+</div>
+</div>
+<a id="a2a50b29f71427c1941f8f3316b58d3d7" name="a2a50b29f71427c1941f8f3316b58d3d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a50b29f71427c1941f8f3316b58d3d7">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ModelRail::XmlPrinter::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00237">237</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+
+</div>
+</div>
 <a id="a3c5e237fccfaa08e5b30caac340072a2" name="a3c5e237fccfaa08e5b30caac340072a2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c5e237fccfaa08e5b30caac340072a2">&#9670;&#160;</a></span>onAccessoryAnalogValue()</h2>
 
@@ -276,7 +334,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a5887f15e1c8cb57170fd5f52de7d1ed6">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00189">189</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00297">297</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -330,7 +388,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a55521b12909611686373d24551207cd5">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00190">190</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00300">300</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -384,7 +442,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a1daae0306690d50091ab313056a3768c">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00204">204</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00348">348</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -445,7 +503,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#ad7c22aeae62549384f903edf14f36072">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00185">185</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00285">285</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -483,7 +541,56 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#ac317a6ccd653b173f4d0b7a27e9b5756">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00186">186</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00288">288</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+
+</div>
+</div>
+<a id="abf22d51ca756ad6a2c655ddc2a923536" name="abf22d51ca756ad6a2c655ddc2a923536"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf22d51ca756ad6a2c655ddc2a923536">&#9670;&#160;</a></span>onCvReadRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ModelRail::XmlPrinter::onCvReadRequest </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structModelRail_1_1LocoHandle.html">LocoHandle</a> &amp;&#160;</td>
+          <td class="paramname"><em>loco</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cvNumber</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A request to read a CV from a decoder has been issued. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">loco</td><td>The target locomotive. </td></tr>
+    <tr><td class="paramname">cvNumber</td><td>The Configuration Variable number to read. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a88af9adfeb222cda84b0dfc70071e86a">ModelRail::IUnifiedModelTrainListener</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00336">336</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -546,7 +653,63 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a886c1fe80763edb28cc7f7f8e7866922">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00202">202</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00342">342</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+
+</div>
+</div>
+<a id="ab2d2ba3551984358ee2fbed70e5c1d07" name="ab2d2ba3551984358ee2fbed70e5c1d07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2d2ba3551984358ee2fbed70e5c1d07">&#9670;&#160;</a></span>onCvWriteRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ModelRail::XmlPrinter::onCvWriteRequest </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structModelRail_1_1LocoHandle.html">LocoHandle</a> &amp;&#160;</td>
+          <td class="paramname"><em>loco</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cvNumber</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A request to write a CV to a decoder has been issued. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">loco</td><td>The target locomotive. </td></tr>
+    <tr><td class="paramname">cvNumber</td><td>The Configuration Variable number to write. </td></tr>
+    <tr><td class="paramname">value</td><td>The 8-bit value to write. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#adf256f59cb4c04729027f1a2a65f08e2">ModelRail::IUnifiedModelTrainListener</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00339">339</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -595,7 +758,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a74cd6bce504563620c0c37397c2cf6a5">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00193">193</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00309">309</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -649,7 +812,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#af042f4d36726c3b8f2237dfa46c84b44">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00194">194</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00312">312</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -687,7 +850,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a03252df220bbe8a9e0c8d42dafa4c0da">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00195">195</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00315">315</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -741,7 +904,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a7d5d9af4459b4c75585433f0e12c4145">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00197">197</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00321">321</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -796,7 +959,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a3760221f6bf3688875d98fc22ebaddad">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00184">184</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00282">282</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -852,7 +1015,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#aab8de8f6ea4b7fecb99c86fe7d5cb42c">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00206">206</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00354">354</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 <p class="reference">References <a class="el" href="xDuinoRails__xTrainAPI_8h_source.html#l00111">ModelRail::LocoHandle::address</a>, <a class="el" href="namespaceModelRail.html#a3a9c9bfe3951a8a53f045c39479dd178af2257e0f2716ef6a50e2080157e0d82b">ModelRail::BRAKE_SQUEAL_START</a>, <a class="el" href="namespaceModelRail.html#a3a9c9bfe3951a8a53f045c39479dd178a5c16497e96445d7b7f66bd0b2cc4187d">ModelRail::CAM_PULSE</a>, <a class="el" href="namespaceModelRail.html#a3a9c9bfe3951a8a53f045c39479dd178afc1d40a47836fb19437c80ee2bafd7ab">ModelRail::CYLINDER_CYCLE</a>, <a class="el" href="namespaceModelRail.html#a3a9c9bfe3951a8a53f045c39479dd178a3f4714fd8ecb7159d35b0629a62e3fcf">ModelRail::DOOR_MOVEMENT</a>, <a class="el" href="namespaceModelRail.html#a3a9c9bfe3951a8a53f045c39479dd178a3d950d89f49f1d72b47f16fb312209ab">ModelRail::GEAR_CHANGE_DOWN</a>, <a class="el" href="namespaceModelRail.html#a3a9c9bfe3951a8a53f045c39479dd178a2f25bc7199761d36b28f472ea68d961c">ModelRail::GEAR_CHANGE_UP</a>, and <a class="el" href="xDuinoRails__xTrainAPI_8h_source.html#l00113">ModelRail::LocoHandle::mfxUid</a>.</p>
 
@@ -896,7 +1059,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#aa83b69fc02f538c3d89377910ef16122">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00199">199</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00327">327</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -950,7 +1113,9 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#afb0f30a1db5e4cd04548e415f16526a9">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00183">183</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00270">270</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+
+<p class="reference">References <a class="el" href="xDuinoRails__xTrainAPI_8h_source.html#l00111">ModelRail::LocoHandle::address</a>.</p>
 
 </div>
 </div>
@@ -1005,7 +1170,9 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#ab20c729582c37af7406835ac76fc5056">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00182">182</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00258">258</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+
+<p class="reference">References <a class="el" href="xDuinoRails__xTrainAPI_8h_source.html#l00111">ModelRail::LocoHandle::address</a>.</p>
 
 </div>
 </div>
@@ -1059,7 +1226,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#acb3246012edfbcb687fab93dc86c4217">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00200">200</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00330">330</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -1122,7 +1289,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a8e756a152320aae0eccaff46e3286662">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00161">161</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00241">241</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 <p class="reference">References <a class="el" href="xDuinoRails__xTrainAPI_8h_source.html#l00111">ModelRail::LocoHandle::address</a>, <a class="el" href="namespaceModelRail.html#afe98c6614d10e85614d309d919327cf6abfec72bb37910c61f36b6c29a1f7ec31">ModelRail::FORWARD</a>, and <a class="el" href="xDuinoRails__xTrainAPI_8h_source.html#l00113">ModelRail::LocoHandle::mfxUid</a>.</p>
 
@@ -1170,7 +1337,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a46280ead37c875eb502f6ccd7674273f">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00198">198</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00324">324</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -1224,7 +1391,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a798c51f21e52e7b3e47069363c95cb02">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00201">201</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00333">333</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -1273,7 +1440,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a967dc7e09a09396ccb69c99a861cde00">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00205">205</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00351">351</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -1322,7 +1489,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#aaac5d7e9e52d36f11fff4be9179271c0">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00191">191</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00303">303</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -1376,7 +1543,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a627921da200b4cde2e3d1e6a30356ca0">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00188">188</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00294">294</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -1439,7 +1606,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a21ddf33ec30b1d0d4c5772b2ca341631">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00203">203</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00345">345</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -1488,7 +1655,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a12bfef8de042a6e5d55c44e79d00900c">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00196">196</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00318">318</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -1526,7 +1693,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#a427190dee7e56fe267c8b2fc85253bd4">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00192">192</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00306">306</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -1581,7 +1748,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classModelRail_1_1IUnifiedModelTrainListener.html#aedffd22a8bf56c4ba4c69e5c29acf070">ModelRail::IUnifiedModelTrainListener</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00187">187</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00291">291</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
 
 </div>
 </div>
@@ -1594,7 +1761,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceModelRail.html">ModelRail</a></li><li class="navelem"><a class="el" href="classModelRail_1_1XmlPrinter.html">XmlPrinter</a></li>
-    <li class="footer">Generated on Sun Nov 16 2025 13:09:44 for xTrain API by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Nov 16 2025 14:36:13 for xTrain API by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

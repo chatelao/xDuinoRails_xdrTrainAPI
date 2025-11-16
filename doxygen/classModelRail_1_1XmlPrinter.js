@@ -1,12 +1,16 @@
 var classModelRail_1_1XmlPrinter =
 [
     [ "XmlPrinter", "classModelRail_1_1XmlPrinter.html#ad040838fe44d9a628f4a58b67f70b815", null ],
+    [ "begin", "classModelRail_1_1XmlPrinter.html#aad9d7481bccf1fb38181aef78ed126dd", null ],
+    [ "end", "classModelRail_1_1XmlPrinter.html#a2a50b29f71427c1941f8f3316b58d3d7", null ],
     [ "onAccessoryAnalogValue", "classModelRail_1_1XmlPrinter.html#a3c5e237fccfaa08e5b30caac340072a2", null ],
     [ "onAccessoryError", "classModelRail_1_1XmlPrinter.html#a20d5834d1e47032bb2fae949ed74011f", null ],
     [ "onConfigBlockLoad", "classModelRail_1_1XmlPrinter.html#a790c5f951e586a311b8fd3238faca626", null ],
     [ "onConsistLink", "classModelRail_1_1XmlPrinter.html#a76f7b89c31a20e64a068c24ef644af56", null ],
     [ "onConsistUnlink", "classModelRail_1_1XmlPrinter.html#aef6a4e83eaa2807789b430fdf67b8fec", null ],
+    [ "onCvReadRequest", "classModelRail_1_1XmlPrinter.html#abf22d51ca756ad6a2c655ddc2a923536", null ],
     [ "onCvReadResult", "classModelRail_1_1XmlPrinter.html#afc21c4b8baa67787f773ed45676be7aa", null ],
+    [ "onCvWriteRequest", "classModelRail_1_1XmlPrinter.html#ab2d2ba3551984358ee2fbed70e5c1d07", null ],
     [ "onFastClockUpdated", "classModelRail_1_1XmlPrinter.html#aa60b0b39db764e5624ce8b9122802691", null ],
     [ "onHardwareNodeAttached", "classModelRail_1_1XmlPrinter.html#a8ad793654c71a9566a64f081b45c17d1", null ],
     [ "onHardwareNodeLost", "classModelRail_1_1XmlPrinter.html#a7310df5a7a2400abbc993b1dc12968d1", null ],
