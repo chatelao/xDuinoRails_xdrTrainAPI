@@ -138,19 +138,19 @@
     <!-- ===================================================================== -->
 
     <!-- Event: A CV read operation has completed. -->
-    <event type="onCvReadResult" timestamp="2024-07-29T10:08:30Z">
+    <event type="onCvReadDone" timestamp="2024-07-29T10:08:30Z">
         <loco address="5" protocol="DCC" />
         <cv cvNumber="5" value="200" success="true" />
     </event>
 
     <!-- Event: A request to read a CV from a decoder has been issued. -->
-    <event type="onCvReadRequest" timestamp="2024-07-29T10:08:00Z">
+    <event type="onCvRead" timestamp="2024-07-29T10:08:00Z">
         <loco address="3" protocol="DCC" />
         <cv cvNumber="5" />
     </event>
 
     <!-- Event: A request to write a CV to a decoder has been issued. -->
-    <event type="onCvWriteRequest" timestamp="2024-07-29T10:09:00Z">
+    <event type="onCvWrite" timestamp="2024-07-29T10:09:00Z">
         <loco address="3" protocol="DCC" />
         <cv cvNumber="5" value="128" />
     </event>

@@ -277,7 +277,7 @@ namespace ModelRail {
          * @param loco The target locomotive.
          * @param cvNumber The Configuration Variable number to read.
          */
-        virtual void onCvReadRequest(const LocoHandle& loco, int cvNumber)                                               = 0;
+        virtual void onCvRead(const LocoHandle& loco, int cvNumber)                                               = 0;
 
         /**
          * @brief A request to write a CV to a decoder has been issued.
@@ -285,7 +285,7 @@ namespace ModelRail {
          * @param cvNumber The Configuration Variable number to write.
          * @param value The 8-bit value to write.
          */
-        virtual void onCvWriteRequest(const LocoHandle& loco, int cvNumber, uint8_t value)                                = 0;
+        virtual void onCvWrite(const LocoHandle& loco, int cvNumber, uint8_t value)                                = 0;
 
         /**
          * @brief Result of a CV read operation.
@@ -294,7 +294,7 @@ namespace ModelRail {
          * @param value The 8-bit value returned by the decoder.
          * @param success True if the read was successful (acknowledged).
          */
-        virtual void onCvReadResult(const LocoHandle& loco, int cvNumber, uint8_t value, bool success)                   = 0;
+        virtual void onCvReadDone(const LocoHandle& loco, int cvNumber, uint8_t value, bool success)                   = 0;
 
         /**
          * @brief Result of reading a SUSI configuration register.
