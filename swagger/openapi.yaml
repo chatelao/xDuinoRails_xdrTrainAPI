@@ -1,10 +1,10 @@
 openapi: 3.0.0
 info:
   title: xTrain Event API
-  version: "2.0.0"
+  version: "2.3.0"
   description: |
     A RESTful API to trigger events for the Unified Model Train Control System (xTrain).
-    This version uses a dedicated endpoint for each event type.
+    This version uses a dedicated endpoint for each event type and adds support for real-time synchronization events.
     This API is based on the abstract interface defined in `xDuinoRails_xTrainAPI.h`.
 servers:
   - url: "/xTrainAPIv1/events"
