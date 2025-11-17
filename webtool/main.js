@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch and parse the OpenAPI spec
     const loadOpenApiSpec = async () => {
         try {
-            const response = await fetch('../swagger/openapi.yaml');
+            const response = await fetch('/xDuinoRails_xTrainAPI/swagger/openapi.yaml');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
