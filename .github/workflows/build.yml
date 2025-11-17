@@ -138,6 +138,9 @@ jobs:
           mkdir -p public/swagger
           redocly build-docs swagger/openapi.yaml -o public/swagger/index.html
 
+      - name: Copy swagger spec for webtool
+        run: cp swagger/openapi.yaml public/swagger/
+
       - name: Copy webtool to public directory
         run: cp -r webtool public/
 
