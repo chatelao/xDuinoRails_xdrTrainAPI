@@ -1,0 +1,937 @@
+openapi: 3.0.0
+info:
+  title: xTrain Event API
+  version: "2.3.0"
+  description: |
+    A RESTful API to trigger events for the Unified Model Train Control System (xTrain).
+    This version uses a dedicated endpoint for each event type and adds support for real-time synchronization events.
+    This API is based on the abstract interface defined in `xDuinoRails_xTrainAPI.h`.
+servers:
+  - url: "/xTrainAPIv1/events"
+    description: "Main API endpoint"
+
+paths:
+  /onLocoSpeedChange:
+    post:
+      summary: "Loco Speed Change"
+      description: "Event for changing a locomotive's speed and direction."
+      operationId: "onLocoSpeedChange"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocoSpeedChange'
+            examples:
+              DCC_Loco_Full_Speed:
+                summary: "Set a DCC locomotive to full speed forward."
+                value:
+                  loco:
+                    address: 101
+                    protocol: "DCC"
+                  speedPercent: 100.0
+                  direction: "FORWARD"
+                  speedSteps: 128
+              MFX_Loco_Stop:
+                summary: "Stop an mfx locomotive."
+                value:
+                  loco:
+                    address: 3
+                    protocol: "MFX"
+                    mfxUid: 16385
+                  speedPercent: 0.0
+                  direction: "FORWARD"
+                  speedSteps: 128
+      responses:
+        '202':
+          description: "Event accepted."
+  /onLocoFunctionChange:
+    post:
+      summary: "Loco Function Change"
+      description: "Event for activating or deactivating a locomotive function."
+      operationId: "onLocoFunctionChange"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocoFunctionChange'
+            examples:
+              TurnOnLight:
+                summary: "Turn on the headlight (F0)."
+                value:
+                  loco:
+                    address: 101
+                    protocol: "DCC"
+                  fIndex: 0
+                  isActive: true
+              ActivateSound:
+                summary: "Activate a sound function (F2)."
+                value:
+                  loco:
+                    address: 101
+                    protocol: "DCC"
+                  fIndex: 2
+                  isActive: true
+      responses:
+        '202':
+          description: "Event accepted."
+  /onTurnoutChange:
+    post:
+      summary: "Turnout Change"
+      description: "Event for changing a turnout's state."
+      operationId: "onTurnoutChange"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TurnoutChange'
+            examples:
+              ThrowTurnout:
+                summary: "Throw a turnout to the diverging route."
+                value:
+                  address: 25
+                  isThrown: true
+                  isFeedback: false
+              SetTurnoutStraightWithFeedback:
+                summary: "Set a turnout to the straight route with hardware confirmation."
+                value:
+                  address: 25
+                  isThrown: false
+                  isFeedback: true
+      responses:
+        '202':
+          description: "Event accepted."
+  /onTrackPowerChange:
+    post:
+      summary: "Track Power Change"
+      description: "Event for changing the global track power state."
+      operationId: "onTrackPowerChange"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrackPowerChange'
+            examples:
+              PowerOn:
+                summary: "Turn the track power on."
+                value:
+                  state: "ON"
+              EmergencyStop:
+                summary: "Initiate an emergency stop."
+                value:
+                  state: "EMERGENCY_STOP"
+      responses:
+        '202':
+          description: "Event accepted."
+  /onSensorStateChange:
+    post:
+      summary: "Sensor State Change"
+      description: "Event for an occupancy or feedback sensor changing state."
+      operationId: "onSensorStateChange"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SensorStateChange'
+            examples:
+              BlockOccupied:
+                summary: "A track block sensor is now occupied."
+                value:
+                  sensorId: 1001
+                  isActive: true
+              BlockFree:
+                summary: "A track block sensor is now free."
+                value:
+                  sensorId: 1001
+                  isActive: false
+      responses:
+        '202':
+          description: "Event accepted."
+  /onCvWrite:
+    post:
+      summary: "CV Write Request"
+      description: "Request to write a value to a configuration variable (CV)."
+      operationId: "onCvWrite"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CvWriteRequest'
+            examples:
+              SetAcceleration:
+                summary: "Set the acceleration CV (CV3) to a value of 20."
+                value:
+                  loco:
+                    address: 101
+                    protocol: "DCC"
+                  cvNumber: 3
+                  value: 20
+              SetManufacturerID:
+                summary: "Set the manufacturer ID CV (CV8) to 151 (ESU)."
+                value:
+                  loco:
+                    address: 101
+                    protocol: "DCC"
+                  cvNumber: 8
+                  value: 151
+      responses:
+        '202':
+          description: "Event accepted."
+  /onCvRead:
+    post:
+      summary: "CV Read Request"
+      description: "Request to read a value from a configuration variable (CV)."
+      operationId: "onCvRead"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CvReadRequest'
+            examples:
+              ReadAcceleration:
+                summary: "Request to read the acceleration CV (CV3)."
+                value:
+                  loco:
+                    address: 101
+                    protocol: "DCC"
+                  cvNumber: 3
+      responses:
+        '202':
+          description: "Event accepted."
+  /onConsistLink:
+    post:
+      summary: "Consist Link"
+      description: "Event for linking two locomotives in a consist."
+      operationId: "onConsistLink"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsistLink'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onConsistUnlink:
+    post:
+      summary: "Consist Unlink"
+      description: "Event for unlinking a locomotive from a consist."
+      operationId: "onConsistUnlink"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsistUnlink'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onSignalAspectChange:
+    post:
+      summary: "Signal Aspect Change"
+      description: "Event for changing a signal's aspect."
+      operationId: "onSignalAspectChange"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignalAspectChange'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onProgressUpdate:
+    post:
+      summary: "Progress Update"
+      description: "Feedback on the progress of a long-running operation."
+      operationId: "onProgressUpdate"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProgressUpdate'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onLocoDetectedOnBlock:
+    post:
+      summary: "Loco Detected On Block"
+      description: "Event for a train's location and orientation detection."
+      operationId: "onLocoDetectedOnBlock"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocoDetectedOnBlock'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onLocoFunctionAnalogChange:
+    post:
+      summary: "Loco Function Analog Change"
+      description: "Event for an analog function value."
+      operationId: "onLocoFunctionAnalogChange"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocoFunctionAnalogChange'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onLocoDispatchStateChange:
+    post:
+      summary: "Loco Dispatch State Change"
+      description: "Event for slot management."
+      operationId: "onLocoDispatchStateChange"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocoDispatchStateChange'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onLocoTelemetryData:
+    post:
+      summary: "Loco Telemetry Data"
+      description: "Event for telemetry data."
+      operationId: "onLocoTelemetryData"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocoTelemetryData'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onLocoExternalStateChange:
+    post:
+      summary: "Loco External State Change"
+      description: "Event for an external state change."
+      operationId: "onLocoExternalStateChange"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocoExternalStateChange'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onLocoRailComRawData:
+    post:
+      summary: "Loco RailCom Raw Data"
+      description: "Event for raw/proprietary RailCom data."
+      operationId: "onLocoRailComRawData"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocoRailComRawData'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onNewLocoDiscovered:
+    post:
+      summary: "New Loco Discovered"
+      description: "Event for a new locomotive discovered."
+      operationId: "onNewLocoDiscovered"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewLocoDiscovered'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onLocoEventSync:
+    post:
+      summary: "Loco Event Sync"
+      description: "Event for a mechanical synchronization event."
+      operationId: "onLocoEventSync"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocoEventSync'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onAccessoryAnalogValue:
+    post:
+      summary: "Accessory Analog Value"
+      description: "Event for direct analog control."
+      operationId: "onAccessoryAnalogValue"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessoryAnalogValue'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onAccessoryError:
+    post:
+      summary: "Accessory Error"
+      description: "Event for a hardware diagnostic error."
+      operationId: "onAccessoryError"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessoryError'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onFastClockUpdated:
+    post:
+      summary: "Fast Clock Updated"
+      description: "Event for a model time/fast clock update."
+      operationId: "onFastClockUpdated"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FastClockUpdated'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onHardwareNodeAttached:
+    post:
+      summary: "Hardware Node Attached"
+      description: "Event for a new hardware node found."
+      operationId: "onHardwareNodeAttached"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HardwareNodeAttached'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onHardwareNodeLost:
+    post:
+      summary: "Hardware Node Lost"
+      description: "Event for a hardware node that has disconnected from the bus."
+      operationId: "onHardwareNodeLost"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HardwareNodeLost'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onSystemMessage:
+    post:
+      summary: "System Message"
+      description: "Event for a generic system message or log entry."
+      operationId: "onSystemMessage"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SystemMessage'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onCvReadDone:
+    post:
+      summary: "CV Read Done"
+      description: "Event for the result of a CV read operation."
+      operationId: "onCvReadDone"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CvReadDone'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onSusiConfigRead:
+    post:
+      summary: "SUSI Config Read"
+      description: "Event for the result of reading a SUSI configuration register."
+      operationId: "onSusiConfigRead"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SusiConfigRead'
+      responses:
+        '202':
+          description: "Event accepted."
+  /onConfigBlockLoad:
+    post:
+      summary: "Config Block Load"
+      description: "Event for a mass data transfer."
+      operationId: "onConfigBlockLoad"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigBlockLoad'
+      responses:
+        '202':
+          description: "Event accepted."
+
+components:
+  schemas:
+    # --------- Core Data Types ---------
+
+    LocoHandle:
+      type: object
+      description: "Unique identifier for a locomotive."
+      required: [address, protocol]
+      properties:
+        address:
+          type: integer
+          format: uint16
+          description: "Primary address of the locomotive."
+          example: 101
+        protocol:
+          $ref: '#/components/schemas/Protocol'
+        mfxUid:
+          type: integer
+          format: uint32
+          description: "Unique mfx ID, if applicable."
+          example: 16385
+
+    # --------- Enums (from .h file) ---------
+
+    Protocol:
+      type: string
+      enum: [DCC, MM_I, MM_II, MFX, SELECTRIX, SX2, LOCONET, BIDIB, XPRESSNET, CAN_GENERIC]
+      example: "DCC"
+    Direction:
+      type: string
+      enum: [REVERSE, FORWARD, UNKNOWN]
+      example: "FORWARD"
+    PowerState:
+      type: string
+      enum: [OFF, ON, EMERGENCY_STOP, SHORT_CIRCUIT]
+      example: "ON"
+    ConsistType:
+      type: string
+      enum: [ADVANCED_DCC, UNIVERSAL_HOST, MU_LOCONET]
+      example: "ADVANCED_DCC"
+    DecoderOrientation:
+      type: string
+      enum: [NORMAL, INVERTED, UNKNOWN]
+      example: "NORMAL"
+    TelemetryType:
+      type: string
+      enum: [SPEED_KMH, LOAD_PERCENT, VOLTAGE_TRACK, CURRENT_AMP, FUEL_LEVEL, TEMP_CELSIUS, QOS_ERROR_RATE, ODOMETER_VALUE, POSITION_CONFIDENCE]
+      example: "SPEED_KMH"
+    ExternalState:
+      type: string
+      enum: [FREE_RUN, STOPPED_BY_ABC_SIGNAL, STOPPED_BY_DC_BRAKE, STOPPED_BY_HLU, RESTRICTED_SPEED_HLU]
+      example: "FREE_RUN"
+    SyncType:
+      type: string
+      enum: [CAM_PULSE, CYLINDER_CYCLE, GEAR_CHANGE_UP, GEAR_CHANGE_DOWN, BRAKE_SQUEAL_START, DOOR_MOVEMENT]
+      example: "CAM_PULSE"
+
+    # --------- Event-Specific Schemas ---------
+
+    AccessoryAnalogValue:
+      type: object
+      required: [address, value0to1]
+      properties:
+        address:
+          type: integer
+          format: uint16
+          example: 55
+        value0to1:
+          type: number
+          format: float
+          example: 0.75
+
+    AccessoryError:
+      type: object
+      required: [address, errorId, errorMsg]
+      properties:
+        address:
+          type: integer
+          format: uint16
+          example: 201
+        errorId:
+          type: integer
+          format: uint8
+          example: 1
+        errorMsg:
+          type: string
+          example: "Overload detected"
+
+    FastClockUpdated:
+      type: object
+      required: [modelTimeUnix, factor]
+      properties:
+        modelTimeUnix:
+          type: integer
+          format: int64
+          example: 1678886400
+        factor:
+          type: number
+          format: float
+          example: 10.0
+
+    HardwareNodeAttached:
+      type: object
+      required: [nodeUid, productName, booster]
+      properties:
+        nodeUid:
+          type: string
+          example: "uuid-1234-abcd"
+        productName:
+          type: string
+          example: "xTrain Central Station"
+        booster:
+          type: boolean
+          example: true
+
+    HardwareNodeLost:
+      type: object
+      required: [nodeUid]
+      properties:
+        nodeUid:
+          type: string
+          example: "uuid-1234-efgh"
+
+    SystemMessage:
+      type: object
+      required: [source, message]
+      properties:
+        source:
+          type: string
+          example: "CommandStation"
+        message:
+          type: string
+          example: "System startup complete."
+
+    CvReadDone:
+      type: object
+      required: [loco, cvNumber, value, success]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        cvNumber:
+          type: integer
+          example: 3
+        value:
+          type: integer
+          format: uint8
+          example: 20
+        success:
+          type: boolean
+          example: true
+
+    SusiConfigRead:
+      type: object
+      required: [loco, bankIndex, susiIndex, value]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        bankIndex:
+          type: integer
+          format: uint8
+          example: 1
+        susiIndex:
+          type: integer
+          format: uint8
+          example: 5
+        value:
+          type: integer
+          format: uint8
+          example: 255
+
+    ConfigBlockLoad:
+      type: object
+      required: [loco, domain, data]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        domain:
+          type: string
+          example: "SoundProfile"
+        data:
+          type: array
+          items:
+            type: integer
+            format: uint8
+          example: [255, 254, 253, 252]
+
+    LocoFunctionAnalogChange:
+      type: object
+      required: [loco, fIndex, value]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        fIndex:
+          type: integer
+          example: 5
+        value:
+          type: integer
+          format: uint8
+          example: 128
+
+    LocoDispatchStateChange:
+      type: object
+      required: [loco, isAcquired, ownerId]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        isAcquired:
+          type: boolean
+          example: true
+        ownerId:
+          type: string
+          example: "throttle-5678"
+
+    LocoTelemetryData:
+      type: object
+      required: [loco, type, value]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        type:
+          $ref: '#/components/schemas/TelemetryType'
+        value:
+          type: number
+          format: float
+          example: 88.5
+
+    LocoExternalStateChange:
+      type: object
+      required: [loco, state]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        state:
+          $ref: '#/components/schemas/ExternalState'
+
+    LocoRailComRawData:
+      type: object
+      required: [loco, appId, data]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        appId:
+          type: integer
+          format: uint8
+          example: 1
+        data:
+          type: array
+          items:
+            type: integer
+            format: uint8
+          example: [1, 2, 3, 4]
+
+    NewLocoDiscovered:
+      type: object
+      required: [loco, name, icon]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        name:
+          type: string
+          example: "BR 18.5"
+        icon:
+          type: string
+          example: "br185.png"
+
+    LocoEventSync:
+      type: object
+      required: [loco, type, value]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        type:
+          $ref: '#/components/schemas/SyncType'
+        value:
+          type: integer
+          format: uint32
+          example: 1
+
+    ProgressUpdate:
+      type: object
+      required: [operation, percent]
+      properties:
+        operation:
+          type: string
+          example: "FirmwareUpdate"
+        percent:
+          type: number
+          format: float
+          example: 50.5
+
+    LocoDetectedOnBlock:
+      type: object
+      required: [sensorId, loco, orientation]
+      properties:
+        sensorId:
+          type: integer
+          format: uint32
+          example: 1001
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        orientation:
+          $ref: '#/components/schemas/DecoderOrientation'
+
+    LocoSpeedChange:
+      type: object
+      required: [loco, speedPercent, direction, speedSteps]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        speedPercent:
+          type: number
+          format: float
+          minimum: 0.0
+          maximum: 100.0
+          example: 75.5
+        direction:
+          $ref: '#/components/schemas/Direction'
+        speedSteps:
+          type: integer
+          description: "The speed step mode (e.g., 14, 28, 128)."
+          example: 128
+
+    LocoFunctionChange:
+      type: object
+      required: [loco, fIndex, isActive]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        fIndex:
+          type: integer
+          description: "Function index (0 for light, 1 for F1, etc.)."
+          example: 1
+        isActive:
+          type: boolean
+          example: true
+
+    TurnoutChange:
+      type: object
+      required: [address, isThrown, isFeedback]
+      properties:
+        address:
+          type: integer
+          format: uint16
+          example: 25
+        isThrown:
+          type: boolean
+          description: "True for diverging/thrown, False for straight."
+          example: true
+        isFeedback:
+          type: boolean
+          description: "True if this is a confirmation from hardware."
+          example: false
+
+    TrackPowerChange:
+      type: object
+      required: [state]
+      properties:
+        state:
+          $ref: '#/components/schemas/PowerState'
+
+    SensorStateChange:
+      type: object
+      required: [sensorId, isActive]
+      properties:
+        sensorId:
+          type: integer
+          format: uint32
+          example: 1002
+        isActive:
+          type: boolean
+          description: "True for occupied/active, False for free."
+          example: true
+
+    CvWriteRequest:
+      type: object
+      required: [loco, cvNumber, value]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        cvNumber:
+          type: integer
+          description: "The CV number to write to."
+          example: 3
+        value:
+          type: integer
+          format: uint8
+          description: "The 8-bit value to write."
+          example: 20
+
+    CvReadRequest:
+      type: object
+      required: [loco, cvNumber]
+      properties:
+        loco:
+          $ref: '#/components/schemas/LocoHandle'
+        cvNumber:
+          type: integer
+          description: "The CV number to read from."
+          example: 8
+
+    ConsistLink:
+      type: object
+      required: [master, slave, type, inverted]
+      properties:
+        master:
+          $ref: '#/components/schemas/LocoHandle'
+        slave:
+          $ref: '#/components/schemas/LocoHandle'
+        type:
+          $ref: '#/components/schemas/ConsistType'
+        inverted:
+          type: boolean
+          example: false
+
+    ConsistUnlink:
+      type: object
+      required: [slave]
+      properties:
+        slave:
+          $ref: '#/components/schemas/LocoHandle'
+
+    SignalAspectChange:
+      type: object
+      required: [address, aspectId, isFeedback]
+      properties:
+        address:
+          type: integer
+          format: uint16
+          example: 301
+        aspectId:
+          type: integer
+          format: uint8
+          example: 2
+        isFeedback:
+          type: boolean
+          example: false
