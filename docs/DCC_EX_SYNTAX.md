@@ -140,6 +140,7 @@ This is the complete list of all Opcodes (commands and responses), categorized b
 | **`-`** | Command | (none) | Deactivates "Echo" mode. |
 | **`?`** | Command | (none) | Requests a list of all available commands (Opcodes) from the station. |
 | `?` | Response | `[Text]` | Sends the list of implemented Opcodes. |
+| **`h`, `help`** | Command | `[command]` | **Reserved for Help:** These opcodes, along with `?`, are reserved for invoking a help system. The `debug_cli` example provides a reference implementation. See the [Debug CLI Syntax](./DEBUG_CLI_SYNTAX.md) for details. |
 
 ### H. Error & Broadcast Responses
 
