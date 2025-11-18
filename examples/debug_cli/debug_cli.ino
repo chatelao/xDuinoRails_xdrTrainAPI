@@ -1,5 +1,6 @@
 #include "xDuinoRails_xTrainAPI.h"
 #include "xDuinoRails_xTrainAPI_utils.h"
+#include "help.h"
 
 class MyTrainAPI : public ModelRail::IUnifiedModelTrainListener {
 public:
@@ -78,15 +79,28 @@ void setup() {
     ; // wait for serial port to connect. Needed for native USB port only
   }
   Serial.println("xDuinoRails_xTrainAPI Debug CLI");
-  Serial.println("Ready to receive commands...");
+  Serial.println("Ready to receive commands... Type 'h' for help.");
 }
 
 void loop() {
   if (Serial.available() > 0) {
-    String command = Serial.readStringUntil('>');
-    if (command.startsWith("<")) {
-      command = command.substring(1);
+    String command = Serial.readStringUntil('\n');
+    command.trim();
+
+    if (command.startsWith("h") || command.startsWith("?") || command.startsWith("help")) {
+        int firstSpace = command.indexOf(' ');
+        String helpCmd = "";
+        if (firstSpace != -1) {
+            helpCmd = command.substring(firstSpace + 1);
+            helpCmd.trim();
+        }
+        showHelp(helpCmd);
+    } else if (command.startsWith("<") && command.endsWith(">")) {
+      command = command.substring(1, command.length() - 1);
       parser.parse(command);
+    } else if (command.length() > 0) {
+      Serial.println("Invalid command format. Commands must be enclosed in < >.");
+      showHelp("");
     }
   }
 }
