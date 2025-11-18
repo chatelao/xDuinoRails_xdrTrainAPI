@@ -117,9 +117,72 @@ namespace ModelRail {
     // 2. THE UNIFIED INTERFACE (Abstract Base Class)
     // =============================================================
 
+    /**
+     * @brief Bitmask for self-inspection of implemented API features.
+     * Allows a class to declare which specific functions of the
+     * IUnifiedModelTrainListener interface it implements.
+     */
+    enum class ApiFeature : uint64_t {
+        onLocoSpeedChange           = 1ULL << 0,
+        onLocoFunctionChange        = 1ULL << 1,
+        onLocoFunctionAnalogChange  = 1ULL << 2,
+        onLocoDispatchStateChange   = 1ULL << 3,
+        onConsistLink               = 1ULL << 4,
+        onConsistUnlink             = 1ULL << 5,
+        onTurnoutChange             = 1ULL << 6,
+        onSignalAspectChange        = 1ULL << 7,
+        onAccessoryAnalogValue      = 1ULL << 8,
+        onAccessoryError            = 1ULL << 9,
+        onSensorStateChange         = 1ULL << 10,
+        onTrackPowerChange          = 1ULL << 11,
+        onFastClockUpdated          = 1ULL << 12,
+        onHardwareNodeAttached      = 1ULL << 13,
+        onHardwareNodeLost          = 1ULL << 14,
+        onSystemMessage             = 1ULL << 15,
+        onLocoDetectedOnBlock       = 1ULL << 16,
+        onLocoTelemetryData         = 1ULL << 17,
+        onLocoExternalStateChange   = 1ULL << 18,
+        onLocoRailComRawData        = 1ULL << 19,
+        onNewLocoDiscovered         = 1ULL << 20,
+        onCvRead                    = 1ULL << 21,
+        onCvWrite                   = 1ULL << 22,
+        onCvReadDone                = 1ULL << 23,
+        onSusiConfigRead            = 1ULL << 24,
+        onConfigBlockLoad           = 1ULL << 25,
+        onProgressUpdate            = 1ULL << 26,
+        onLocoEventSync             = 1ULL << 27,
+
+        // --- Grouped Masks ---
+        ALL_TRAFFIC_DISPATCHING = onLocoSpeedChange | onLocoFunctionChange | onLocoFunctionAnalogChange |
+                                  onLocoDispatchStateChange | onConsistLink | onConsistUnlink,
+
+        ALL_INFRASTRUCTURE      = onTurnoutChange | onSignalAspectChange | onAccessoryAnalogValue |
+                                  onAccessoryError | onSensorStateChange,
+
+        ALL_SYSTEM_TOPOLOGY     = onTrackPowerChange | onFastClockUpdated | onHardwareNodeAttached |
+                                  onHardwareNodeLost | onSystemMessage,
+
+        ALL_TELEMETRY_ID        = onLocoDetectedOnBlock | onLocoTelemetryData | onLocoExternalStateChange |
+                                  onLocoRailComRawData | onNewLocoDiscovered,
+
+        ALL_CONFIGURATION       = onCvRead | onCvWrite | onCvReadDone | onSusiConfigRead |
+                                  onConfigBlockLoad | onProgressUpdate,
+
+        ALL_SYNC                = onLocoEventSync,
+
+        ALL_FEATURES            = ALL_TRAFFIC_DISPATCHING | ALL_INFRASTRUCTURE | ALL_SYSTEM_TOPOLOGY |
+                                  ALL_TELEMETRY_ID | ALL_CONFIGURATION | ALL_SYNC
+    };
+
     class IUnifiedModelTrainListener {
     public:
         virtual ~IUnifiedModelTrainListener() = default;
+
+        /**
+         * @brief Runtime check for implemented API features.
+         * @return A bitmask of ApiFeature flags indicating which functions are implemented.
+         */
+        virtual uint64_t getImplementedApi() const { return 0; }
 
         // -------------------------------------------------------------
         // GROUP A: TRAFFIC & DISPATCHING
@@ -132,40 +195,40 @@ namespace ModelRail {
          * @param direction Requested direction.
          * @param speedSteps Step mode (14, 28, 128).
          */
-        virtual void onLocoSpeedChange(const LocoHandle& loco, float speedPercent, Direction direction, int speedSteps) = 0;
+        virtual void onLocoSpeedChange(const LocoHandle& loco, float speedPercent, Direction direction, int speedSteps) {}
 
         /**
          * @brief Binary function control (F0-F68+).
          * @param fIndex Function index (0=Light, 1=F1...).
          * @param isActive True=ON, False=OFF.
          */
-        virtual void onLocoFunctionChange(const LocoHandle& loco, int fIndex, bool isActive)                            = 0;
+        virtual void onLocoFunctionChange(const LocoHandle& loco, int fIndex, bool isActive)                            {}
 
         /**
          * @brief Analog function value (Pressure-sensitive / Analog features).
          * @param value Analog value (0-255).
          */
-        virtual void onLocoFunctionAnalogChange(const LocoHandle& loco, int fIndex, uint8_t value)                        = 0;
+        virtual void onLocoFunctionAnalogChange(const LocoHandle& loco, int fIndex, uint8_t value)                        {}
 
         /**
          * @brief Slot Management (LocoNet/XpressNet).
          * @param isAcquired True=Controlled by throttle, False=Released.
          * @param ownerId ID of the controlling device.
          */
-        virtual void onLocoDispatchStateChange(const LocoHandle& loco, bool isAcquired, std::string ownerId)            = 0;
+        virtual void onLocoDispatchStateChange(const LocoHandle& loco, bool isAcquired, std::string ownerId)            {}
 
         /**
          * @brief Consist Linking report.
          * @param type Linking method (CV19 vs Software).
          * @param inverted True if slave is reversed relative to master.
          */
-        virtual void onConsistLink(const LocoHandle& master, const LocoHandle& slave, ConsistType type, bool inverted)   = 0;
+        virtual void onConsistLink(const LocoHandle& master, const LocoHandle& slave, ConsistType type, bool inverted)   {}
 
         /**
          * @brief Dissolve a multi-traction link.
          * @param slave The locomotive being removed from the consist.
          */
-        virtual void onConsistUnlink(const LocoHandle& slave)                                                            = 0;
+        virtual void onConsistUnlink(const LocoHandle& slave)                                                            {}
 
         // -------------------------------------------------------------
         // GROUP B: INFRASTRUCTURE (ACCESSORIES)
@@ -176,32 +239,32 @@ namespace ModelRail {
          * @param isThrown True=Diverging, False=Straight.
          * @param isFeedback True=Real hardware confirmation.
          */
-        virtual void onTurnoutChange(uint16_t address, bool isThrown, bool isFeedback)                 = 0;
+        virtual void onTurnoutChange(uint16_t address, bool isThrown, bool isFeedback)                 {}
 
         /**
          * @brief Extended Signal Aspects (0-255).
          * @param aspectId Aspect ID (Hp0, Hp1, etc.).
          */
-        virtual void onSignalAspectChange(uint16_t address, uint8_t aspectId, bool isFeedback)         = 0;
+        virtual void onSignalAspectChange(uint16_t address, uint8_t aspectId, bool isFeedback)         {}
         
         /**
          * @brief Direct analog control (Servos, Dimmers).
          * @param value0to1 Normalized float (0.0 - 1.0).
          */
-        virtual void onAccessoryAnalogValue(uint16_t address, float value0to1)                          = 0;
+        virtual void onAccessoryAnalogValue(uint16_t address, float value0to1)                          {}
 
         /**
          * @brief Hardware Diagnostic Error.
          * @param errorId 1=OpenLoad, 2=Short, 3=Stall.
          */
-        virtual void onAccessoryError(uint16_t address, uint8_t errorId, std::string errorMsg)          = 0;
+        virtual void onAccessoryError(uint16_t address, uint8_t errorId, std::string errorMsg)          {}
 
         /**
          * @brief Occupancy / Feedback Sensors.
          * @param sensorId Unique 32-bit ID.
          * @param isActive True=Occupied.
          */
-        virtual void onSensorStateChange(uint32_t sensorId, bool isActive)                             = 0;
+        virtual void onSensorStateChange(uint32_t sensorId, bool isActive)                             {}
 
         // -------------------------------------------------------------
         // GROUP C: SYSTEM, TIME & TOPOLOGY
@@ -211,33 +274,33 @@ namespace ModelRail {
          * @brief Report global track power status change.
          * @param state The new power state (ON, OFF, EMERGENCY_STOP).
          */
-        virtual void onTrackPowerChange(PowerState state)                                                              = 0;
+        virtual void onTrackPowerChange(PowerState state)                                                              {}
 
         /**
          * @brief Model Time / Fast Clock (RCN-211).
          * @param modelTimeUnix Unix Timestamp (int64).
          * @param factor Acceleration factor.
          */
-        virtual void onFastClockUpdated(int64_t modelTimeUnix, float factor)                                            = 0;
+        virtual void onFastClockUpdated(int64_t modelTimeUnix, float factor)                                            {}
 
         /**
          * @brief New Hardware Node Found (BiDiB / LNet).
          * @param booster True if node supplies power.
          */
-        virtual void onHardwareNodeAttached(std::string nodeUid, std::string productName, bool booster) = 0;
+        virtual void onHardwareNodeAttached(std::string nodeUid, std::string productName, bool booster) {}
 
         /**
          * @brief A hardware node has disconnected from the bus.
          * @param nodeUid Unique identifier of the lost node.
          */
-        virtual void onHardwareNodeLost(std::string nodeUid)                                            = 0;
+        virtual void onHardwareNodeLost(std::string nodeUid)                                            {}
 
         /**
          * @brief Generic system message or log entry.
          * @param source The component originating the message (e.g., "PowerManager", "BiDiB-Stack").
          * @param message The content of the message.
          */
-        virtual void onSystemMessage(std::string source, std::string message)                           = 0;
+        virtual void onSystemMessage(std::string source, std::string message)                           {}
 
         // -------------------------------------------------------------
         // GROUP D: TELEMETRY & IDENTIFICATION
@@ -247,26 +310,26 @@ namespace ModelRail {
          * @brief Train Location & Orientation Detection (RCN-217 Ch1).
          * @param orientation Chimney vs Tender first.
          */
-        virtual void onLocoDetectedOnBlock(uint32_t sensorId, const LocoHandle& loco, DecoderOrientation orientation)    = 0;
-        virtual void onLocoTelemetryData(const LocoHandle& loco, TelemetryType type, float value)                        = 0; 
+        virtual void onLocoDetectedOnBlock(uint32_t sensorId, const LocoHandle& loco, DecoderOrientation orientation)    {}
+        virtual void onLocoTelemetryData(const LocoHandle& loco, TelemetryType type, float value)                        {}
 
         /**
          * @brief External State Change (ABC / HLU).
          * Loco stopped by track module despite throttle > 0.
          */
-        virtual void onLocoExternalStateChange(const LocoHandle& loco, ExternalState state)                             = 0;
+        virtual void onLocoExternalStateChange(const LocoHandle& loco, ExternalState state)                             {}
 
         /**
          * @brief Raw/Proprietary RailCom Data.
          * @param appId RailCom Application ID.
          */
-        virtual void onLocoRailComRawData(const LocoHandle& loco, uint8_t appId, const std::vector<uint8_t>& data)       = 0;
+        virtual void onLocoRailComRawData(const LocoHandle& loco, uint8_t appId, const std::vector<uint8_t>& data)       {}
 
         /**
          * @brief Discovery (mfx / RailComPlus).
          * @param icon Suggested icon filename.
          */
-        virtual void onNewLocoDiscovered(const LocoHandle& loco, const std::string& name, const std::string& icon)       = 0;
+        virtual void onNewLocoDiscovered(const LocoHandle& loco, const std::string& name, const std::string& icon)       {}
 
         // -------------------------------------------------------------
         // GROUP E: CONFIGURATION & MASS DATA
@@ -277,7 +340,7 @@ namespace ModelRail {
          * @param loco The target locomotive.
          * @param cvNumber The Configuration Variable number to read.
          */
-        virtual void onCvRead(const LocoHandle& loco, int cvNumber)                                               = 0;
+        virtual void onCvRead(const LocoHandle& loco, int cvNumber)                                               {}
 
         /**
          * @brief A request to write a CV to a decoder has been issued.
@@ -285,7 +348,7 @@ namespace ModelRail {
          * @param cvNumber The Configuration Variable number to write.
          * @param value The 8-bit value to write.
          */
-        virtual void onCvWrite(const LocoHandle& loco, int cvNumber, uint8_t value)                                = 0;
+        virtual void onCvWrite(const LocoHandle& loco, int cvNumber, uint8_t value)                                {}
 
         /**
          * @brief Result of a CV read operation.
@@ -294,7 +357,7 @@ namespace ModelRail {
          * @param value The 8-bit value returned by the decoder.
          * @param success True if the read was successful (acknowledged).
          */
-        virtual void onCvReadDone(const LocoHandle& loco, int cvNumber, uint8_t value, bool success)                   = 0;
+        virtual void onCvReadDone(const LocoHandle& loco, int cvNumber, uint8_t value, bool success)                   {}
 
         /**
          * @brief Result of reading a SUSI configuration register.
@@ -303,20 +366,20 @@ namespace ModelRail {
          * @param susiIndex The specific SUSI register index.
          * @param value The value read from the register.
          */
-        virtual void onSusiConfigRead(const LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value)       = 0;
+        virtual void onSusiConfigRead(const LocoHandle& loco, uint8_t bankIndex, uint8_t susiIndex, uint8_t value)       {}
         
         /**
          * @brief Mass Data Transfer.
          * @param domain Data type (e.g., "ICON", "MFX_CONFIG").
          */
-        virtual void onConfigBlockLoad(const LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data)   = 0;
+        virtual void onConfigBlockLoad(const LocoHandle& loco, std::string domain, const std::vector<uint8_t>& data)   {}
 
         /**
          * @brief Feedback on the progress of a long-running operation.
          * @param operation A string identifying the task (e.g., "CV_READ_ALL", "FIRMWARE_UPDATE").
          * @param percent The progress from 0.0 to 100.0.
          */
-        virtual void onProgressUpdate(std::string operation, float percent)                                              = 0;
+        virtual void onProgressUpdate(std::string operation, float percent)                                              {}
 
         // -------------------------------------------------------------
         // GROUP F: REAL-TIME SYNCHRONIZATION (Added in v2.3)
@@ -329,6 +392,6 @@ namespace ModelRail {
          * @param type The type of mechanical event (e.g., CAM_PULSE).
          * @param value An optional value (e.g., new gear number).
          */
-        virtual void onLocoEventSync(const LocoHandle& loco, SyncType type, uint32_t value) = 0;
+        virtual void onLocoEventSync(const LocoHandle& loco, SyncType type, uint32_t value) {}
     };
 }
