@@ -34,7 +34,7 @@ All communication, and code comments must be in English. This ensures that the p
 
 ## Documentation Language
 
-All documentation files must be provided in both German and English.
+Create all documentation files in both German and English.
 
 -   **German:** Files must end with the `.de.md` extension.
 -   **English:** Files must end with the `.en.md` extension.
