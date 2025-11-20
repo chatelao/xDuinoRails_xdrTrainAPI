@@ -101,5 +101,7 @@ var namespaceModelRail =
       [ "QOS_ERROR_RATE", "namespaceModelRail.html#ae48f508dc8465b1fff6742e42cb340cbaa9e813fab1173d1c7447fdbbeb583607", null ],
       [ "ODOMETER_VALUE", "namespaceModelRail.html#ae48f508dc8465b1fff6742e42cb340cba319e5d5476bf3df354637efb72b9a4a9", null ],
       [ "POSITION_CONFIDENCE", "namespaceModelRail.html#ae48f508dc8465b1fff6742e42cb340cba21570cfc0a35af8df137a36c73e193ee", null ]
-    ] ]
+    ] ],
+    [ "hexToBytes", "namespaceModelRail.html#a40e2058aee0d12d4b19b4b295d0fdfcb", null ],
+    [ "printHex", "namespaceModelRail.html#a762d04e4ff9f475648afd4416ca0ce9b", null ]
 ];

@@ -92,7 +92,8 @@ $(document).ready(function(){initNavTree('namespaceModelRail.html',''); initResi
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">ModelRail Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -244,6 +245,13 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ad11aa6957464d4311eddd676c35461d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bitmask for self-inspection of implemented API features. Allows a class to declare which specific functions of the IUnifiedModelTrainListener interface it implements.  <a href="namespaceModelRail.html#ad11aa6957464d4311eddd676c35461d1">More...</a><br /></td></tr>
 <tr class="separator:ad11aa6957464d4311eddd676c35461d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a40e2058aee0d12d4b19b4b295d0fdfcb" id="r_a40e2058aee0d12d4b19b4b295d0fdfcb"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceModelRail.html#a40e2058aee0d12d4b19b4b295d0fdfcb">hexToBytes</a> (const std::string &amp;hex)</td></tr>
+<tr class="separator:a40e2058aee0d12d4b19b4b295d0fdfcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a762d04e4ff9f475648afd4416ca0ce9b" id="r_a762d04e4ff9f475648afd4416ca0ce9b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceModelRail.html#a762d04e4ff9f475648afd4416ca0ce9b">printHex</a> (Stream *stream, const std::vector&lt; uint8_t &gt; &amp;data)</td></tr>
+<tr class="separator:a762d04e4ff9f475648afd4416ca0ce9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="ad11aa6957464d4311eddd676c35461d1" name="ad11aa6957464d4311eddd676c35461d1"></a>
@@ -622,13 +630,82 @@ Enumerations</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a40e2058aee0d12d4b19b4b295d0fdfcb" name="a40e2058aee0d12d4b19b4b295d0fdfcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40e2058aee0d12d4b19b4b295d0fdfcb">&#9670;&#160;</a></span>hexToBytes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::vector&lt; uint8_t &gt; ModelRail::hexToBytes </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>hex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00016">16</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+
+</div>
+</div>
+<a id="a762d04e4ff9f475648afd4416ca0ce9b" name="a762d04e4ff9f475648afd4416ca0ce9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a762d04e4ff9f475648afd4416ca0ce9b">&#9670;&#160;</a></span>printHex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void ModelRail::printHex </td>
+          <td>(</td>
+          <td class="paramtype">Stream *&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00027">27</a> of file <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html">xDuinoRails_xTrainAPI_utils.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00323">ModelRail::CmdLinePrinter::onConfigBlockLoad()</a>, <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00672">ModelRail::XmlPrinter::onConfigBlockLoad()</a>, <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00261">ModelRail::CmdLinePrinter::onLocoRailComRawData()</a>, and <a class="el" href="xDuinoRails__xTrainAPI__utils_8h_source.html#l00610">ModelRail::XmlPrinter::onLocoRailComRawData()</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceModelRail.html">ModelRail</a></li>
-    <li class="footer">Generated on Wed Nov 19 2025 21:32:29 for xTrain API by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Nov 20 2025 18:41:49 for xTrain API by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

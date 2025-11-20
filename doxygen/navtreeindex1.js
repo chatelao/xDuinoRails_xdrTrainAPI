@@ -1,7 +1,9 @@
 var NAVTREEINDEX1 =
 {
+"namespaceModelRail.html#a602c8b5466e72ff0f2e5dfe5a69dfe3fac1dc294692a63995499d02cde80af4ec":[0,0,0,12,4],
 "namespaceModelRail.html#a602c8b5466e72ff0f2e5dfe5a69dfe3facba0c41ce47f0594acfe0f607e7776ce":[0,0,0,12,7],
 "namespaceModelRail.html#a602c8b5466e72ff0f2e5dfe5a69dfe3fadf38cbb45550b14368f9f3c60681bf79":[0,0,0,12,0],
+"namespaceModelRail.html#a762d04e4ff9f475648afd4416ca0ce9b":[0,0,0,16],
 "namespaceModelRail.html#aba3c14c7f62f52bfc261b158f109596b":[0,0,0,11],
 "namespaceModelRail.html#aba3c14c7f62f52bfc261b158f109596ba01fa42acfb9d4827860c37424640bc05":[0,0,0,11,3],
 "namespaceModelRail.html#aba3c14c7f62f52bfc261b158f109596ba88559a0cfd8250c9d65970cc145c92d4":[0,0,0,11,0],
@@ -66,7 +68,8 @@ var NAVTREEINDEX1 =
 "namespaceModelRail.html#afe98c6614d10e85614d309d919327cf6a696b031073e74bf2cb98e5ef201d4aa3":[0,0,0,9,2],
 "namespaceModelRail.html#afe98c6614d10e85614d309d919327cf6abfec72bb37910c61f36b6c29a1f7ec31":[0,0,0,9,1],
 "namespacemembers.html":[0,1,0],
-"namespacemembers_enum.html":[0,1,1],
+"namespacemembers_enum.html":[0,1,2],
+"namespacemembers_func.html":[0,1,1],
 "namespaces.html":[0,0],
 "pages.html":[],
 "structModelRail_1_1LocoHandle.html":[0,0,0,3],
@@ -182,6 +185,8 @@ var NAVTREEINDEX1 =
 "xDuinoRails__xTrainAPI_8h.html#afe98c6614d10e85614d309d919327cf6abfec72bb37910c61f36b6c29a1f7ec31":[2,0,2,5,1],
 "xDuinoRails__xTrainAPI_8h_source.html":[2,0,2],
 "xDuinoRails__xTrainAPI__utils_8h.html":[2,0,3],
+"xDuinoRails__xTrainAPI__utils_8h.html#a40e2058aee0d12d4b19b4b295d0fdfcb":[2,0,3,5],
+"xDuinoRails__xTrainAPI__utils_8h.html#a762d04e4ff9f475648afd4416ca0ce9b":[2,0,3,6],
 "xDuinoRails__xTrainAPI__utils_8h.html#a800e7357a8d8241a10cdd0536d19370c":[2,0,3,4],
 "xDuinoRails__xTrainAPI__utils_8h_source.html":[2,0,3],
 "yxml_8h.html":[2,0,1,0,0],

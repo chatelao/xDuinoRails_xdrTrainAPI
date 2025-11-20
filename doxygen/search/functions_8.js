@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['yxml_5feof_0',['yxml_eof',['../yxml_8h.html#a14123550b632978bb3597ba437054553',1,'yxml.h']]],
-  ['yxml_5finit_1',['yxml_init',['../yxml_8h.html#a7c161ba7ddfe37537424244ac9582929',1,'yxml.h']]],
-  ['yxml_5fparse_2',['yxml_parse',['../yxml_8h.html#aa54c948ea753a259c0fcc897b95c11b9',1,'yxml.h']]],
-  ['yxml_5fsymlen_3',['yxml_symlen',['../yxml_8h.html#a839e6e91664dd70165c93cd49a6de1e9',1,'yxml.h']]]
+  ['xmlparser_0',['XmlParser',['../classModelRail_1_1XmlParser.html#ad628daf5b08eae21481b0096277238ee',1,'ModelRail::XmlParser']]],
+  ['xmlprinter_1',['XmlPrinter',['../classModelRail_1_1XmlPrinter.html#ad040838fe44d9a628f4a58b67f70b815',1,'ModelRail::XmlPrinter']]]
 ];
