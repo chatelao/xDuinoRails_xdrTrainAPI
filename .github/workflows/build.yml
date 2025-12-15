@@ -42,7 +42,7 @@ jobs:
           else
             BUILD_PROPERTIES="--build-property build.extra_flags=-DUSE_EXTENDED_CLI_SYNTAX=0"
           fi
-          arduino-cli compile --fqbn ${{ matrix.fqbn }} --library lib $BUILD_PROPERTIES examples/${{ matrix.example }} --output-dir build/${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
+          arduino-cli compile --fqbn ${{ matrix.fqbn }} --library . $BUILD_PROPERTIES examples/${{ matrix.example }} --output-dir build/${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
