@@ -129,11 +129,10 @@
 <h2 id="repository-structure">Repository Structure</h2>
 <p>The repository is organized as follows:</p>
 <ul>
-<li><code>/xDuinoRails_xTrainAPI.h</code>: The main C++ API definition.</li>
+<li><code>/src</code>: Contains the main C++ API definition and utility classes (including <code>yxml</code>).</li>
 <li><code>/docs</code>: Contains additional documentation, such as the CLI syntax.</li>
 <li><code>/examples</code>: Arduino sketches demonstrating how to use the API.</li>
 <li><code>/json</code>: JSON schemas for the API events.</li>
-<li><code>/lib</code>: Contains the <code>yxml</code> library for XML parsing.</li>
 <li><code>/swagger</code>: The OpenAPI 3.0 specification for the REST API.</li>
 <li><code>/webtool</code>: A web-based tool for interacting with the API.</li>
 <li><code>/xml</code>: XML schemas and examples.</li>
@@ -141,8 +140,17 @@
 <h2 id="getting-started">Getting Started</h2>
 <p>To use the xTrainAPI in your own Arduino projects, follow these steps:</p>
 <ol>
-<li><strong>Include the Library:</strong> Copy this entire repository into your Arduino <code>libraries</code> folder.</li>
-<li><strong>Implement the Interface:</strong> Create a new class in your sketch that inherits from <code>IUnifiedModelTrainListener</code> and implement the methods for the events you want to handle.</li>
+<li>
+<p><strong>Install the Library:</strong></p>
+<ul>
+<li>Download the repository as a ZIP file.</li>
+<li>In the Arduino IDE, go to <strong>Sketch</strong> -&gt; <strong>Include Library</strong> -&gt; <strong>Add .ZIP Library...</strong> and select the downloaded file.</li>
+<li>Alternatively, you can install it manually by copying the repository folder into your Arduino <code>libraries</code> folder.</li>
+</ul>
+</li>
+<li>
+<p><strong>Implement the Interface:</strong> Create a new class in your sketch that inherits from <code>IUnifiedModelTrainListener</code> and implement the methods for the events you want to handle.</p>
+</li>
 <li><strong>Process Events:</strong> In your <code>loop()</code> function, you can use one of the utility classes (like <code>CmdLineParser</code> or <code>XmlParser</code>) to parse incoming data and trigger the corresponding events in your listener class.</li>
 </ol>
 <h2 id="running-the-examples">Running the Examples</h2>
@@ -207,5 +215,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-12-06 10:06:45.147723+00:00
+Build Date UTC : 2025-12-15 21:16:47.925834+00:00
 -->
