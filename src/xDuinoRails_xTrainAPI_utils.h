@@ -1,7 +1,7 @@
 #pragma once
 
 #include "xDuinoRails_xTrainAPI.h"
-#include <yxml.h>
+#include "yxml.h"
 #include <Arduino.h>
 #include <vector>
 #include <string>

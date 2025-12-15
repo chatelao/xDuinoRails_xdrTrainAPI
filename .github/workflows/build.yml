@@ -42,7 +42,7 @@ jobs:
           else
             BUILD_PROPERTIES="--build-property build.extra_flags=-DUSE_EXTENDED_CLI_SYNTAX=0"
           fi
-          arduino-cli compile --fqbn ${{ matrix.fqbn }} --library lib $BUILD_PROPERTIES examples/${{ matrix.example }} --output-dir build/${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
+          arduino-cli compile --fqbn ${{ matrix.fqbn }} --library . $BUILD_PROPERTIES examples/${{ matrix.example }} --output-dir build/${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -80,13 +80,18 @@ jobs:
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Download all artifacts
         uses: actions/download-artifact@v3
         with:
           path: artifacts
+
       - name: Prepare release assets
         run: |
           mkdir release-assets
+          git archive --format=zip --output=release-assets/xDuinoRails_xTrainAPI.zip --prefix=xDuinoRails_xTrainAPI/ HEAD
           for artifact_dir in artifacts/*; do
             if [ -d "$artifact_dir" ]; then
               artifact_name=$(basename "$artifact_dir")

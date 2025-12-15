@@ -29,11 +29,10 @@ Für ein tieferes Verständnis der in der API verwendeten Begriffe und Datenfeld
 
 Das Repository ist wie folgt organisiert:
 
--   `/xDuinoRails_xTrainAPI.h`: Die C++-API-Hauptdefinition.
+-   `/src`: Enthält die C++-API-Hauptdefinition und Hilfsklassen (einschließlich `yxml`).
 -   `/docs`: Enthält zusätzliche Dokumentation, wie z. B. die CLI-Syntax.
 -   `/examples`: Arduino-Sketches, die die Verwendung der API demonstrieren.
 -   `/json`: JSON-Schemata für die API-Ereignisse.
--   `/lib`: Enthält die `yxml`-Bibliothek für das XML-Parsing.
 -   `/swagger`: Die OpenAPI 3.0-Spezifikation für die REST-API.
 -   `/webtool`: Ein webbasiertes Tool zur Interaktion mit der API.
 -   `/xml`: XML-Schemata und Beispiele.
@@ -42,7 +41,11 @@ Das Repository ist wie folgt organisiert:
 
 Um die xTrainAPI in Ihren eigenen Arduino-Projekten zu verwenden, folgen Sie diesen Schritten:
 
-1.  **Bibliothek einbinden:** Kopieren Sie dieses gesamte Repository in Ihren Arduino-`libraries`-Ordner.
+1.  **Installation der Bibliothek:**
+    *   Laden Sie das Repository als ZIP-Datei herunter.
+    *   Gehen Sie in der Arduino IDE zu **Sketch** -> **Bibliothek einbinden** -> **.ZIP-Bibliothek hinzufügen...** und wählen Sie die heruntergeladene Datei aus.
+    *   Alternativ können Sie die Bibliothek manuell installieren, indem Sie den Repository-Ordner in Ihren Arduino-`libraries`-Ordner kopieren.
+
 2.  **Schnittstelle implementieren:** Erstellen Sie in Ihrem Sketch eine neue Klasse, die von `IUnifiedModelTrainListener` erbt, und implementieren Sie die Methoden für die Ereignisse, die Sie behandeln möchten.
 3.  **Ereignisse verarbeiten:** In Ihrer `loop()`-Funktion können Sie eine der Hilfsklassen (wie `CmdLineParser` oder `XmlParser`) verwenden, um eingehende Daten zu parsen und die entsprechenden Ereignisse in Ihrer Listener-Klasse auszulösen.
 
