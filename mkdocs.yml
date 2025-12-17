@@ -8,9 +8,12 @@ docs_dir: site_source
 site_dir: public
 
 nav:
-  - Home: index.md
-  - CLI Syntax: docs/CLI_SYNTAX.en.md
-  - Glossary: XTTRAIN_GLOSSARY.en.md
-  - Data Dictionary: DATA_DICTIONARY.en.md
-  - Open Issues: OPEN_ISSUES.en.md
-  - API Reference: docs/API_LINKS.en.md
+  - User Documentation:
+    - Home: index.md
+    - CLI Syntax: docs/CLI_SYNTAX.en.md
+    - Glossary: XTTRAIN_GLOSSARY.en.md
+    - Data Dictionary: DATA_DICTIONARY.en.md
+  - Contributor Documentation:
+    - "Agent Instructions": AGENTS.md
+    - "API Reference": docs/API_LINKS.en.md
+    - "Open Issues": OPEN_ISSUES.en.md
