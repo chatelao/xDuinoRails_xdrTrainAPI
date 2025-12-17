@@ -1,3 +1,5 @@
+// The Arduino build system adds the library's root directory to the include path,
+// so we can include the header directly.
 #include "xDuinoRails_xTrainAPI.h"
 #include "xDuinoRails_xTrainAPI_utils.h"
 #include "help.h"
