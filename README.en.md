@@ -2,6 +2,12 @@
 
 Welcome to the xTrainAPI project! This repository contains a C++-based API for controlling digital model trains and their accessories.
 
+## Summary
+
+xTrainAPI is a unified interface designed to control various digital model train systems through a single, consistent API. It simplifies the development of control software by abstracting the complexities of individual protocols, such as DCC and Märklin Motorola.
+
+The API is defined in C++ as an abstract interface (`IUnifiedModelTrainListener`) and serves as the "Single Source of Truth." All other artifacts, including XML schemas, the OpenAPI specification, and utility classes, are derived from this central C++ header file. This repository provides the core API, documentation, and a set of examples to help you get started.
+
 ## Documentation
 
 Our API documentation is automatically generated and hosted on GitHub Pages.
@@ -14,10 +20,6 @@ Our API documentation is automatically generated and hosted on GitHub Pages.
 
 *   **Web Tool:** A simple web application for interacting with the xTrainAPI is available here:
     [Web Tool](https://chatelao.github.io/xDuinoRails_xTrainAPI/webtool)
-
-## What is xTrainAPI?
-
-xTrainAPI is a unified interface that allows various digital model train systems to be controlled through a single, consistent API. This simplifies the development of control software by abstracting the complexity of individual protocols (such as DCC, Märklin Motorola, etc.).
 
 ## Core Concepts
 
