@@ -9,18 +9,18 @@ site_dir: public
 
 nav:
   - User Documentation:
-    - Home: index.md
+    - Home: docs/README.en.md
     - CLI Syntax: docs/CLI_SYNTAX.en.md
-    - Glossary: XTTRAIN_GLOSSARY.en.md
-    - Data Dictionary: DATA_DICTIONARY.en.md
+    - Glossary: docs/XTTRAIN_GLOSSARY.en.md
   - Contributor Documentation:
-    - "Agent Instructions": AGENTS.md
+    - "Agent Instructions": spec/AGENTS.md
     - "API Reference": docs/API_LINKS.en.md
-    - "Open Issues": OPEN_ISSUES.en.md
+    - "Data Dictionary": spec/DATA_DICTIONARY.en.md
+    - "Open Issues": spec/OPEN_ISSUES.en.md
   - Deutsche Dokumentation:
-    - Home: README.de.md
+    - Home: docs/README.de.md
     - CLI Syntax: docs/CLI_SYNTAX.de.md
-    - Glossar: XTTRAIN_GLOSSARY.de.md
-    - Datenwörterbuch: DATA_DICTIONARY.de.md
+    - Glossar: docs/XTTRAIN_GLOSSARY.de.md
+    - "Datenwörterbuch": spec/DATA_DICTIONARY.de.md
     - "API-Referenz": docs/API_LINKS.de.md
-    - "Offene Probleme": OPEN_ISSUES.de.md
+    - "Offene Probleme": spec/OPEN_ISSUES.de.md
