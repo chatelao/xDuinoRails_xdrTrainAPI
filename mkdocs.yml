@@ -17,3 +17,10 @@ nav:
     - "Agent Instructions": AGENTS.md
     - "API Reference": docs/API_LINKS.en.md
     - "Open Issues": OPEN_ISSUES.en.md
+  - Deutsche Dokumentation:
+    - Home: README.de.md
+    - CLI Syntax: docs/CLI_SYNTAX.de.md
+    - Glossar: XTTRAIN_GLOSSARY.de.md
+    - Datenwörterbuch: DATA_DICTIONARY.de.md
+    - "API-Referenz": docs/API_LINKS.de.md
+    - "Offene Probleme": OPEN_ISSUES.de.md
