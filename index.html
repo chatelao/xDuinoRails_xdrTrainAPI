@@ -43,9 +43,9 @@
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#what-is-xtrainapi">What is xTrainAPI?</a>
+    <li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#core-concepts">Core Concepts</a>
     </li>
@@ -102,6 +102,9 @@
               
                 <h1 id="xtrainapi-unified-model-train-control">xTrainAPI - Unified Model Train Control</h1>
 <p>Welcome to the xTrainAPI project! This repository contains a C++-based API for controlling digital model trains and their accessories.</p>
+<h2 id="summary">Summary</h2>
+<p>xTrainAPI is a unified interface designed to control various digital model train systems through a single, consistent API. It simplifies the development of control software by abstracting the complexities of individual protocols, such as DCC and Märklin Motorola.</p>
+<p>The API is defined in C++ as an abstract interface (<code>IUnifiedModelTrainListener</code>) and serves as the "Single Source of Truth." All other artifacts, including XML schemas, the OpenAPI specification, and utility classes, are derived from this central C++ header file. This repository provides the core API, documentation, and a set of examples to help you get started.</p>
 <h2 id="documentation">Documentation</h2>
 <p>Our API documentation is automatically generated and hosted on GitHub Pages.</p>
 <ul>
@@ -118,8 +121,6 @@
     <a href="https://chatelao.github.io/xDuinoRails_xTrainAPI/webtool">Web Tool</a></p>
 </li>
 </ul>
-<h2 id="what-is-xtrainapi">What is xTrainAPI?</h2>
-<p>xTrainAPI is a unified interface that allows various digital model train systems to be controlled through a single, consistent API. This simplifies the development of control software by abstracting the complexity of individual protocols (such as DCC, Märklin Motorola, etc.).</p>
 <h2 id="core-concepts">Core Concepts</h2>
 <p>The API is defined in C++ as an abstract interface (<code>IUnifiedModelTrainListener</code>) and serves as the "Single Source of Truth". All other artifacts, such as the XML schemas and the OpenAPI specification, are derived from this C++ header file.</p>
 <p>For a deeper understanding of the terms and data fields used in the API, please take a look at our <a href="XTTRAIN_GLOSSARY.en/">Glossary</a> and the <a href="DATA_DICTIONARY.en/">Data Dictionary</a>.</p>
