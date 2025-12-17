@@ -4,8 +4,8 @@ repo_url: https://github.com/chatelao/xDuinoRails_xTrainAPI
 theme:
   name: readthedocs
 
-docs_dir: site_source
-site_dir: public
+docs_dir: gen/site_source
+site_dir: gen/public
 
 nav:
   - User Documentation:

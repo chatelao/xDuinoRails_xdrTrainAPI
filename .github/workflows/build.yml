@@ -42,12 +42,12 @@ jobs:
           else
             BUILD_PROPERTIES="--build-property build.extra_flags=-DUSE_EXTENDED_CLI_SYNTAX=0"
           fi
-          arduino-cli compile --fqbn ${{ matrix.fqbn }} --library . $BUILD_PROPERTIES examples/${{ matrix.example }} --output-dir build/${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
+          arduino-cli compile --fqbn ${{ matrix.fqbn }} --library . $BUILD_PROPERTIES examples/${{ matrix.example }} --output-dir gen/build/${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
-          path: build/${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
+          path: gen/build/${{ matrix.example }}-${{ matrix.fqbn }}-${{ matrix.cli_syntax }}
 
   validate-xml:
     runs-on: ubuntu-latest
@@ -86,19 +86,19 @@ jobs:
       - name: Download all artifacts
         uses: actions/download-artifact@v3
         with:
-          path: artifacts
+          path: gen/artifacts
 
       - name: Prepare release assets
         run: |
-          mkdir release-assets
-          git archive --format=zip --output=release-assets/xDuinoRails_xTrainAPI.zip --prefix=xDuinoRails_xTrainAPI/ HEAD
-          for artifact_dir in artifacts/*; do
+          mkdir gen/release-assets
+          git archive --format=zip --output=gen/release-assets/xDuinoRails_xTrainAPI.zip --prefix=xDuinoRails_xTrainAPI/ HEAD
+          for artifact_dir in gen/artifacts/*; do
             if [ -d "$artifact_dir" ]; then
               artifact_name=$(basename "$artifact_dir")
               find "$artifact_dir" -type f \( -name "*.hex" -o -name "*.elf" -o -name "*.uf2" \) | while read -r file_path; do
                 extension="${file_path##*.}"
                 sanitized_artifact_name=$(echo "$artifact_name" | tr ':' '_')
-                new_filename="release-assets/${sanitized_artifact_name}.${extension}"
+                new_filename="gen/release-assets/${sanitized_artifact_name}.${extension}"
                 mv "$file_path" "$new_filename"
               done
             fi
@@ -106,7 +106,7 @@ jobs:
       - name: Upload to release
         uses: softprops/action-gh-release@v1
         with:
-          files: release-assets/*
+          files: gen/release-assets/*
 
   build-and-deploy-docs:
     # NOTE: This job correctly generates the MkDocs, Doxygen and Redocly/Swagger
@@ -142,33 +142,30 @@ jobs:
 
       - name: Prepare MkDocs source
         run: |
-          mkdir -p site_source/docs
-          cp *.en.md site_source/
-          cp docs/*.en.md site_source/docs/
-          mv site_source/README.en.md site_source/index.md
+          mkdir -p gen/site_source/docs
+          cp *.en.md gen/site_source/
+          cp docs/*.en.md gen/site_source/docs/
+          mv gen/site_source/README.en.md gen/site_source/index.md
 
       - name: Build MkDocs site
         run: mkdocs build
 
-      - name: Create Doxygen output directory
-        run: mkdir -p public/doxygen
-
       - name: Generate Doxygen documentation
-        run: doxygen Doxyfile
+        run: doxygen spec/Doxyfile
 
       - name: Generate Redocly documentation
         run: |
-          mkdir -p public/swagger
-          redocly build-docs swagger/openapi.yaml -o public/swagger/index.html
+          mkdir -p gen/public/swagger
+          redocly build-docs swagger/openapi.yaml -o gen/public/swagger/index.html
 
       - name: Copy swagger spec for webtool
-        run: cp swagger/openapi.yaml public/swagger/
+        run: cp swagger/openapi.yaml gen/public/swagger/
 
       - name: Copy webtool to public directory
-        run: cp -r webtool public/
+        run: cp -r webtool gen/public/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./gen/public
