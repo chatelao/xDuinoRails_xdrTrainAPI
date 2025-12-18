@@ -27,7 +27,7 @@ namespace ModelRail {
         MM_I,           ///< Marklin Motorola I (Old). Register mode, 14 steps, unidirectional.
         MM_II,          ///< Marklin Motorola II (New). Adds direction and functions F1-F4.
         MFX,            ///< mfx / M4. Bidirectional, auto-registration (UID), 128 steps.
-        SELECTRIX,      ///< Selectrix (SX1). Synchronous bus (NEM 680/681).
+        SX,             ///< Selectrix (SX1). Synchronous bus (NEM 680/681).
         SX2,            ///< Selectrix 2 (SX2). RCN extension for multiprotocol & config.
         LOCONET,        ///< Digitrax LocoNet. Peer-to-Peer, OpCode based.
         BIDIB,          ///< BiDiB. High-speed, tree-topology, CRC protected.

@@ -727,7 +727,7 @@ private:
             case Protocol::MM_I: _stream->print("MM_I"); break;
             case Protocol::MM_II: _stream->print("MM_II"); break;
             case Protocol::MFX: _stream->print("MFX"); break;
-            case Protocol::SELECTRIX: _stream->print("SELECTRIX"); break;
+            case Protocol::SX: _stream->print("SX"); break;
             case Protocol::SX2: _stream->print("SX2"); break;
             case Protocol::LOCONET: _stream->print("LOCONET"); break;
             case Protocol::BIDIB: _stream->print("BIDIB"); break;
@@ -1017,7 +1017,7 @@ private:
         if (str == "MM_I") return Protocol::MM_I;
         if (str == "MM_II") return Protocol::MM_II;
         if (str == "MFX") return Protocol::MFX;
-        if (str == "SELECTRIX") return Protocol::SELECTRIX;
+        if (str == "SX") return Protocol::SX;
         if (str == "SX2") return Protocol::SX2;
         if (str == "LOCONET") return Protocol::LOCONET;
         if (str == "BIDIB") return Protocol::BIDIB;
