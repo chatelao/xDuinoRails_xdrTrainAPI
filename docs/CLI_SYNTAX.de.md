@@ -69,7 +69,7 @@ Zeichenkette ::= '"' ( JEDES_ZEICHEN_AUSSER_ANFÜHRUNGSZEICHEN )* '"'
 | `EMERGENCY_STOP_LOCO` | `<X>` | `cab` | Nothalt für eine einzelne Lok. | `<EMERGENCY_STOP_LOCO cab="123">` |
 | `EMERGENCY_STOP_ALL` | `<K>` | (keine) | Nothalt für alle Loks. | `<EMERGENCY_STOP_ALL>` |
 | `RESET_EMERGENCY_STOP_ALL` | `<E>` | (keine) | Setzt den Nothalt für alle Loks zurück. | `<RESET_EMERGENCY_STOP_ALL>` |
-| `DELETE_LOCO` | `<R>` | `cab` | Löscht eine Lok aus dem Roster. | `<DELETE_LOCO cab="123">` |
+| `DELETE_LOCO` | | `cab` | Löscht eine Lok aus dem Roster. | `<DELETE_LOCO cab="123">` |
 
 ### C. CV-Programmierung
 
