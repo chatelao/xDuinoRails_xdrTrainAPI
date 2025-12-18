@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xTrainEvents>
     <event type="onConsistLink" timestamp="2024-07-29T10:02:00Z">
-        <master address="2001" protocol="DCC" />
-        <slave address="2002" protocol="DCC" />
+        <master address="2001" protocol="MFX" />
+        <slave address="2002" protocol="MFX" />
         <consist type="ADVANCED_DCC" inverted="false" />
     </event>
 </xTrainEvents>

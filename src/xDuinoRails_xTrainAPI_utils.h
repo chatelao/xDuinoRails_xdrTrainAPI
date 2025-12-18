@@ -723,16 +723,11 @@ private:
 
     void printProtocol(Protocol protocol) {
         switch (protocol) {
-            case Protocol::DCC: _stream->print("DCC"); break;
-            case Protocol::MM_I: _stream->print("MM_I"); break;
-            case Protocol::MM_II: _stream->print("MM_II"); break;
+            case Protocol::MM_1: _stream->print("MM_1"); break;
+            case Protocol::MM_2: _stream->print("MM_2"); break;
             case Protocol::MFX: _stream->print("MFX"); break;
-            case Protocol::SX: _stream->print("SX"); break;
-            case Protocol::SX2: _stream->print("SX2"); break;
-            case Protocol::LOCONET: _stream->print("LOCONET"); break;
-            case Protocol::BIDIB: _stream->print("BIDIB"); break;
-            case Protocol::XPRESSNET: _stream->print("XPRESSNET"); break;
-            case Protocol::CAN_GENERIC: _stream->print("CAN_GENERIC"); break;
+            case Protocol::SX_1: _stream->print("SX_1"); break;
+            case Protocol::SX_2: _stream->print("SX_2"); break;
         }
     }
 
@@ -833,9 +828,9 @@ private:
 
     void reset() {
         _eventType = "";
-        _loco = {0, Protocol::DCC, 0};
-        _master = {0, Protocol::DCC, 0};
-        _slave = {0, Protocol::DCC, 0};
+        _loco = {0, Protocol::MFX, 0};
+        _master = {0, Protocol::MFX, 0};
+        _slave = {0, Protocol::MFX, 0};
         _currentAttr = "";
         _currentValue = "";
         _speedPercent = 0;
@@ -1013,17 +1008,12 @@ private:
     }
 
     Protocol parseProtocol(const String& str) {
-        if (str == "DCC") return Protocol::DCC;
-        if (str == "MM_I") return Protocol::MM_I;
-        if (str == "MM_II") return Protocol::MM_II;
+        if (str == "MM_1") return Protocol::MM_1;
+        if (str == "MM_2") return Protocol::MM_2;
         if (str == "MFX") return Protocol::MFX;
-        if (str == "SX") return Protocol::SX;
-        if (str == "SX2") return Protocol::SX2;
-        if (str == "LOCONET") return Protocol::LOCONET;
-        if (str == "BIDIB") return Protocol::BIDIB;
-        if (str == "XPRESSNET") return Protocol::XPRESSNET;
-        if (str == "CAN_GENERIC") return Protocol::CAN_GENERIC;
-        return Protocol::DCC;
+        if (str == "SX_1") return Protocol::SX_1;
+        if (str == "SX_2") return Protocol::SX_2;
+        return Protocol::MFX;
     }
 
     ConsistType parseConsistType(const String& str) {
@@ -1129,7 +1119,7 @@ public:
             int steps = getParamValue(params, "steps").toInt();
             if (steps == 0) steps = 128; // default
 
-            LocoHandle loco = {cab, Protocol::DCC, 0};
+            LocoHandle loco = {cab, Protocol::MFX, 0};
             _listener->onLocoSpeedChange(loco, speed, (Direction)dir, steps);
             return;
         } else if (cmd == "FUNCTION") {
@@ -1137,7 +1127,7 @@ public:
             int func = getParamValue(params, "function").toInt();
             int state = getParamValue(params, "state").toInt();
 
-            LocoHandle loco = {cab, Protocol::DCC, 0};
+            LocoHandle loco = {cab, Protocol::MFX, 0};
             _listener->onLocoFunctionChange(loco, func, state);
             return;
         } else if (cmd == "TURNOUT") {
@@ -1162,7 +1152,7 @@ public:
             else if (typeStr == "BRAKE_SQUEAL_START") type = SyncType::BRAKE_SQUEAL_START;
             else if (typeStr == "DOOR_MOVEMENT") type = SyncType::DOOR_MOVEMENT;
 
-            LocoHandle loco = {cab, Protocol::DCC, 0};
+            LocoHandle loco = {cab, Protocol::MFX, 0};
             _listener->onLocoEventSync(loco, type, value);
             return;
         }
@@ -1172,7 +1162,7 @@ public:
              uint16_t cab = getParamValue(params, "cab").toInt();
              String state = getParamValue(params, "state");
              String owner = getParamValue(params, "owner");
-             LocoHandle loco = {cab, Protocol::DCC, 0};
+             LocoHandle loco = {cab, Protocol::MFX, 0};
              _listener->onLocoDispatchStateChange(loco, (state == "ACQUIRED"), owner.c_str());
         }
         else if (cmd == "CONSIST_LINK") {
@@ -1184,13 +1174,13 @@ public:
             if (typeStr == "UNIVERSAL") type = ConsistType::UNIVERSAL_HOST;
             else if (typeStr == "LOCONET") type = ConsistType::MU_LOCONET;
 
-            LocoHandle m = {master, Protocol::DCC, 0};
-            LocoHandle s = {slave, Protocol::DCC, 0};
+            LocoHandle m = {master, Protocol::MFX, 0};
+            LocoHandle s = {slave, Protocol::MFX, 0};
             _listener->onConsistLink(m, s, type, inverted);
         }
         else if (cmd == "CONSIST_UNLINK") {
             uint16_t slave = getParamValue(params, "slave").toInt();
-            LocoHandle s = {slave, Protocol::DCC, 0};
+            LocoHandle s = {slave, Protocol::MFX, 0};
             _listener->onConsistUnlink(s);
         }
         else if (cmd == "ACCESSORY_ANALOG") {
@@ -1237,7 +1227,7 @@ public:
             if (orientStr == "NORMAL") orient = DecoderOrientation::NORMAL;
             else if (orientStr == "INVERTED") orient = DecoderOrientation::INVERTED;
 
-            LocoHandle loco = {cab, Protocol::DCC, 0};
+            LocoHandle loco = {cab, Protocol::MFX, 0};
             _listener->onLocoDetectedOnBlock(sid, loco, orient);
         }
         else if (cmd == "LOCO_TELEMETRY") {
@@ -1248,7 +1238,7 @@ public:
              // Simply mapping SPEED for now as in printer
              if (typeStr == "SPEED") type = TelemetryType::SPEED_KMH;
 
-             LocoHandle loco = {cab, Protocol::DCC, 0};
+             LocoHandle loco = {cab, Protocol::MFX, 0};
              _listener->onLocoTelemetryData(loco, type, val);
         }
 
@@ -1273,7 +1263,7 @@ public:
                         int speed = params.substring(firstSpace + 1, secondSpace).toInt();
                         int dir = params.substring(secondSpace + 1).toInt();
 
-                        LocoHandle loco = {cab, Protocol::DCC, 0};
+                        LocoHandle loco = {cab, Protocol::MFX, 0};
                         _listener->onLocoSpeedChange(loco, speed, (Direction)dir, 128);
                     }
                 }
@@ -1287,7 +1277,7 @@ public:
                         int func = params.substring(firstSpace + 1, secondSpace).toInt();
                         int state = params.substring(secondSpace + 1).toInt();
 
-                        LocoHandle loco = {cab, Protocol::DCC, 0};
+                        LocoHandle loco = {cab, Protocol::MFX, 0};
                         _listener->onLocoFunctionChange(loco, func, state);
                     }
                 }
@@ -1321,7 +1311,7 @@ public:
                         int type = params.substring(firstSpace + 1, secondSpace).toInt();
                         int value = params.substring(secondSpace + 1).toInt();
 
-                        LocoHandle loco = {cab, Protocol::DCC, 0};
+                        LocoHandle loco = {cab, Protocol::MFX, 0};
                         _listener->onLocoEventSync(loco, (SyncType)type, value);
                     }
                 }

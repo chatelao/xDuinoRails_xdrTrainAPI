@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xTrainEvents>
     <event type="onConsistUnlink" timestamp="2024-07-29T10:03:00Z">
-        <slave address="2002" protocol="DCC" />
+        <slave address="2002" protocol="MFX" />
     </event>
 </xTrainEvents>

@@ -6,13 +6,13 @@
 
     <!-- Event: Speed of a locomotive has changed. -->
     <event type="onLocoSpeedChange" timestamp="2024-07-29T10:00:01Z">
-        <loco address="3" protocol="DCC" mfxUid="0" />
+        <loco address="3" protocol="MFX" mfxUid="0" />
         <speed speedPercent="50.5" direction="FORWARD" speedSteps="128" />
     </event>
 
     <!-- Event: A binary function (e.g., lights, smoke) has been toggled. -->
     <event type="onLocoFunctionChange" timestamp="2024-07-29T10:00:05Z">
-        <loco address="3" protocol="DCC" />
+        <loco address="3" protocol="MFX" />
         <function fIndex="0" isActive="true" />
     </event>
 
@@ -24,20 +24,20 @@
 
     <!-- Event: A locomotive has been acquired or released by a throttle. -->
     <event type="onLocoDispatchStateChange" timestamp="2024-07-29T10:01:00Z">
-        <loco address="44" protocol="LOCONET" />
+        <loco address="44" protocol="MFX" />
         <dispatch isAcquired="true" ownerId="Throttle #3" />
     </event>
 
     <!-- Event: Two locomotives have been linked in a consist (multi-traction). -->
     <event type="onConsistLink" timestamp="2024-07-29T10:02:00Z">
-        <master address="2001" protocol="DCC" />
-        <slave address="2002" protocol="DCC" />
+        <master address="2001" protocol="MFX" />
+        <slave address="2002" protocol="MFX" />
         <consist type="ADVANCED_DCC" inverted="false" />
     </event>
 
     <!-- Event: A locomotive has been removed from a consist. -->
     <event type="onConsistUnlink" timestamp="2024-07-29T10:03:00Z">
-        <slave address="2002" protocol="DCC" />
+        <slave address="2002" protocol="MFX" />
     </event>
 
     <!-- ===================================================================== -->
@@ -104,25 +104,25 @@
 
     <!-- Event: A locomotive has been detected on a specific track block. -->
     <event type="onLocoDetectedOnBlock" timestamp="2024-07-29T10:06:15Z">
-        <loco address="3" protocol="DCC" />
+        <loco address="3" protocol="MFX" />
         <detection sensorId="501" orientation="NORMAL" />
     </event>
 
     <!-- Event: Telemetry data has been received from a locomotive. -->
     <event type="onLocoTelemetryData" timestamp="2024-07-29T10:06:18Z">
-        <loco address="3" protocol="DCC" />
+        <loco address="3" protocol="MFX" />
         <telemetry type="SPEED_KMH" value="88.5" />
     </event>
 
     <!-- Event: The external state of a loco changed (e.g., stopped by ABC). -->
     <event type="onLocoExternalStateChange" timestamp="2024-07-29T10:07:00Z">
-        <loco address="99" protocol="DCC" />
+        <loco address="99" protocol="MFX" />
         <externalState state="STOPPED_BY_ABC_SIGNAL" />
     </event>
 
     <!-- Event: Raw/Proprietary RailCom Data. -->
     <event type="onLocoRailComRawData" timestamp="2024-07-29T10:06:00Z">
-        <loco address="1024" protocol="DCC" />
+        <loco address="1024" protocol="MFX" />
         <railcom app="1" data="01A4B7" />
     </event>
 
@@ -138,31 +138,31 @@
 
     <!-- Event: A CV read operation has completed. -->
     <event type="onCvReadDone" timestamp="2024-07-29T10:08:30Z">
-        <loco address="5" protocol="DCC" />
+        <loco address="5" protocol="MFX" />
         <cv cvNumber="5" value="200" success="true" />
     </event>
 
     <!-- Event: A request to read a CV from a decoder has been issued. -->
     <event type="onCvRead" timestamp="2024-07-29T10:08:00Z">
-        <loco address="3" protocol="DCC" />
+        <loco address="3" protocol="MFX" />
         <cv cvNumber="5" />
     </event>
 
     <!-- Event: A request to write a CV to a decoder has been issued. -->
     <event type="onCvWrite" timestamp="2024-07-29T10:09:00Z">
-        <loco address="3" protocol="DCC" />
+        <loco address="3" protocol="MFX" />
         <cv cvNumber="5" value="128" />
     </event>
 
     <!-- Event: Result of reading a SUSI configuration register. -->
     <event type="onSusiConfigRead" timestamp="2024-07-29T10:10:00Z">
-        <loco address="4" protocol="DCC" />
+        <loco address="4" protocol="MFX" />
         <susi bank="1" index="2" value="3" />
     </event>
 
     <!-- Event: Mass Data Transfer (e.g., icon or sound profile). -->
     <event type="onConfigBlockLoad" timestamp="2024-07-29T10:11:00Z">
-        <loco address="5" protocol="DCC" />
+        <loco address="5" protocol="MFX" />
         <config domain="ICON" data="89504e47" />
     </event>
 
@@ -177,7 +177,7 @@
 
     <!-- Event: A mechanical synchronization event occurred. -->
     <event type="onLocoSyncEvent" timestamp="2024-07-29T10:12:00Z">
-        <loco address="6" protocol="DCC" />
+        <loco address="6" protocol="MFX" />
         <sync type="CAM_PULSE" value="1" />
     </event>
 

@@ -361,19 +361,14 @@
     <!-- Enumeration Definitions -->
     <xs:simpleType name="ProtocolEnum">
         <xs:annotation>
-            <xs:documentation>DCC</xs:documentation>
+            <xs:documentation>MFX</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:enumeration value="DCC"/>
-            <xs:enumeration value="MM_I"/>
-            <xs:enumeration value="MM_II"/>
+            <xs:enumeration value="MM_1"/>
+            <xs:enumeration value="MM_2"/>
             <xs:enumeration value="MFX"/>
-            <xs:enumeration value="SX"/>
-            <xs:enumeration value="SX2"/>
-            <xs:enumeration value="LOCONET"/>
-            <xs:enumeration value="BIDIB"/>
-            <xs:enumeration value="XPRESSNET"/>
-            <xs:enumeration value="CAN_GENERIC"/>
+            <xs:enumeration value="SX_1"/>
+            <xs:enumeration value="SX_2"/>
         </xs:restriction>
     </xs:simpleType>
 

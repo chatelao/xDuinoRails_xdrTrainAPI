@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xTrainEvents>
     <event type="onLocoRailComRawData" timestamp="2024-07-29T10:06:00Z">
-        <loco address="1024" protocol="DCC" />
+        <loco address="1024" protocol="MFX" />
         <railcom app="1" data="01A4B7" />
     </event>
 </xTrainEvents>
