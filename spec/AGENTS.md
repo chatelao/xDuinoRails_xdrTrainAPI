@@ -14,8 +14,8 @@ This header file is the **single source of truth** for all API events, data stru
 
 The following files are derivatives of the main `.h` file and **must** be kept in sync with it:
 
-1.  **XML Schema:** `/xml/xTrainEvents.xsd`
-2.  **OpenAPI Schema:** `/swagger/openapi.yaml`
+1.  **XML Schema:** `/clients/xml/xTrainEvents.xsd`
+2.  **OpenAPI Schema:** `/clients/swagger/openapi.yaml`
 3.  **Utility Implementations:** `/src/xDuinoRails_xTrainAPI_utils.h` (specifically the `CmdLinePrinter`, `XmlPrinter`, and `CmdLineParser` classes).
 
 ### Agent Responsibility
