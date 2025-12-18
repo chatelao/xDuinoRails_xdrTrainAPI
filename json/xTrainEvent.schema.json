@@ -252,7 +252,7 @@
         "required": [ "address", "protocol" ],
         "properties": {
             "address": { "type": "integer", "format": "uint16", "description": "Primary address of the locomotive.", "example": 101 },
-            "protocol": { "type": "string", "enum": [ "DCC", "MM_I", "MM_II", "MFX", "SELECTRIX", "SX2", "LOCONET", "BIDIB", "XPRESSNET", "CAN_GENERIC" ], "example": "DCC" },
+            "protocol": { "type": "string", "enum": [ "DCC", "MM_I", "MM_II", "MFX", "SX", "SX2", "LOCONET", "BIDIB", "XPRESSNET", "CAN_GENERIC" ], "example": "DCC" },
             "mfxUid": { "type": "integer", "format": "uint32", "description": "Unique mfx ID, if applicable.", "example": 16385 }
         }
     }

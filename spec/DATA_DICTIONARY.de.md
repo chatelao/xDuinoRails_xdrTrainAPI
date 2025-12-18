@@ -6,7 +6,7 @@ Diese Tabelle beschreibt alle Felder, Parameter und Datentypen, die in der `Unif
 
 | Kategorie | Feld / Parameter | Datentyp | Beschreibung | Gültiger Bereich / Werte | Anmerkungen |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Core** | `Protocol` | `enum` | Liste aller unterstützten Protokolle. | `DCC`, `MM_I`, `MM_II`, `MFX`, `SELECTRIX`, `SX2`, `LOCONET`, `BIDIB`, `XPRESSNET`, `CAN_GENERIC` | Bestimmt den zu verwendenden Treiber. |
+| **Core** | `Protocol` | `enum` | Liste aller unterstützten Protokolle. | `DCC`, `MM_I`, `MM_II`, `MFX`, `SX`, `SX2`, `LOCONET`, `BIDIB`, `XPRESSNET`, `CAN_GENERIC` | Bestimmt den zu verwendenden Treiber. |
 | **Core** | `mobAddress` | `uint16_t` | Die digitale Adresse des Decoders. | `1` - `10239` (DCC)<br>`1` - `255` (MM)<br>`1` - `127` (SX) | Wird ignoriert, falls `mfxUid` gesetzt ist. |
 | **Core** | `mobMfxUid` | `uint32_t` | Eindeutige Hardware-ID (UID) für mfx/BiDiB. | `0` = Inaktiv<br>`>0` = Gültige UID | Hat Vorrang vor der Adresse (Routing-Priorität). |
 | **Core** | `direction` | `enum` | Logische Fahrtrichtung. | `REVERSE` (0)<br>`FORWARD` (1)<br>`UNKNOWN` (2) | Genutzt für Befehle und Rückmeldung. |

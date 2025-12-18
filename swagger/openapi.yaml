@@ -525,7 +525,7 @@ components:
 
     Protocol:
       type: string
-      enum: [DCC, MM_I, MM_II, MFX, SELECTRIX, SX2, LOCONET, BIDIB, XPRESSNET, CAN_GENERIC]
+      enum: [DCC, MM_I, MM_II, MFX, SX, SX2, LOCONET, BIDIB, XPRESSNET, CAN_GENERIC]
       example: "DCC"
     Direction:
       type: string

@@ -368,7 +368,7 @@
             <xs:enumeration value="MM_I"/>
             <xs:enumeration value="MM_II"/>
             <xs:enumeration value="MFX"/>
-            <xs:enumeration value="SELECTRIX"/>
+            <xs:enumeration value="SX"/>
             <xs:enumeration value="SX2"/>
             <xs:enumeration value="LOCONET"/>
             <xs:enumeration value="BIDIB"/>

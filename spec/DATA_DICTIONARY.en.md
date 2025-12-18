@@ -6,7 +6,7 @@ This table describes all fields, parameters, and data types used in the `Unified
 
 | Category | Field / Parameter | Data Type | Description | Valid Range / Values | Notes |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Core** | `Protocol` | `enum` | List of all supported protocols. | `DCC`, `MM_I`, `MM_II`, `MFX`, `SELECTRIX`, `SX2`, `LOCONET`, `BIDIB`, `XPRESSNET`, `CAN_GENERIC` | Determines the driver to be used. |
+| **Core** | `Protocol` | `enum` | List of all supported protocols. | `DCC`, `MM_I`, `MM_II`, `MFX`, `SX`, `SX2`, `LOCONET`, `BIDIB`, `XPRESSNET`, `CAN_GENERIC` | Determines the driver to be used. |
 | **Core** | `mobAddress` | `uint16_t` | The digital address of the decoder. | `1` - `10239` (DCC)<br>`1` - `255` (MM)<br>`1` - `127` (SX) | Is ignored if `mfxUid` is set. |
 | **Core** | `mobMfxUid` | `uint32_t` | Unique Hardware ID (UID) for mfx/BiDiB. | `0` = Inactive<br>`>0` = Valid UID | Takes precedence over the address (routing priority). |
 | **Core** | `direction` | `enum` | Logical travel direction. | `REVERSE` (0)<br>`FORWARD` (1)<br>`UNKNOWN` (2) | Used for commands and feedback. |
