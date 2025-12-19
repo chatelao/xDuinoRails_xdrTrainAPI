@@ -25,7 +25,7 @@ Our API documentation is automatically generated and hosted on GitHub Pages.
 
 The API is defined in C++ as an abstract interface (`IUnifiedModelTrainListener`) and serves as the "Single Source of Truth". All other artifacts, such as the XML schemas and the OpenAPI specification, are derived from this C++ header file.
 
-For a deeper understanding of the terms and data fields used in the API, please take a look at our [Glossary](XTTRAIN_GLOSSARY.en.md) and the [Data Dictionary](DATA_DICTIONARY.en.md).
+For a deeper understanding of the terms and data fields used in the API, please take a look at our [Glossary](XTTRAIN_GLOSSARY.md) and the [Data Dictionary](../spec/DATA_DICTIONARY.md).
 
 ## Repository Structure
 
