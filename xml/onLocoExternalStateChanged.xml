@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xTrainEvents>
     <event type="onLocoExternalStateChanged" timestamp="2024-07-29T10:07:00Z">
-        <loco address="99" protocol="MFX" />
+        <loco address="99" protocol="DCC" />
         <externalState state="STOPPED_BY_ABC_SIGNAL" />
     </event>
 </xTrainEvents>

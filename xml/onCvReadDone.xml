@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xTrainEvents>
     <event type="onCvReadDone" timestamp="2024-07-29T10:08:30Z">
-        <loco address="3" protocol="MFX"/>
+        <loco address="3" protocol="DCC"/>
         <cv cvNumber="5" value="100" success="true"/>
     </event>
 </xTrainEvents>

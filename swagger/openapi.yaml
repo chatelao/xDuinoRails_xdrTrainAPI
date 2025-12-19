@@ -24,11 +24,11 @@ paths:
               $ref: '#/components/schemas/LocoSpeedChange'
             examples:
               DCC_Loco_Full_Speed:
-                summary: "Set a locomotive to full speed forward."
+                summary: "Set a DCC locomotive to full speed forward."
                 value:
                   loco:
                     address: 101
-                    protocol: "MFX"
+                    protocol: "DCC"
                   speedPercent: 100.0
                   direction: "FORWARD"
                   speedSteps: 128
@@ -62,7 +62,7 @@ paths:
                 value:
                   loco:
                     address: 101
-                    protocol: "MFX"
+                    protocol: "DCC"
                   fIndex: 0
                   isActive: true
               ActivateSound:
@@ -70,7 +70,7 @@ paths:
                 value:
                   loco:
                     address: 101
-                    protocol: "MFX"
+                    protocol: "DCC"
                   fIndex: 2
                   isActive: true
       responses:
@@ -168,7 +168,7 @@ paths:
                 value:
                   loco:
                     address: 101
-                    protocol: "MFX"
+                    protocol: "DCC"
                   cvNumber: 3
                   value: 20
               SetManufacturerID:
@@ -176,7 +176,7 @@ paths:
                 value:
                   loco:
                     address: 101
-                    protocol: "MFX"
+                    protocol: "DCC"
                   cvNumber: 8
                   value: 151
       responses:
@@ -199,7 +199,7 @@ paths:
                 value:
                   loco:
                     address: 101
-                    protocol: "MFX"
+                    protocol: "DCC"
                   cvNumber: 3
       responses:
         '202':
@@ -525,8 +525,8 @@ components:
 
     Protocol:
       type: string
-      enum: [MM_1, MM_2, MFX, SX_1, SX_2]
-      example: "MFX"
+      enum: [DCC, MM_I, MM_II, MFX, SX, SX2, LOCONET, BIDIB, XPRESSNET, CAN_GENERIC]
+      example: "DCC"
     Direction:
       type: string
       enum: [REVERSE, FORWARD, UNKNOWN]

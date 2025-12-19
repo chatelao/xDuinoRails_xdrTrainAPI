@@ -23,11 +23,16 @@ namespace ModelRail {
      * See NMRA, RCN, and Manufacturer specs for details.
      */
     enum class Protocol : uint8_t {
+        DCC,            ///< NMRA DCC (S-9.1, S-9.2, RCN-210). Worldwide standard.
         MM_1,           ///< Marklin Motorola I (Old). Register mode, 14 steps, unidirectional.
         MM_2,          ///< Marklin Motorola II (New). Adds direction and functions F1-F4.
         MFX,            ///< mfx / M4. Bidirectional, auto-registration (UID), 128 steps.
         SX_1,             ///< Selectrix (SX1). Synchronous bus (NEM 680/681).
         SX_2,            ///< Selectrix 2 (SX2). RCN extension for multiprotocol & config.
+        LOCONET,        ///< Digitrax LocoNet. Peer-to-Peer, OpCode based.
+        BIDIB,          ///< BiDiB. High-speed, tree-topology, CRC protected.
+        XPRESSNET,      ///< Lenz XpressNet. RS-485 Master-Slave.
+        CAN_GENERIC     ///< Generic CAN (e.g., OpenLCB/LCC or Marklin CS2/CS3).
     };
 
     // --- Basic State Definitions ---

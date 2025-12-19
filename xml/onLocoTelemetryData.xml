@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xTrainEvents>
     <event type="onLocoTelemetryData" timestamp="2024-07-29T10:06:18Z">
-        <loco address="3" protocol="MFX" />
+        <loco address="3" protocol="DCC" />
         <telemetry type="SPEED_KMH" value="88.5" />
     </event>
 </xTrainEvents>

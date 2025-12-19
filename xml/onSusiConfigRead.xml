@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xTrainEvents>
     <event type="onSusiConfigRead" timestamp="2024-07-29T10:10:00Z">
-        <loco address="4" protocol="MFX" />
+        <loco address="4" protocol="DCC" />
         <susi bank="1" index="2" value="3" />
     </event>
 </xTrainEvents>

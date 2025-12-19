@@ -33,7 +33,7 @@ const char HELP_THROTTLE[] PROGMEM = R"=====(
 THROTTLE: Sets the speed and direction of a locomotive.
 
 Syntax: <THROTTLE cab="<CAB>" speed="<SPEED>" direction="<DIR>" steps="<STEPS>">
-  <CAB>     - The locomotive's address.
+  <CAB>     - The locomotive's DCC address.
   <SPEED>   - Speed as a percentage (0-100).
   <DIR>     - Direction: 1 for FORWARD, 0 for REVERSE.
   <STEPS>   - (Optional) The number of speed steps for the decoder (e.g., 28, 128). Defaults to 128.
@@ -50,7 +50,7 @@ const char HELP_FUNCTION[] PROGMEM = R"=====(
 FUNCTION: Activates or deactivates a locomotive function.
 
 Syntax: <FUNCTION cab="<CAB>" function="<FUNC>" state="<STATE>">
-  <CAB>     - The locomotive's address.
+  <CAB>     - The locomotive's DCC address.
   <FUNC>    - The function number to control (e.g., 0 for headlight).
   <STATE>   - The desired state: 1 for ON, 0 for OFF.
 
@@ -93,7 +93,7 @@ const char HELP_MECH_SYNC[] PROGMEM = R"=====(
 MECH_SYNC: Sends a mechanical synchronization event, typically for sound decoders.
 
 Syntax: <MECH_SYNC cab="<CAB>" type="<TYPE>" value="<VALUE>">
-  <CAB>     - The locomotive's address.
+  <CAB>     - The locomotive's DCC address.
   <TYPE>    - The type of synchronization event.
               Valid types: CAM_PULSE, CYLINDER_CYCLE, GEAR_CHANGE_UP,
                            GEAR_CHANGE_DOWN, BRAKE_SQUEAL_START, DOOR_MOVEMENT.
