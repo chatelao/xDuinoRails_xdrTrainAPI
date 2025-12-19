@@ -148,7 +148,7 @@ jobs:
           mv gen/site_source/README.en.md gen/site_source/index.md
 
       - name: Build MkDocs site
-        run: mkdocs build
+        run: mkdocs build --config-file docs/mkdocs.yml
 
       - name: Generate Doxygen documentation
         run: doxygen spec/Doxyfile
