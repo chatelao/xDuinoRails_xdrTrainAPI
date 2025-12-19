@@ -59,7 +59,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libxml2-utils
       - name: Validate XML files
-        run: xmllint --noout --schema xml/xTrainEvents.xsd xml/*.xml
+        run: xmllint --noout --schema clients/xml/xTrainEvents.xsd clients/xml/*.xml
 
   validate-swagger:
     runs-on: ubuntu-latest
@@ -73,7 +73,7 @@ jobs:
       - name: Install dependencies
         run: pip install openapi-spec-validator
       - name: Validate OpenAPI spec
-        run: openapi-spec-validator swagger/openapi.yaml
+        run: openapi-spec-validator clients/swagger/openapi.yaml
 
   release:
     needs: [build, validate-xml, validate-swagger]
@@ -156,10 +156,10 @@ jobs:
       - name: Generate Redocly documentation
         run: |
           mkdir -p gen/public/swagger
-          redocly build-docs swagger/openapi.yaml -o gen/public/swagger/index.html
+          redocly build-docs clients/swagger/openapi.yaml -o gen/public/swagger/index.html
 
       - name: Copy swagger spec for webtool
-        run: cp swagger/openapi.yaml gen/public/swagger/
+        run: cp clients/swagger/openapi.yaml gen/public/swagger/
 
       - name: Copy webtool to public directory
         run: cp -r webtool gen/public/
