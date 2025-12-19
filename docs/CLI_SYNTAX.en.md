@@ -69,7 +69,7 @@ string      ::= '"' ( ANY_CHAR_EXCEPT_QUOTE )* '"'
 | `EMERGENCY_STOP_LOCO` | `<X>` | `cab` | Emergency stop for a single loco. | `<EMERGENCY_STOP_LOCO cab="123">` |
 | `EMERGENCY_STOP_ALL` | `<K>` | (none) | Emergency stop for all locos. | `<EMERGENCY_STOP_ALL>` |
 | `RESET_EMERGENCY_STOP_ALL` | `<E>` | (none) | Resets emergency stop for all locos. | `<RESET_EMERGENCY_STOP_ALL>` |
-| `DELETE_LOCO` | | `cab` | Deletes a loco from the roster. | `<DELETE_LOCO cab="123">` |
+| `DELETE_LOCO` | `<R>` | `cab` | Deletes a loco from the roster. | `<DELETE_LOCO cab="123">` |
 
 ### C. CV Programming
 
