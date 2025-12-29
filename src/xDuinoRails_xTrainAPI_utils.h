@@ -8,10 +8,6 @@
 #include <vector>
 #include <string>
 
-#ifndef USE_EXTENDED_CLI_SYNTAX
-#define USE_EXTENDED_CLI_SYNTAX 1
-#endif
-
 namespace ModelRail {
 
 // Helper to convert hex string to bytes
@@ -35,94 +31,95 @@ static void printHex(Stream* stream, const std::vector<uint8_t>& data) {
 
 class CmdLinePrinter : public IUnifiedModelTrainListener {
 public:
-    CmdLinePrinter(Stream& stream) : _stream(&stream) {}
+    CmdLinePrinter(Stream& stream, bool useExtendedSyntax = true)
+        : _stream(&stream), _useExtendedSyntax(useExtendedSyntax) {}
 
     uint64_t getImplementedApi() const override { return (1ULL << 28) - 1; }
 
     void onLocoSpeedChange(const LocoHandle& loco, float speedPercent, Direction direction, int speedSteps) override {
-#if USE_EXTENDED_CLI_SYNTAX
-        _stream->print("<THROTTLE cab=\"");
-        _stream->print(loco.address);
-        _stream->print("\" speed=\"");
-        _stream->print((int)speedPercent);
-        _stream->print("\" direction=\"");
-        _stream->print(direction == Direction::FORWARD ? 1 : 0);
-        _stream->print("\" steps=\"");
-        _stream->print(speedSteps);
-        _stream->println("\">");
-#else
-        _stream->print("<t ");
-        _stream->print(loco.address);
-        _stream->print(" ");
-        _stream->print((int)speedPercent);
-        _stream->print(" ");
-        _stream->print(direction == Direction::FORWARD ? 1 : 0);
-        _stream->println(">");
-#endif
+        if (_useExtendedSyntax) {
+            _stream->print("<THROTTLE cab=\"");
+            _stream->print(loco.address);
+            _stream->print("\" speed=\"");
+            _stream->print((int)speedPercent);
+            _stream->print("\" direction=\"");
+            _stream->print(direction == Direction::FORWARD ? 1 : 0);
+            _stream->print("\" steps=\"");
+            _stream->print(speedSteps);
+            _stream->println("\">");
+        } else {
+            _stream->print("<t ");
+            _stream->print(loco.address);
+            _stream->print(" ");
+            _stream->print((int)speedPercent);
+            _stream->print(" ");
+            _stream->print(direction == Direction::FORWARD ? 1 : 0);
+            _stream->println(">");
+        }
     }
 
     void onLocoFunctionChange(const LocoHandle& loco, int fIndex, bool isActive) override {
-#if USE_EXTENDED_CLI_SYNTAX
-        _stream->print("<FUNCTION cab=\"");
-        _stream->print(loco.address);
-        _stream->print("\" function=\"");
-        _stream->print(fIndex);
-        _stream->print("\" state=\"");
-        _stream->print(isActive ? 1 : 0);
-        _stream->println("\">");
-#else
-        _stream->print("<f ");
-        _stream->print(loco.address);
-        _stream->print(" ");
-        _stream->print(fIndex);
-        _stream->print(" ");
-        _stream->print(isActive ? 1 : 0);
-        _stream->println(">");
-#endif
+        if (_useExtendedSyntax) {
+            _stream->print("<FUNCTION cab=\"");
+            _stream->print(loco.address);
+            _stream->print("\" function=\"");
+            _stream->print(fIndex);
+            _stream->print("\" state=\"");
+            _stream->print(isActive ? 1 : 0);
+            _stream->println("\">");
+        } else {
+            _stream->print("<f ");
+            _stream->print(loco.address);
+            _stream->print(" ");
+            _stream->print(fIndex);
+            _stream->print(" ");
+            _stream->print(isActive ? 1 : 0);
+            _stream->println(">");
+        }
     }
 
     void onTurnoutChange(uint16_t address, bool isThrown, bool isFeedback) override {
-#if USE_EXTENDED_CLI_SYNTAX
-        _stream->print("<TURNOUT id=\"");
-        _stream->print(address);
-        _stream->print("\" state=\"");
-        _stream->print(isThrown ? 1 : 0);
-        _stream->println("\">");
-#else
-        _stream->print("<T ");
-        _stream->print(address);
-        _stream->print(" ");
-        _stream->print(isThrown ? 1 : 0);
-        _stream->println(">");
-#endif
+        if (_useExtendedSyntax) {
+            _stream->print("<TURNOUT id=\"");
+            _stream->print(address);
+            _stream->print("\" state=\"");
+            _stream->print(isThrown ? 1 : 0);
+            _stream->println("\">");
+        } else {
+            _stream->print("<T ");
+            _stream->print(address);
+            _stream->print(" ");
+            _stream->print(isThrown ? 1 : 0);
+            _stream->println(">");
+        }
     }
 
     void onSignalAspectChange(uint16_t address, uint8_t aspectId, bool isFeedback) override {
-#if USE_EXTENDED_CLI_SYNTAX
-        _stream->print("<ACCESSORY id=\"");
-        _stream->print(address);
-        _stream->print("\" state=\"");
-        _stream->print(aspectId);
-        _stream->println("\">");
-#else
-        _stream->print("<S ");
-        _stream->print(address);
-        _stream->print(" ");
-        _stream->print(aspectId);
-        _stream->println(">");
-#endif
+        if (_useExtendedSyntax) {
+            _stream->print("<ACCESSORY id=\"");
+            _stream->print(address);
+            _stream->print("\" state=\"");
+            _stream->print(aspectId);
+            _stream->println("\">");
+        } else {
+            _stream->print("<S ");
+            _stream->print(address);
+            _stream->print(" ");
+            _stream->print(aspectId);
+            _stream->println(">");
+        }
     }
 
     void onTrackPowerChange(PowerState state) override {
-#if USE_EXTENDED_CLI_SYNTAX
-        _stream->print("<POWER state=\"");
-        _stream->print(state == PowerState::ON ? "ON" : "OFF");
-        _stream->println("\">");
-#else
-        _stream->print("<");
-        _stream->print(state == PowerState::ON ? 1 : 0);
-        _stream->println(">");
-#endif
+        if (_useExtendedSyntax) {
+            _stream->print("<POWER state=\"");
+            _stream->print(state == PowerState::ON ? "ON" : "OFF");
+            _stream->println("\">");
+        } else {
+            _stream->print("<");
+            _stream->print(state == PowerState::ON ? 1 : 0);
+            _stream->println(">");
+        }
     }
 
     void onLocoFunctionAnalogChange(const LocoHandle& loco, int fIndex, uint8_t value) override {
@@ -341,34 +338,35 @@ public:
     }
 
     void onLocoEventSync(const LocoHandle& loco, SyncType type, uint32_t value) override {
-#if USE_EXTENDED_CLI_SYNTAX
-        _stream->print("<MECHANICAL_SYNC_EVENT cab=\"");
-        _stream->print(loco.address);
-        _stream->print("\" type=\"");
-        switch (type) {
-            case SyncType::CAM_PULSE: _stream->print("CAM_PULSE"); break;
-            case SyncType::CYLINDER_CYCLE: _stream->print("CYLINDER_CYCLE"); break;
-            case SyncType::GEAR_CHANGE_UP: _stream->print("GEAR_CHANGE_UP"); break;
-            case SyncType::GEAR_CHANGE_DOWN: _stream->print("GEAR_CHANGE_DOWN"); break;
-            case SyncType::BRAKE_SQUEAL_START: _stream->print("BRAKE_SQUEAL_START"); break;
-            case SyncType::DOOR_MOVEMENT: _stream->print("DOOR_MOVEMENT"); break;
+        if (_useExtendedSyntax) {
+            _stream->print("<MECHANICAL_SYNC_EVENT cab=\"");
+            _stream->print(loco.address);
+            _stream->print("\" type=\"");
+            switch (type) {
+                case SyncType::CAM_PULSE: _stream->print("CAM_PULSE"); break;
+                case SyncType::CYLINDER_CYCLE: _stream->print("CYLINDER_CYCLE"); break;
+                case SyncType::GEAR_CHANGE_UP: _stream->print("GEAR_CHANGE_UP"); break;
+                case SyncType::GEAR_CHANGE_DOWN: _stream->print("GEAR_CHANGE_DOWN"); break;
+                case SyncType::BRAKE_SQUEAL_START: _stream->print("BRAKE_SQUEAL_START"); break;
+                case SyncType::DOOR_MOVEMENT: _stream->print("DOOR_MOVEMENT"); break;
+            }
+            _stream->print("\" value=\"");
+            _stream->print(value);
+            _stream->println("\">");
+        } else {
+            _stream->print("<m ");
+            _stream->print(loco.address);
+            _stream->print(" ");
+            _stream->print(static_cast<uint8_t>(type));
+            _stream->print(" ");
+            _stream->print(value);
+            _stream->println(">");
         }
-        _stream->print("\" value=\"");
-        _stream->print(value);
-        _stream->println("\">");
-#else
-        _stream->print("<m ");
-        _stream->print(loco.address);
-        _stream->print(" ");
-        _stream->print(static_cast<uint8_t>(type));
-        _stream->print(" ");
-        _stream->print(value);
-        _stream->println(">");
-#endif
     }
 
 private:
     Stream* _stream;
+    bool _useExtendedSyntax;
 };
 
 class XmlPrinter : public IUnifiedModelTrainListener {
