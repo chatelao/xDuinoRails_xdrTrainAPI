@@ -150,28 +150,7 @@ namespace ModelRail {
         onSusiConfigRead            = 1ULL << 24,
         onConfigBlockLoad           = 1ULL << 25,
         onProgressUpdate            = 1ULL << 26,
-        onLocoEventSync             = 1ULL << 27,
-
-        // --- Grouped Masks ---
-        ALL_TRAFFIC_DISPATCHING = onLocoSpeedChange | onLocoFunctionChange | onLocoFunctionAnalogChange |
-                                  onLocoDispatchStateChange | onConsistLink | onConsistUnlink,
-
-        ALL_INFRASTRUCTURE      = onTurnoutChange | onSignalAspectChange | onAccessoryAnalogValue |
-                                  onAccessoryError | onSensorStateChange,
-
-        ALL_SYSTEM_TOPOLOGY     = onTrackPowerChange | onFastClockUpdated | onHardwareNodeAttached |
-                                  onHardwareNodeLost | onSystemMessage,
-
-        ALL_TELEMETRY_ID        = onLocoDetectedOnBlock | onLocoTelemetryData | onLocoExternalStateChange |
-                                  onLocoRailComRawData | onNewLocoDiscovered,
-
-        ALL_CONFIGURATION       = onCvRead | onCvWrite | onCvReadDone | onSusiConfigRead |
-                                  onConfigBlockLoad | onProgressUpdate,
-
-        ALL_SYNC                = onLocoEventSync,
-
-        ALL_FEATURES            = ALL_TRAFFIC_DISPATCHING | ALL_INFRASTRUCTURE | ALL_SYSTEM_TOPOLOGY |
-                                  ALL_TELEMETRY_ID | ALL_CONFIGURATION | ALL_SYNC
+        onLocoEventSync             = 1ULL << 27
     };
 
     class IUnifiedModelTrainListener {

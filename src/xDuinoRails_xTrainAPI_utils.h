@@ -37,7 +37,7 @@ class CmdLinePrinter : public IUnifiedModelTrainListener {
 public:
     CmdLinePrinter(Stream& stream) : _stream(&stream) {}
 
-    uint64_t getImplementedApi() const override { return (uint64_t)ApiFeature::ALL_FEATURES; }
+    uint64_t getImplementedApi() const override { return (1ULL << 28) - 1; }
 
     void onLocoSpeedChange(const LocoHandle& loco, float speedPercent, Direction direction, int speedSteps) override {
 #if USE_EXTENDED_CLI_SYNTAX
@@ -375,7 +375,7 @@ class XmlPrinter : public IUnifiedModelTrainListener {
 public:
     XmlPrinter(Stream& stream) : _stream(&stream) {}
 
-    uint64_t getImplementedApi() const override { return (uint64_t)ApiFeature::ALL_FEATURES; }
+    uint64_t getImplementedApi() const override { return (1ULL << 28) - 1; }
 
     void begin() {
         _stream->println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
