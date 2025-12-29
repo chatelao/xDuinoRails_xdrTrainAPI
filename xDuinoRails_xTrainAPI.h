@@ -25,10 +25,10 @@ namespace ModelRail {
     enum class Protocol : uint8_t {
         DCC,            ///< NMRA DCC (S-9.1, S-9.2, RCN-210). Worldwide standard.
         MM_1,           ///< Marklin Motorola I (Old). Register mode, 14 steps, unidirectional.
-        MM_2,          ///< Marklin Motorola II (New). Adds direction and functions F1-F4.
+        MM_2,           ///< Marklin Motorola II (New). Adds direction and functions F1-F4.
         MFX,            ///< mfx / M4. Bidirectional, auto-registration (UID), 128 steps.
-        SX_1,             ///< Selectrix (SX1). Synchronous bus (NEM 680/681).
-        SX_2,            ///< Selectrix 2 (SX2). RCN extension for multiprotocol & config.
+        SX_1,           ///< Selectrix (SX1). Synchronous bus (NEM 680/681).
+        SX_2,           ///< Selectrix 2 (SX2). RCN extension for multiprotocol & config.
         LOCONET,        ///< Digitrax LocoNet. Peer-to-Peer, OpCode based.
         BIDIB,          ///< BiDiB. High-speed, tree-topology, CRC protected.
         XPRESSNET,      ///< Lenz XpressNet. RS-485 Master-Slave.
@@ -46,10 +46,10 @@ namespace ModelRail {
 
     /** @brief Global track power status. */
     enum class PowerState : uint8_t {
-        OFF            = 0, ///< System idle / No power to tracks.
-        ON             = 1, ///< Normal operation.
-        EMERGENCY_STOP = 2, ///< Logical stop (broadcast speed 0), power may remain.
-        SHORT_CIRCUIT  = 3  ///< Hardware trip / Power cut.
+        OFF            = 0,  ///< System idle / No power to tracks.
+        ON             = 1,  ///< Normal operation.
+        EMERGENCY_STOP = 2,  ///< Logical stop (broadcast speed 0), power may remain.
+        SHORT_CIRCUIT  = 3   ///< Hardware trip / Power cut.
     };
 
     // --- RCN-217 / RailCom Definitions ---
@@ -63,11 +63,11 @@ namespace ModelRail {
 
     /** @brief External influence on movement (ABC, HLU, etc.). */
     enum class ExternalState : uint8_t {
-        FREE_RUN              = 0, ///< No restrictions.
-        STOPPED_BY_ABC_SIGNAL = 1, ///< Stopped by Lenz ABC Asymmetry.
-        STOPPED_BY_DC_BRAKE   = 2, ///< Stopped by Marklin DC Brake Module.
-        STOPPED_BY_HLU        = 3, ///< Stopped by Zimo HLU signal.
-        RESTRICTED_SPEED_HLU  = 4  ///< Speed limit enforced by Zimo HLU.
+        FREE_RUN              = 0,  ///< No restrictions.
+        STOPPED_BY_ABC_SIGNAL = 1,  ///< Stopped by Lenz ABC Asymmetry.
+        STOPPED_BY_DC_BRAKE   = 2,  ///< Stopped by Marklin DC Brake Module.
+        STOPPED_BY_HLU        = 3,  ///< Stopped by Zimo HLU signal.
+        RESTRICTED_SPEED_HLU  = 4   ///< Speed limit enforced by Zimo HLU.
     };
 
     /** @brief Telemetry data types (RailCom Ch2 / BiDiB). */
@@ -108,9 +108,9 @@ namespace ModelRail {
 
     /** @brief Core Identifier for a Locomotive. */
     struct LocoHandle {
-        uint16_t address;       ///< Primary address (e.g., 3, 9999).
-        Protocol protocol;      ///< Protocol used (DCC, MFX, etc.).
-        uint32_t mfxUid;        ///< Unique ID (takes precedence if non-zero).
+        uint16_t address;  ///< Primary address (e.g., 3, 9999).
+        Protocol protocol; ///< Protocol used (DCC, MFX, etc.).
+        uint32_t mfxUid;   ///< Unique ID (takes precedence if non-zero).
     };
 
     // =============================================================
